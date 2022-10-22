@@ -10,6 +10,7 @@
 #include <iomanip>
 #include <chrono>
 #include <thread>
+#include <QThread>
 
 typedef uint64_t ii64;
 
@@ -117,7 +118,6 @@ void MainWindow::on_StartStopButton_clicked()
     this->ui->BlockSizeStartCombo->setEnabled(false);
     this->ui->FileSizeCombo->setEnabled(false);
 
-    std::thread workThread(&appManager::StartWorking, manager);
-    workThread.join();
- //   StartWorking();
+    QThread *thread = QThread::create(&appManager::StartWorking, manager);
+    thread->start();
 }

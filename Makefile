@@ -1060,7 +1060,9 @@ Release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		appManager.h \
 		ui_mainwindow.h \
 		../../Qt5/6.4.0/macos/lib/QtWidgets.framework/Headers/QFileDialog \
-		../../Qt5/6.4.0/macos/lib/QtWidgets.framework/Headers/qfiledialog.h
+		../../Qt5/6.4.0/macos/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		../../Qt5/6.4.0/macos/lib/QtCore.framework/Headers/QThread \
+		../../Qt5/6.4.0/macos/lib/QtCore.framework/Headers/qthread.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Release/mainwindow.o mainwindow.cpp
 
 Release/start_stop_watch.o: support/start_stop_watch.cpp support/start_stop_watch.h

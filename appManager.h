@@ -13,7 +13,7 @@ const long long AlignedBlockSize = 512;
 
 class GUI_Interface{
 public:
-    GUI_Interface() { }
+     GUI_Interface() { }
     virtual ~GUI_Interface() { }
 
     virtual unsigned int blockSizeStartIndex() = 0;
