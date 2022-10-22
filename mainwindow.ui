@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>527</width>
+    <height>623</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string/>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout_2">
+    <item row="0" column="0" colspan="3">
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Directory</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QLineEdit" name="DirectoryEdit">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>\</string>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButton_2">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+            <horstretch>20</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>50</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>60</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Browse</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item row="3" column="0" colspan="3">
+     <widget class="Line" name="line_3">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QGroupBox" name="groupBox">
+      <property name="title">
+       <string>Block Size</string>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>From</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="BlockSizeStartCombo">
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <item>
+          <property name="text">
+           <string>512B</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>1KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>2KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>4KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>8KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>16KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>32KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>64KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>128KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>256KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>512KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>1MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>2MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>4MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>8MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>16MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>32MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>64MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>128MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>256MB</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_6">
+         <property name="text">
+          <string>To</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="BlockSizeEndCombo">
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="currentIndex">
+          <number>6</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>512B</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>1KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>2KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>4KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>8KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>16KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>32KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>64KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>128KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>256KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>512KB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>1MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>2MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>4MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>8MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>16MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>32MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>64MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>128MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>256MB</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="maximumSize">
+       <size>
+        <width>100</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="title">
+       <string>File Size</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="0" column="0">
+        <widget class="QComboBox" name="FileSizeCombo">
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="currentIndex">
+          <number>4</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>32MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>64MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>128MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>256MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>512MB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>1GB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>2GB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>4GB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>8GB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>16GB</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>32GB</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="title">
+       <string/>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="0">
+        <widget class="QPushButton" name="StartStopButton">
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>start</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="4" column="0" colspan="3">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <item>
+         <widget class="QLabel" name="label_8">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <italic>false</italic>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Block Size</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="BlockSizeEdit">
+          <property name="maximumSize">
+           <size>
+            <width>100</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <widget class="QLabel" name="label_9">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <italic>false</italic>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Write Rate</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="WriteRateEdit">
+          <property name="maximumSize">
+           <size>
+            <width>150</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="Line" name="line_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_7">
+        <item>
+         <widget class="QLabel" name="label_10">
+          <property name="font">
+           <font>
+            <pointsize>10</pointsize>
+            <italic>false</italic>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="text">
+           <string>Read Rate</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTextEdit" name="ReadRateEdit">
+          <property name="maximumSize">
+           <size>
+            <width>150</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="font">
+           <font>
+            <pointsize>8</pointsize>
+            <bold>true</bold>
+           </font>
+          </property>
+          <property name="readOnly">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </item>
+    <item row="2" column="0">
+     <widget class="QCheckBox" name="ValidateDataCheck">
+      <property name="text">
+       <string>Validate Data</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>527</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
