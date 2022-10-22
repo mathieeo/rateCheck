@@ -86,13 +86,18 @@ void MainWindow::appendToReadRate(string size)
     ui->ReadRateEdit->append(QString::fromStdString(size));
 }
 
-void MainWindow::RestrictGUIElements(bool state)
+void MainWindow::restrictGUIElements(bool state)
 {
         this->ui->StartStopButton->setEnabled(state);
         this->ui->pushButton_2->setEnabled(state);
         this->ui->BlockSizeEndCombo->setEnabled(state);
         this->ui->BlockSizeStartCombo->setEnabled(state);
-        this->ui->FileSizeCombo->setEnabled(state);
+    this->ui->FileSizeCombo->setEnabled(state);
+}
+
+void MainWindow::updateProgressBar(int value)
+{
+    this->ui->progressBar->setValue(value);
 }
 
 
@@ -117,7 +122,8 @@ void MainWindow::on_StartStopButton_clicked()
     this->ui->BlockSizeEndCombo->setEnabled(false);
     this->ui->BlockSizeStartCombo->setEnabled(false);
     this->ui->FileSizeCombo->setEnabled(false);
+    bool directMode = this->ui->directModeCheckBox->isChecked();
 
-    QThread *thread = QThread::create(&appManager::StartWorking, manager);
+    QThread *thread = QThread::create(&appManager::StartWorking, manager, directMode);
     thread->start();
 }

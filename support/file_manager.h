@@ -6,6 +6,15 @@
 
 #ifndef LINUX
 #include <windows.h>
+#else
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <errno.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #endif
 
 namespace rateCheckApp
@@ -191,30 +200,41 @@ protected:
 class FileAPIFileManager : public IFileManagerImpl
 {
 public:
-    FileAPIFileManager() { }
+    FileAPIFileManager();
     // Assignment
-    FileAPIFileManager(const FileAPIFileManager & /*other*/) { }
-    //FileAPIFileManager & operator = (const FileAPIFileManager & /*other*/){  }
-    ~FileAPIFileManager(){ }
+    FileAPIFileManager(const FileAPIFileManager & /*other*/);
+    FileAPIFileManager & operator = (const FileAPIFileManager & /*other*/);
+    ~FileAPIFileManager();
 
-    virtual bool            Open(){ return false; }
-    virtual bool            Opened() const
-     { return false;   }
-    virtual bool            Append() { return false; }
-    virtual bool            Create() { return false; }
-    virtual bool            Close(){ return false; }
+    virtual bool            Open();
+    virtual bool            Opened() const;
+    virtual bool            Append();
+    virtual bool            Create();
+    virtual bool            Close();
 
-    virtual unsigned int    Write(const char * /*buffer*/, unsigned int /*size*/) { return 0; }
-    virtual unsigned int    Read(char * /*buffer*/, unsigned int /*size*/){ return 0; }
+    virtual unsigned int    Write(const char * /*buffer*/, unsigned int /*size*/);
+    virtual unsigned int    Read(char * /*buffer*/, unsigned int /*size*/);
 
-    virtual void            Size(ii64 /*size*/) { }
-    virtual ii64            Size() const { return 0; }
+    virtual void            Size(ii64 /*size*/) ;
+    virtual ii64            Size() const;
 
-    virtual void            FileName(const std::string & /*name*/) { }
-    virtual std::string     FileName() const { return ""; }
+    virtual void            FileName(const std::string & /*name*/);
+    virtual std::string     FileName() const;
 
-    virtual bool            Position(ii64 /*value*/) { return false; }
-    virtual ii64            Position() const { return 0; }
+    virtual bool            Position(ii64 /*value*/);
+    virtual ii64            Position() const;
+
+protected:
+
+    // Data
+    //
+    int          Handle;
+    std::string     FFileName;
+    long long       FPosition;
+    long long       FSize;
+    bool            isOpen;
+
+    void            GetSize();
 };
 #endif
 

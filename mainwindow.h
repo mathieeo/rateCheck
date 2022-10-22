@@ -40,7 +40,8 @@ public:
     void appendToBlockSize(std::string size) ;
     void appendToWriteRate(std::string size) ;
     void appendToReadRate(std::string size) ;
-    void RestrictGUIElements(bool state);
+    void restrictGUIElements(bool state);
+    void updateProgressBar(int value);
 
 
     GUI_Interface_Impl * UI;
@@ -72,7 +73,8 @@ public:
     virtual void appendToBlockSize(std::string size) { Form->appendToBlockSize(size); }
     virtual void appendToWriteRate(std::string size){ Form->appendToWriteRate(size); }
     virtual void appendToReadRate(std::string size) { Form->appendToReadRate(size); }
-    virtual void RestrictGUIElements(bool state) { Form->RestrictGUIElements(state); }
+    virtual void restrictGUIElements(bool state) { Form->restrictGUIElements(state); }
+    virtual void updateProgressBar(int value) { Form->updateProgressBar(value); }
 
 protected:
     MainWindow *  Form;

@@ -25,7 +25,8 @@ public:
     virtual void appendToBlockSize(std::string size) = 0;
     virtual void appendToWriteRate(std::string size) = 0;
     virtual void appendToReadRate(std::string size) = 0;
-    virtual void RestrictGUIElements(bool state) = 0;
+    virtual void restrictGUIElements(bool state) = 0;
+    virtual void updateProgressBar(int value) = 0;
 
 
 };
@@ -37,7 +38,7 @@ public:
     appManager(GUI_Interface* _gui_interface);
     ~appManager();
 
-    int StartWorking();
+    int StartWorking(bool directMode);
     void FinishedBenchmarking();
     void fillRandomly(unsigned int size, int *ptr);
     std::string AttachTag(double rate);

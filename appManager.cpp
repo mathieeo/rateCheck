@@ -6,6 +6,7 @@
 #include <support/benchmark.h>
 #include <support/file_manager.h>
 #include <QString>
+#include <iostream>
 
 using namespace rateCheckApp;
 using namespace std::chrono;
@@ -83,7 +84,7 @@ void appManager::fillRandomly(unsigned int size, int *ptr)
     while(counter < size)
     {
         // fixme use arc4randm for clang?
-        ptr[counter] = (rand() %50)+1;
+        ptr[counter] = (arc4random() % 50) + 1;
         counter++;
     }
 }
@@ -91,9 +92,9 @@ void appManager::fillRandomly(unsigned int size, int *ptr)
 string appManager::AttachTag(double rate)
 {
     if(rate < 1)
-      {
+    {
         rate = rate * 1000;
-    return QString::number(rate).toStdString() + " KB/S";
+        return QString::number(rate).toStdString() + " KB/S";
     }
     else if(rate > 1010)
     {
@@ -109,7 +110,7 @@ string appManager::AttachTag(double rate)
 //#define ROUND_UP_PTR(Ptr,Pow2)  ((void *) ((((ULONG_PTR)(Ptr)) + (Pow2) - 1) & (~(((LONG_PTR)(Pow2)) - 1))))
 
 
-int appManager::StartWorking()
+int appManager::StartWorking(bool directMode)
 {
     // Required Parm
     unsigned int counter = 0;
@@ -151,7 +152,11 @@ int appManager::StartWorking()
 
     gui_interface->updateStatusMessage("Benchmarking is in the process...");
 
+    float number_of_runs = BS_Stop_Idx-BS_Start_Idx;
     for (int idx =BS_Start_Idx;idx <=BS_Stop_Idx;++idx) {
+
+        cout << idx << " " << number_of_runs << " " << (float(float(idx)/float(number_of_runs))*100) << endl;
+        gui_interface->updateProgressBar((float(float(idx)/float(number_of_runs)))*100);
 
         size_t idx_t = static_cast<size_t>(idx);
         CurrentBlockSize = static_cast<unsigned long>(blockSizeVec[idx_t]);
@@ -159,68 +164,10 @@ int appManager::StartWorking()
         gui_interface->appendToBlockSize(IoSizeTagsVec[idx_t]);
 
         //---------------
-        // Write Windows
-        //---------------
-#ifndef LINUX
-        {
-
-            WriteFileHandle = CreateFileA(FilePath.c_str(), GENERIC_ALL, 0, nullptr, CREATE_NEW,  FILE_ATTRIBUTE_TEMPORARY | FILE_FLAG_WRITE_THROUGH | FILE_FLAG_NO_BUFFERING , nullptr);
-            if (WriteFileHandle == INVALID_HANDLE_VALUE)
-            {
-                this->ui->statusbar->showMessage("Cannot create the write file.");
-                FinishedBenchmarking();
-                return;
-            }
-            counter = 0;
-            FTxBlockRate = 0.0;
-            unsigned long long IOCount = CurrentFileSize / CurrentBlockSize;
-            IOCount = std::max(IOCount, static_cast<unsigned long long>(10));
-            IOCount = std::min(IOCount, static_cast<unsigned long long>(30000));
-
-
-//             DWORD dwBytesWritten = 0;
-
-//            DWORD BytesPerSector = 0; // obtained from the GetFreeDiskSpace function.
-//         // ... obtain data here
-//         // sample data
-//             BytesPerSector = 512;
-//            SIZE_T SizeNeeded = BytesPerSector + ROUND_UP_SIZE(CurrentBlockSize, BytesPerSector);  // Replace this statement with any allocation routine.
-//            LPBYTE Buffer = (LPBYTE) malloc(SizeNeeded);  // Error checking of your choice.
-//            if ( !Buffer )
-//            {
-//              FinishedBenchmarking();
-//              return;
-//            }
-//            void * BufferAligned = ROUND_UP_PTR(WriteData, BytesPerSector);
-
-
-
-            while(counter < IOCount){
-                WriteFile(WriteFileHandle, WriteData, CurrentBlockSize, &dwBytesWritten, nullptr);
-                if(dwBytesWritten == 0)
-                {
-                    this->ui->statusbar->showMessage("Failed to write to the file.");
-                    FinishedBenchmarking();
-                    return;
-                }
-                counter+=1;
-
-            }
-            double timediff = watch.Stop();
-            FTxBlockRate = (IOCount*CurrentBlockSize) / (timediff*1.0e6);
-
-            this->ui->WriteRateEdit->append(QString::fromStdString(AttachTag(FTxBlockRate)));
-            std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            CloseHandle(WriteFileHandle);
-        }
-#else
-        //---------------
-        // Write Linux/Mac
+        // Write
         //---------------
         {
-            FileManager file(FilePath);
-            // WriteFileHandle = CreateFileA(FilePath.c_str(), GENERIC_ALL, 0, nullptr, CREATE_NEW,  FILE_ATTRIBUTE_TEMPORARY | FILE_FLAG_WRITE_THROUGH | FILE_FLAG_NO_BUFFERING , nullptr);
-            //if (WriteFileHandle == INVALID_HANDLE_VALUE)
+            FileManager file(FilePath, !directMode);
 
             if(file.Create() == false)
             {
@@ -259,32 +206,30 @@ int appManager::StartWorking()
 
             gui_interface->appendToWriteRate(AttachTag(FTxBlockRate));
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
-//            CloseHandle(WriteFileHandle);
             file.Close();
         }
-#endif
 
         //---------------
         // Read
         //---------------
-
-#ifndef LINUX
-    {
+        {
             //Open The File
-            ReadFileHandle = CreateFileA(FilePath.c_str(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_FLAG_NO_BUFFERING , nullptr);
-            if (ReadFileHandle == INVALID_HANDLE_VALUE)
+            FileManager file(FilePath, !directMode);
+            if(file.Open() == false)
             {
-                this->ui->statusbar->showMessage("Cannot create the read file.");
+                gui_interface->appendToWriteRate("Cannot create the read file.");
                 FinishedBenchmarking();
-                return;
+                delete[] ReadData;
+                delete[] WriteData;
+                return 0;
             }
 
             counter = 0;
-            FTxBlockRate = 0.0;
             unsigned long bytes;
             watch.Start();
             while(true){
-                ReadFile(ReadFileHandle, ReadData, CurrentBlockSize, &bytes, nullptr);
+                //ReadFile(ReadFileHandle, ReadData, CurrentBlockSize, &bytes, nullptr);
+                bytes = file.Read(reinterpret_cast<char*>(ReadData), CurrentBlockSize);
                 if(bytes == 0)
                 {
                     break;
@@ -294,9 +239,9 @@ int appManager::StartWorking()
                     bool result = memcmp(ReadData,WriteData,CurrentBlockSize);
                     if(result != 0)
                     {
-                        this->ui->statusbar->showMessage("Failed the data validation.");
+                        gui_interface->appendToWriteRate("Failed the data validation.");
                         FinishedBenchmarking();
-                        return;
+                        return 0;
                     }
                 }
 
@@ -306,60 +251,12 @@ int appManager::StartWorking()
             long long num1 = (counter*(CurrentBlockSize<1000? CurrentBlockSize : CurrentBlockSize/1000));
             double num2 =  (timediff*1.0e6);
             FTxBlockRate =  CurrentBlockSize<1000? (num1/num2): (num1/num2)*1000;
-            AddToControl(this->ui->ReadRateEdit, AttachTag(FTxBlockRate));
+            // AddToControl(this->ui->ReadRateEdit, AttachTag(FTxBlockRate));
+            gui_interface->appendToReadRate(AttachTag(FTxBlockRate));
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            CloseHandle(ReadFileHandle);
-
+            //CloseHandle(ReadFileHandle);
+            file.Close();
         }
-
-#else
-        {
-                //Open The File
-                //ReadFileHandle = CreateFileA(FilePath.c_str(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_FLAG_NO_BUFFERING , nullptr);
-                FileManager file(FilePath);
-                if(file.Open() == false)
-                {
-                    gui_interface->appendToWriteRate("Cannot create the read file.");
-                    FinishedBenchmarking();
-                    delete[] ReadData;
-                    delete[] WriteData;
-                    return 0;
-                }
-
-                counter = 0;
-                unsigned long bytes;
-                watch.Start();
-                while(true){
-                    //ReadFile(ReadFileHandle, ReadData, CurrentBlockSize, &bytes, nullptr);
-                    bytes = file.Read(reinterpret_cast<char*>(ReadData), CurrentBlockSize);
-                    if(bytes == 0)
-                    {
-                        break;
-                    }
-                    if(CheckData)
-                    {
-                        bool result = memcmp(ReadData,WriteData,CurrentBlockSize);
-                        if(result != 0)
-                        {
-                            gui_interface->appendToWriteRate("Failed the data validation.");
-                            FinishedBenchmarking();
-                            return 0;
-                        }
-                    }
-
-                    counter+=1;
-                }
-                double timediff = watch.Stop();
-                long long num1 = (counter*(CurrentBlockSize<1000? CurrentBlockSize : CurrentBlockSize/1000));
-                double num2 =  (timediff*1.0e6);
-                FTxBlockRate =  CurrentBlockSize<1000? (num1/num2): (num1/num2)*1000;
-                // AddToControl(this->ui->ReadRateEdit, AttachTag(FTxBlockRate));
-                gui_interface->appendToReadRate(AttachTag(FTxBlockRate));
-                std::this_thread::sleep_for(std::chrono::milliseconds(500));
-                //CloseHandle(ReadFileHandle);
-                file.Close();
-            }
-#endif
         remove(FilePath.c_str());
     }
 
@@ -377,5 +274,5 @@ int appManager::StartWorking()
 
 void appManager::FinishedBenchmarking()
 {
-    gui_interface->RestrictGUIElements(true);
+    gui_interface->restrictGUIElements(true);
 }

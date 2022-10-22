@@ -508,7 +508,244 @@ ii64 FileAPIFileManager::Size() const
 {
     return FSize;
 }
+#else
+//=============================================================================
+//  CLASS FileAPIFileManager  --
+//=============================================================================
 
+//---------------------------------------------------------------------------
+//  FileAPIFileManager::FileAPIFileManager() --  Ctor
+//---------------------------------------------------------------------------
+
+FileAPIFileManager::FileAPIFileManager()
+    : FFileName(std::string("")), FPosition(0), FSize(0), isOpen(false)
+{
+}
+
+//---------------------------------------------------------------------------
+// FileAPIFileManager::FileAPIFileManager() --
+//---------------------------------------------------------------------------
+
+FileAPIFileManager::FileAPIFileManager(const FileAPIFileManager & other)
+{
+    FFileName = other.FFileName;
+    FPosition = other.FPosition;
+    FSize = other.FSize;
+    isOpen = other.isOpen;
+}
+
+//---------------------------------------------------------------------------
+//  FileAPIFileManager::operator = --  Assignment operator
+//---------------------------------------------------------------------------
+
+FileAPIFileManager & FileAPIFileManager::operator = (const FileAPIFileManager & other)
+{
+    // protect against invalid self-assignment
+    if (this != &other)
+    {
+        Handle = 0;
+        FFileName = other.FFileName;
+        FPosition = other.FPosition;
+        FSize = other.FSize;
+        isOpen = other.isOpen;
+    }
+
+    // by convention, always return *this
+    return *this;
+}
+
+//---------------------------------------------------------------------------
+//  FileAPIFileManager::~FileAPIFileManager() --  Set file buffer mode state
+//---------------------------------------------------------------------------
+
+FileAPIFileManager::~FileAPIFileManager()
+{
+    Close();
+}
+
+
+//---------------------------------------------------------------------------
+//  FileAPIFileManager::GetSize() --  Get current file size
+//---------------------------------------------------------------------------
+
+void FileAPIFileManager::GetSize()
+{
+   // unsigned long  high = 0;
+
+    //DWORD size = GetFileSize(Handle, &high);
+//    FSize = size;
+
+//    if(high!=0){
+//        long long newHigh = high;
+//        newHigh = newHigh << 32;
+//        FSize = newHigh + size;
+//    }
+
+}
+#define O_DIRECT 040000
+//---------------------------------------------------------------------------
+//  FileAPIFileManager::Open() --  Open file for reading
+//---------------------------------------------------------------------------
+
+bool FileAPIFileManager::Open()
+{
+    if ( (Handle = ::open(FFileName.c_str(), O_DIRECT) ) == -1) {
+        throw "can't open input file!";
+    }
+
+    // Cache file size
+    GetSize();
+    Position(0);
+    isOpen = true;
+    return isOpen;
+}
+
+bool FileAPIFileManager::Opened() const
+{
+    return false;
+}
+
+//---------------------------------------------------------------------------
+//  FileAPIFileManager::Create() --  Create file for writing
+//---------------------------------------------------------------------------
+
+bool FileAPIFileManager::Create()
+{
+   remove(FileName().c_str());
+   int result = ::creat(FFileName.c_str(), O_CREAT | O_DIRECT);
+   if(result == -1){
+        throw std::string("Unable to create file");
+       return false;
+    }
+
+    Position(0);
+
+    return true;
+}
+
+//---------------------------------------------------------------------------
+//  FileAPIFileManager::Append() --  Open file for append
+//---------------------------------------------------------------------------
+
+bool FileAPIFileManager::Append()
+{
+    return false;
+}
+
+//---------------------------------------------------------------------------
+//  FileAPIFileManager::Close() --
+//---------------------------------------------------------------------------
+
+bool FileAPIFileManager::Close()
+{
+    try {
+        bool Result = true;
+
+        if(Opened())
+            Result = ::close(Handle);
+        FSize = 0;
+        FPosition = 0;
+        isOpen = Result==0? true : false; //if not closed properly the result is zero
+
+        return Result;
+    } catch (...) {
+        return false;
+    }
+
+
+}
+
+//---------------------------------------------------------------------------
+//  StdFileManager::FileAPIFileManager() --
+//---------------------------------------------------------------------------
+
+unsigned int FileAPIFileManager::Read(char * buffer, unsigned int size)
+{
+    unsigned long result = 0;
+
+    result = ::read(Handle, buffer, size);
+    FPosition += result;
+
+    return static_cast<unsigned int>(result);
+}
+
+//---------------------------------------------------------------------------
+//  FileAPIFileManager::Write() --
+//---------------------------------------------------------------------------
+
+unsigned int FileAPIFileManager::Write(const char * buffer, unsigned int size)
+{
+    unsigned long result = 0;
+
+    result = ::write(Handle, buffer, size);
+    FPosition += result;
+    FSize = std::max<long long>(FPosition, FSize);
+
+    return static_cast<unsigned int>(result);
+}
+
+//---------------------------------------------------------------------------
+//  FileAPIFileManager::FileName() --  Set file name
+//---------------------------------------------------------------------------
+
+void FileAPIFileManager::FileName(const std::string & name)
+{
+    FFileName = name;
+}
+
+//---------------------------------------------------------------------------
+//  FileAPIFileManager::FileName() --  Get file name
+//---------------------------------------------------------------------------
+
+std::string FileAPIFileManager::FileName() const
+{
+    return FFileName;
+}
+
+//---------------------------------------------------------------------------
+//  FileAPIFileManager::Position() --
+//---------------------------------------------------------------------------
+
+bool FileAPIFileManager::Position(ii64 offset)
+{
+    if (!Opened())
+    { return false;}
+
+    off_t position = static_cast<off_t>(offset);
+    int result = ::lseek(Handle, position, SEEK_SET);
+
+    return (result == 0);
+}
+
+//---------------------------------------------------------------------------
+//  FileAPIFileManager::Position() --
+//---------------------------------------------------------------------------
+
+ii64 FileAPIFileManager::Position() const
+{
+    return FPosition;
+}
+
+//---------------------------------------------------------------------------
+//  FileAPIFileManager::Size() --  Set file size
+//---------------------------------------------------------------------------
+
+void FileAPIFileManager::Size(ii64 size)
+{
+    Position(size);
+    Write("\0", 1);
+
+    FSize = size;
+}
+
+//---------------------------------------------------------------------------
+//  FileAPIFileManager::Size() --  Get file size
+//---------------------------------------------------------------------------
+
+ii64 FileAPIFileManager::Size() const
+{
+    return FSize;
+}
 #endif
 
 //===========================================================================
