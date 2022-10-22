@@ -460,8 +460,9 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>8</pointsize>
-            <bold>true</bold>
+            <family>Academy Engraved LET</family>
+            <pointsize>11</pointsize>
+            <bold>false</bold>
            </font>
           </property>
           <property name="readOnly">
@@ -507,8 +508,9 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>8</pointsize>
-            <bold>true</bold>
+            <family>Academy Engraved LET</family>
+            <pointsize>11</pointsize>
+            <bold>false</bold>
            </font>
           </property>
           <property name="readOnly">
@@ -554,8 +556,9 @@
           </property>
           <property name="font">
            <font>
-            <pointsize>8</pointsize>
-            <bold>true</bold>
+            <family>Academy Engraved LET</family>
+            <pointsize>11</pointsize>
+            <bold>false</bold>
            </font>
           </property>
           <property name="readOnly">

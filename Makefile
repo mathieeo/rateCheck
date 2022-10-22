@@ -52,12 +52,14 @@ OBJECTS_DIR   = Release/
 
 ####### Files
 
-SOURCES       = main.cpp \
+SOURCES       = appManager.cpp \
+		main.cpp \
 		mainwindow.cpp \
 		support/start_stop_watch.cpp \
 		support/benchmark.cpp \
 		support/file_manager.cpp moc_mainwindow.cpp
-OBJECTS       = Release/main.o \
+OBJECTS       = Release/appManager.o \
+		Release/main.o \
 		Release/mainwindow.o \
 		Release/start_stop_watch.o \
 		Release/benchmark.o \
@@ -313,6 +315,7 @@ DIST          = ../../Qt5/6.4.0/macos/mkspecs/features/spec_pre.prf \
 		../../Qt5/6.4.0/macos/mkspecs/features/qt_config.prf \
 		../../Qt5/6.4.0/macos/mkspecs/macx-clang/qmake.conf \
 		../../Qt5/6.4.0/macos/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../Qt5/6.4.0/macos/mkspecs/features/exclusive_builds.prf \
 		../../Qt5/6.4.0/macos/mkspecs/features/mac/sdk.prf \
 		../../Qt5/6.4.0/macos/mkspecs/features/toolchain.prf \
@@ -341,10 +344,12 @@ DIST          = ../../Qt5/6.4.0/macos/mkspecs/features/spec_pre.prf \
 		../../Qt5/6.4.0/macos/mkspecs/features/exceptions.prf \
 		../../Qt5/6.4.0/macos/mkspecs/features/yacc.prf \
 		../../Qt5/6.4.0/macos/mkspecs/features/lex.prf \
-		RateCheck.pro mainwindow.h \
+		RateCheck.pro appManager.h \
+		mainwindow.h \
 		support/benchmark.h \
 		support/start_stop_watch.h \
-		support/file_manager.h main.cpp \
+		support/file_manager.h appManager.cpp \
+		main.cpp \
 		mainwindow.cpp \
 		support/start_stop_watch.cpp \
 		support/benchmark.cpp \
@@ -357,7 +362,7 @@ TARGET        = Release/RateCheck.app/Contents/MacOS/RateCheck
 EXPORT_QMAKE_MAC_SDK = macosx
 EXPORT_QMAKE_MAC_SDK_VERSION = 12.3
 EXPORT_QMAKE_XCODE_DEVELOPER_PATH = /Users/mathyossarkiss/Downloads/Xcode.app/Contents/Developer
-EXPORT__QMAKE_STASH_ = 
+EXPORT__QMAKE_STASH_ = /Users/mathyossarkiss/Personal/rateCheck/.qmake.stash
 EXPORT_VALID_ARCHS = x86_64 arm64
 EXPORT_DEFAULT_ARCHS = arm64
 EXPORT_ARCHS = $(filter $(EXPORT_VALID_ARCHS), $(if $(ARCHS), $(ARCHS), $(if $(EXPORT_DEFAULT_ARCHS), $(EXPORT_DEFAULT_ARCHS), $(EXPORT_VALID_ARCHS))))
@@ -623,6 +628,7 @@ Makefile: RateCheck.pro ../../Qt5/6.4.0/macos/mkspecs/macx-clang/qmake.conf ../.
 		../../Qt5/6.4.0/macos/mkspecs/features/qt_config.prf \
 		../../Qt5/6.4.0/macos/mkspecs/macx-clang/qmake.conf \
 		../../Qt5/6.4.0/macos/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../Qt5/6.4.0/macos/mkspecs/features/exclusive_builds.prf \
 		../../Qt5/6.4.0/macos/mkspecs/features/mac/sdk.prf \
 		../../Qt5/6.4.0/macos/mkspecs/features/toolchain.prf \
@@ -906,6 +912,7 @@ Makefile: RateCheck.pro ../../Qt5/6.4.0/macos/mkspecs/macx-clang/qmake.conf ../.
 ../../Qt5/6.4.0/macos/mkspecs/features/qt_config.prf:
 ../../Qt5/6.4.0/macos/mkspecs/macx-clang/qmake.conf:
 ../../Qt5/6.4.0/macos/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../Qt5/6.4.0/macos/mkspecs/features/exclusive_builds.prf:
 ../../Qt5/6.4.0/macos/mkspecs/features/mac/sdk.prf:
 ../../Qt5/6.4.0/macos/mkspecs/features/toolchain.prf:
@@ -967,8 +974,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents mainwindow.h support/benchmark.h support/start_stop_watch.h support/file_manager.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp mainwindow.cpp support/start_stop_watch.cpp support/benchmark.cpp support/file_manager.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents appManager.h mainwindow.h support/benchmark.h support/start_stop_watch.h support/file_manager.h $(DISTDIR)/
+	$(COPY_FILE) --parents appManager.cpp main.cpp mainwindow.cpp support/start_stop_watch.cpp support/benchmark.cpp support/file_manager.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow.ui $(DISTDIR)/
 
 
@@ -979,6 +986,7 @@ clean: compiler_clean
 
 distclean: clean 
 	-$(DEL_FILE) -r Release/RateCheck.app
+	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
 
@@ -1003,6 +1011,7 @@ compiler_moc_header_clean:
 moc_mainwindow.cpp: mainwindow.h \
 		../../Qt5/6.4.0/macos/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../Qt5/6.4.0/macos/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		appManager.h \
 		../../Qt5/6.4.0/macos/libexec/moc
 	/Users/mathyossarkiss/Qt5/6.4.0/macos/libexec/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -D__cplusplus=199711L -D__APPLE_CC__=6000 -D__clang__ -D__clang_major__=14 -D__clang_minor__=0 -D__clang_patchlevel__=0 -D__GNUC__=4 -D__GNUC_MINOR__=2 -D__GNUC_PATCHLEVEL__=1 -I/Users/mathyossarkiss/Qt5/6.4.0/macos/mkspecs/macx-clang -I/Users/mathyossarkiss/Personal/rateCheck -I/Users/mathyossarkiss/Personal/rateCheck/support/poco/include -I/Users/mathyossarkiss/Personal/rateCheck/support -I/Users/mathyossarkiss/Qt5/6.4.0/macos/lib/QtWidgets.framework/Headers -I/Users/mathyossarkiss/Qt5/6.4.0/macos/lib/QtGui.framework/Headers -I/Users/mathyossarkiss/Qt5/6.4.0/macos/lib/QtCore.framework/Headers -I/Users/mathyossarkiss/Downloads/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include/c++/v1 -I/Users/mathyossarkiss/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/14.0.0/include -I/Users/mathyossarkiss/Downloads/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk/usr/include -I/Users/mathyossarkiss/Downloads/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/mathyossarkiss/Qt5/6.4.0/macos/lib mainwindow.h -o moc_mainwindow.cpp
 
@@ -1029,9 +1038,18 @@ compiler_clean: compiler_moc_header_clean compiler_uic_clean
 
 ####### Compile
 
+Release/appManager.o: appManager.cpp appManager.h \
+		support/start_stop_watch.h \
+		support/benchmark.h \
+		support/file_manager.h \
+		../../Qt5/6.4.0/macos/lib/QtCore.framework/Headers/QString \
+		../../Qt5/6.4.0/macos/lib/QtCore.framework/Headers/qstring.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Release/appManager.o appManager.cpp
+
 Release/main.o: main.cpp mainwindow.h \
 		../../Qt5/6.4.0/macos/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../Qt5/6.4.0/macos/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		appManager.h \
 		../../Qt5/6.4.0/macos/lib/QtWidgets.framework/Headers/QApplication \
 		../../Qt5/6.4.0/macos/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Release/main.o main.cpp
@@ -1039,12 +1057,10 @@ Release/main.o: main.cpp mainwindow.h \
 Release/mainwindow.o: mainwindow.cpp mainwindow.h \
 		../../Qt5/6.4.0/macos/lib/QtWidgets.framework/Headers/QMainWindow \
 		../../Qt5/6.4.0/macos/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		appManager.h \
 		ui_mainwindow.h \
 		../../Qt5/6.4.0/macos/lib/QtWidgets.framework/Headers/QFileDialog \
-		../../Qt5/6.4.0/macos/lib/QtWidgets.framework/Headers/qfiledialog.h \
-		support/start_stop_watch.h \
-		support/benchmark.h \
-		support/file_manager.h
+		../../Qt5/6.4.0/macos/lib/QtWidgets.framework/Headers/qfiledialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Release/mainwindow.o mainwindow.cpp
 
 Release/start_stop_watch.o: support/start_stop_watch.cpp support/start_stop_watch.h

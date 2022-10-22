@@ -5,6 +5,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++11
 
 SOURCES += \
+    appManager.cpp \
     main.cpp \
     mainwindow.cpp \
     support/start_stop_watch.cpp \
@@ -16,6 +17,7 @@ unix:DEFINES += LINUX
 DEFINES += GCC Foundation_EXPORTS
 win32:DEFINES += WIN64
 HEADERS += \
+    appManager.h \
     mainwindow.h \
     support/benchmark.h \
     support/start_stop_watch.h \

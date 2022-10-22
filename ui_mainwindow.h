@@ -244,8 +244,9 @@ public:
         BlockSizeEdit->setObjectName("BlockSizeEdit");
         BlockSizeEdit->setMaximumSize(QSize(100, 16777215));
         QFont font1;
-        font1.setPointSize(8);
-        font1.setBold(true);
+        font1.setFamilies({QString::fromUtf8("Academy Engraved LET")});
+        font1.setPointSize(11);
+        font1.setBold(false);
         BlockSizeEdit->setFont(font1);
         BlockSizeEdit->setReadOnly(true);
 
