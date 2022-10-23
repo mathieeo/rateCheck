@@ -36,6 +36,7 @@
 .qtc_clangd/.cache/clangd/index/
 
 .qtc_clangd/
+Release/**
 
 *.user
 
