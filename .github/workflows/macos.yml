@@ -2,11 +2,13 @@ name: MacOS
 on: 
   push:
     paths:
+      - '**'
       - '*.pro'
       - 'support/**'
       - '.github/workflows/macos.yml'
   pull_request:
     paths:
+      - '**'
       - '*.pro'
       - 'support/**'
       - '.github/workflows/macos.yml' 
