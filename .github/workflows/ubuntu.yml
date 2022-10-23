@@ -45,7 +45,7 @@ jobs:
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.os }}_${{matrix.qt_ver}}.zip
-          path: Release/${{ matrix.os }}_${{matrix.qt_ver}}.run
+          path: Release/${{ matrix.os }}_${{matrix.qt_ver}}
       # tag Release
       - name: uploadRelease
         if: startsWith(github.event.ref, 'refs/tags/')
