@@ -40,9 +40,6 @@ MainWindow::MainWindow(QWidget *parent)
     manager = new appManager(UI);
 
     ui->statusbar->showMessage("Idle");
-
-
-    connect(ui->actionWebsite, SIGNAL(triggered()), this, SLOT(goToWebsite()));
 }
 
 //------------------------------------------------------------------------
@@ -205,5 +202,14 @@ void MainWindow::on_StartBtn_clicked()
 
     QThread *thread = QThread::create(&appManager::StartWorking, manager, directMode);
     thread->start();
+}
+
+//------------------------------------------------------------------------
+// MainWindow::on_AboutBtn_clicked()
+//------------------------------------------------------------------------
+
+void MainWindow::on_AboutBtn_clicked()
+{
+  goToWebsite();
 }
 

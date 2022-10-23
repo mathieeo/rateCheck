@@ -626,7 +626,7 @@
            <property name="horizontalSpacing">
             <number>5</number>
            </property>
-           <item row="0" column="0">
+           <item row="0" column="1">
             <widget class="QPushButton" name="StartBtn">
              <property name="maximumSize">
               <size>
@@ -636,6 +636,13 @@
              </property>
              <property name="text">
               <string>start</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="0">
+            <widget class="QPushButton" name="AboutBtn">
+             <property name="text">
+              <string>About</string>
              </property>
             </widget>
            </item>
@@ -661,16 +668,9 @@
      <x>0</x>
      <y>0</y>
      <width>508</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuAbout">
-    <property name="title">
-     <string>About</string>
-    </property>
-    <addaction name="actionWebsite"/>
-   </widget>
-   <addaction name="menuAbout"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionWebsite">

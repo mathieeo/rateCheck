@@ -22,6 +22,8 @@ private slots:
     void on_StartBtn_clicked();
 
     void goToWebsite();
+    void on_AboutBtn_clicked();
+
 public:
 
     friend class GUI_Interface_Impl;
