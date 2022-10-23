@@ -34,12 +34,14 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->setWindowTitle("DiskRateCheck " + QString(APP_VERSION) + " - Integrated Software Technologies Inc.");
+    this->setWindowTitle("DiskRateCheck " + QString(APP_VERSION) + " -");
 
     UI = new GUI_Interface_Impl(this);
     manager = new appManager(UI);
 
     ui->statusbar->showMessage("Idle");
+
+    ui->infoLabel->setText(QString("Integrated Software Technologies Inc. | RateCheck v" + QString(APP_VERSION) + " |"));
 }
 
 //------------------------------------------------------------------------

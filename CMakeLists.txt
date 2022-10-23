@@ -12,7 +12,6 @@ set(REQUIRED_LIBS_QUALIFIED Qt5::Core Qt5::Gui Qt5::Widgets)
 
 include_directories(${PROJECT_SOURCE_DIR} "support/")
 
-set_target_properties(main_executable PROPERTIES FOLDER "qtc_runnable")
 
 add_library(${PROJECT_NAME} appManager.cpp appManager.h mainwindow.cpp mainwindow.h mainwindow.ui appVersion.h support/benchmark.h support/benchmark.cpp support/start_stop_watch.h support/start_stop_watch.cpp support/file_manager.h support/file_manager.cpp)
 
