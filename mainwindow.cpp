@@ -104,7 +104,7 @@ bool MainWindow::isValidateChecked()
 //------------------------------------------------------------------------
 
 
-string MainWindow::rootDirectory()
+std::string MainWindow::rootDirectory()
 {
     return ui->DirectoryEdit->text().toStdString();
 }
@@ -114,7 +114,7 @@ string MainWindow::rootDirectory()
 //------------------------------------------------------------------------
 
 
-void MainWindow::updateStatusMessage(string msg)
+void MainWindow::updateStatusMessage(std::string msg)
 {
     ui->statusbar->showMessage(QString::fromStdString(msg));
 }
@@ -124,7 +124,7 @@ void MainWindow::updateStatusMessage(string msg)
 //------------------------------------------------------------------------
 
 
-void MainWindow::appendToBlockSize(string size)
+void MainWindow::appendToBlockSize(std::string size)
 {
     ui->BlockSizeEdit->append(QString::fromStdString(size));
 }
@@ -134,7 +134,7 @@ void MainWindow::appendToBlockSize(string size)
 //------------------------------------------------------------------------
 
 
-void MainWindow::appendToWriteRate(string size)
+void MainWindow::appendToWriteRate(std::string size)
 {
     ui->WriteRateEdit->append(QString::fromStdString(size));
 }
@@ -144,7 +144,7 @@ void MainWindow::appendToWriteRate(string size)
 //------------------------------------------------------------------------
 
 
-void MainWindow::appendToReadRate(string size)
+void MainWindow::appendToReadRate(std::string size)
 {
     ui->ReadRateEdit->append(QString::fromStdString(size));
 }

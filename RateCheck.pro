@@ -44,11 +44,7 @@ INCLUDEPATH = support/poco/include \
 
 win32:LIBS += -lversion -lIphlpapi -lSetupApi -lNewdev -lws2_32
 
-RESOURCES += \
-    resource.qrc
-
 ICON = icon.png
-RC_ICONS = icon.png
 
 
 

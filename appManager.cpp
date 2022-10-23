@@ -102,7 +102,7 @@ void appManager::fillRandomly(unsigned int size, int *ptr)
 //  appManager::AttachTag() --
 //---------------------------------------------------------------------------
 
-string appManager::AttachTag(double rate)
+std::string appManager::AttachTag(double rate)
 {
     if(rate < 1)
     {
@@ -169,7 +169,6 @@ int appManager::StartWorking(bool directMode)
     float number_of_runs = BS_Stop_Idx-BS_Start_Idx;
     for (int idx =BS_Start_Idx;idx <=BS_Stop_Idx;++idx) {
 
-        cout << idx << " " << number_of_runs << " " << (float(float(idx)/float(number_of_runs))*100) << endl;
         gui_interface->updateProgressBar((float(float(idx)/float(number_of_runs)))*100);
 
         size_t idx_t = static_cast<size_t>(idx);
@@ -201,8 +200,8 @@ int appManager::StartWorking(bool directMode)
             watch.Start();
 
             while(counter < IOCount){
-                uint bytes = file.Write(reinterpret_cast<char*>(WriteData), CurrentBlockSize);
-                if(bytes == 0)
+                uint __bytes = file.Write(reinterpret_cast<char*>(WriteData), CurrentBlockSize);
+                if(__bytes == 0)
                 {
                     gui_interface->updateStatusMessage("Failed to write to the file.");
                     FinishedBenchmarking();
@@ -238,11 +237,11 @@ int appManager::StartWorking(bool directMode)
             }
 
             counter = 0;
-            unsigned long bytes;
+            unsigned long __bytes;
             watch.Start();
             while(true){
-                bytes = file.Read(reinterpret_cast<char*>(ReadData), CurrentBlockSize);
-                if(bytes == 0)
+                __bytes = file.Read(reinterpret_cast<char*>(ReadData), CurrentBlockSize);
+                if(__bytes == 0)
                 {
                     break;
                 }

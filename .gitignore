@@ -26,6 +26,10 @@
 *.a
 *.lib
 
+*.Debug
+*.Release
+*Makefile*
+
 # Executables
 *.exe
 *.out
@@ -36,7 +40,7 @@
 .qtc_clangd/.cache/clangd/index/
 
 .qtc_clangd/
-Release/**
+Release/
 
 *.user
 

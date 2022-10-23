@@ -4,8 +4,6 @@
 #include <vector>
 #include <string>
 
-using namespace std;
-
 const long long Kay = 1024;
 const long long Meg = 1024*1024;
 const long long Geg = 1024*1024*1024;
@@ -53,10 +51,10 @@ public:
     std::string AttachTag(double rate);
 
 
-    vector<unsigned long long> blockSizeVec;
-    vector<unsigned long long> FileSizeVec;
-    vector<unsigned long long> IoCountVec;
-    vector<string>    IoSizeTagsVec;
+    std::vector<unsigned long long> blockSizeVec;
+    std::vector<unsigned long long> FileSizeVec;
+    std::vector<unsigned long long> IoCountVec;
+    std::vector<std::string>    IoSizeTagsVec;
 
 private:
     GUI_Interface *gui_interface;
