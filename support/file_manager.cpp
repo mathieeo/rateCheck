@@ -339,7 +339,7 @@ bool FileAPIFileManager::Open()
     Handle = CreateFileA(FFileName.c_str(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN | FILE_FLAG_NO_BUFFERING , nullptr);
     if (Handle == INVALID_HANDLE_VALUE)
     {
-        throw MalibuException("Unable to open file");
+        throw std::string("Unable to open file");
     }
 
     // Cache file size
@@ -360,7 +360,7 @@ bool FileAPIFileManager::Create()
     Handle = CreateFileA(FFileName.c_str(), GENERIC_READ, 0, nullptr, CREATE_NEW, FILE_FLAG_SEQUENTIAL_SCAN | FILE_FLAG_NO_BUFFERING , nullptr);
 
     if (!Opened())
-        throw MalibuException("Unable to create file");
+        throw std::string("Unable to create file");
 
     Position(0);
 

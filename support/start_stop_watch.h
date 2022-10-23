@@ -2,12 +2,16 @@
 #define start_stop_watchH
 
 #include <stack>
+#include <string>
+#include <stdio.h>
 
 namespace rateCheckApp
 {
 #ifdef __CLR_VER
 #pragma managed(push, off)
 #endif
+
+typedef uint64_t int64;
 
 //========================================================================
 //  CLASS StartStopWatch --  Accurate StartStopWatch timer class

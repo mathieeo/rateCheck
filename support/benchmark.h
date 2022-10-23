@@ -3,9 +3,12 @@
 
 #include <vector>
 #include <start_stop_watch.h>
+#include <string>
+#include <stdio.h>
 
 namespace rateCheckApp
 {
+typedef uint64_t int64;
 #ifdef __CLR_VER
 #pragma managed(push, off)
 #endif

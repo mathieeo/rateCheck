@@ -43,7 +43,7 @@ StartStopWatchImpl::StartStopWatchImpl()
     QueryPerformanceFrequency(FTimerRate);
 
     if (!FTimerRate)
-        throw MalibuException("Performance timer unavailable!");
+        throw std::string("Performance timer unavailable!");
 }
 
 //------------------------------------------------------------------------
