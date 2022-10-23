@@ -18,11 +18,15 @@ jobs:
     runs-on: windows-latest
     strategy:
       matrix:
-        include:
-          - qt_arch: win64_mingw81
-            qt_ver: 6.0.0
-            qt_tools: "tools_mingw,8.1.0-1-202004170606,qt.tools.win64_mingw810"
-            qt_tools_mingw_install: mingw810_64
+        include:          
+        - qt_arch: win64_mingw81
+          qt_ver: 5.15.2
+          qt_tools: "tools_mingw,8.1.0-1-202004170606,qt.tools.win64_mingw810"
+          qt_tools_mingw_install: mingw810_64
+#           - qt_arch: win64_mingw81
+#             qt_ver: 6.0.0
+#             qt_tools: "tools_mingw,8.1.0-1-202004170606,qt.tools.win64_mingw810"
+#             qt_tools_mingw_install: mingw810_64
 #           - qt_arch: win64_mingw
 #             qt_ver: 6.2.2
 #             qt_tools: "tools_mingw,9.0.0-1-202111221309,qt.tools.win64_mingw900"
@@ -68,14 +72,15 @@ jobs:
           mingw32-make
       - name: package
         id: package      
-        env:  
+        env:
           #archiveName: ${{ matrix.qt_ver }}-${{ matrix.qt_target }}-${{ matrix.qt_arch }}
-          archiveName: ${{ env.orgName }}-${{ env.VERSION }}
+          archiveName: ${{ env.orgName }}-${{ matrix.qt_ver }}-${{ matrix.qt_target }}-${{ matrix.qt_arch }}
+          
         shell: pwsh
         run: |
           & scripts\windows-mingw-publish.ps1 ${env:archiveName} ${env:targetName}
            $name = ${env:archiveName}
-           echo "::set-output name=packageName::$name"       
+           echo "::set-output name=packageName::$name"         
       - uses: actions/upload-artifact@v2
         with:
           name: ${{ steps.package.outputs.packageName }}
