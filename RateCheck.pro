@@ -18,6 +18,7 @@ DEFINES += GCC Foundation_EXPORTS
 win32:DEFINES += WIN64
 HEADERS += \
     appManager.h \
+    appVersion.h \
     mainwindow.h \
     support/benchmark.h \
     support/start_stop_watch.h \

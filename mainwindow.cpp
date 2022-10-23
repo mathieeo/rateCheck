@@ -12,6 +12,7 @@
 #include <thread>
 #include <QThread>
 #include <QDesktopServices>
+#include <appVersion.h>
 
 typedef uint64_t int64;
 
@@ -33,8 +34,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    QString version = "v0.9.2";
-    this->setWindowTitle("DiskRateCheck " + version + " - Integrated Software Technologies Inc.");
+    this->setWindowTitle("DiskRateCheck " + QString(APP_VERSION) + " - Integrated Software Technologies Inc.");
 
     UI = new GUI_Interface_Impl(this);
     manager = new appManager(UI);
