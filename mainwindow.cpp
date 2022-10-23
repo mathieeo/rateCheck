@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    QString version = "v0.9.1";
+    QString version = "v0.9.2";
     this->setWindowTitle("DiskRateCheck " + version + " - Integrated Software Technologies Inc.");
 
     UI = new GUI_Interface_Impl(this);
