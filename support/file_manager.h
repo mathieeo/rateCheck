@@ -19,11 +19,8 @@
 
 namespace rateCheckApp
 {
-#ifdef __CLR_VER
-#pragma managed(push, off)
-#endif
 
-typedef unsigned long ii64;
+typedef uint64_t int64;
 //===========================================================================
 //  CLASS  FileManager   ---  Large disk file access support class
 //===========================================================================
@@ -56,14 +53,14 @@ public:
     void            WriteThrough(bool state);
     bool            WriteThrough() const;
 
-    void            Size(ii64 size);
-    ii64            Size() const;
+    void            Size(int64 size);
+    int64            Size() const;
 
     void            FileName(const std::string & name);
     std::string     FileName() const;
 
-    bool            Position(ii64 value);
-    ii64            Position() const;
+    bool            Position(int64 value);
+    int64            Position() const;
 
     bool            isStdioFile() const { return _useStdioFile; }
 private:
@@ -92,14 +89,14 @@ public:
     virtual unsigned int    Write(const char * buffer, unsigned int size) = 0;
     virtual unsigned int    Read(char * buffer, unsigned int size) = 0;
 
-    virtual void            Size(ii64 size) = 0;
-    virtual ii64            Size() const = 0;
+    virtual void            Size(int64 size) = 0;
+    virtual int64            Size() const = 0;
 
     virtual void            FileName(const std::string & name) = 0;
     virtual std::string     FileName() const = 0;
 
-    virtual bool            Position(ii64 value) = 0;
-    virtual ii64            Position() const = 0;
+    virtual bool            Position(int64 value) = 0;
+    virtual int64            Position() const = 0;
 
 };
 
@@ -128,22 +125,22 @@ public:
     virtual unsigned int    Write(const char * buffer, unsigned int size) ;
     virtual unsigned int    Read(char * buffer, unsigned int size) ;
 
-    virtual void            Size(ii64 size) ;
-    virtual ii64            Size() const ;
+    virtual void            Size(int64 size) ;
+    virtual int64            Size() const ;
 
     virtual void            FileName(const std::string & name) ;
     virtual std::string     FileName() const ;
 
-    virtual bool            Position(ii64 value) ;
-    virtual ii64            Position() const ;
+    virtual bool            Position(int64 value) ;
+    virtual int64            Position() const ;
 
 protected:
 
     // Data
     FILE *	    Handle;
     std::string     FFileName;
-    ii64            FPosition;
-    ii64            FSize;
+    int64            FPosition;
+    int64            FSize;
 
     void            GetSize();
 };
@@ -166,7 +163,7 @@ public:
 
     virtual bool            Open();
     virtual bool            Opened() const
-     { return isOpen;   }
+    { return isOpen;   }
     virtual bool            Append() ;
     virtual bool            Create() ;
     virtual bool            Close() ;
@@ -174,14 +171,14 @@ public:
     virtual unsigned int    Write(const char * buffer, unsigned int size) ;
     virtual unsigned int    Read(char * buffer, unsigned int size) ;
 
-    virtual void            Size(ii64 size) ;
-    virtual ii64            Size() const ;
+    virtual void            Size(int64 size) ;
+    virtual int64            Size() const ;
 
     virtual void            FileName(const std::string & name) ;
     virtual std::string     FileName() const ;
 
-    virtual bool            Position(ii64 value) ;
-    virtual ii64            Position() const ;
+    virtual bool            Position(int64 value) ;
+    virtual int64            Position() const ;
 
 protected:
 
@@ -215,14 +212,14 @@ public:
     virtual unsigned int    Write(const char * /*buffer*/, unsigned int /*size*/);
     virtual unsigned int    Read(char * /*buffer*/, unsigned int /*size*/);
 
-    virtual void            Size(ii64 /*size*/) ;
-    virtual ii64            Size() const;
+    virtual void            Size(int64 /*size*/) ;
+    virtual int64            Size() const;
 
     virtual void            FileName(const std::string & /*name*/);
     virtual std::string     FileName() const;
 
-    virtual bool            Position(ii64 /*value*/);
-    virtual ii64            Position() const;
+    virtual bool            Position(int64 /*value*/);
+    virtual int64            Position() const;
 
 protected:
 
@@ -238,10 +235,6 @@ protected:
 };
 #endif
 
-
-#ifdef __CLR_VER
-#pragma managed(pop)
-#endif
-}  // namespace Innovative
+}  // namespace
 
 #endif

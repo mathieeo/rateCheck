@@ -2,9 +2,9 @@
 
 
 #ifndef LINUX
-	#include <windows.h>
+#include <windows.h>
 #else
-	#include <sys/time.h>
+#include <sys/time.h>
 #endif
 
 namespace   rateCheckApp
@@ -23,14 +23,14 @@ class StartStopWatchImpl
 public:
     StartStopWatchImpl();
     
-     double          TimerRate() const
-        {  return static_cast<double>(FTimerRate);  }
+    double          TimerRate() const
+    {  return static_cast<double>(FTimerRate);  }
     
     double Now();
 private:
-	ii64         FTimerRate;
-    void QueryPerformanceFrequency(ii64 & timerRate);
-    void QueryPerformanceCounter(ii64 & count);
+    int64         FTimerRate;
+    void QueryPerformanceFrequency(int64 & timerRate);
+    void QueryPerformanceCounter(int64 & count);
 };
 
 //------------------------------------------------------------------------
@@ -52,7 +52,7 @@ StartStopWatchImpl::StartStopWatchImpl()
 
 double StartStopWatchImpl::Now()
 {
-    ii64 Current;
+    int64 Current;
     QueryPerformanceCounter(Current);
 
     return static_cast<double>(Current)/TimerRate();
@@ -62,7 +62,7 @@ double StartStopWatchImpl::Now()
 // StartStopWatchImpl::QueryPerformanceFrequency()
 //------------------------------------------------------------------------
 
-void StartStopWatchImpl::QueryPerformanceFrequency(ii64 & timerRate)
+void StartStopWatchImpl::QueryPerformanceFrequency(int64 & timerRate)
 {
     ::QueryPerformanceFrequency(reinterpret_cast<LARGE_INTEGER*>(&timerRate));
 }
@@ -71,7 +71,7 @@ void StartStopWatchImpl::QueryPerformanceFrequency(ii64 & timerRate)
 // StartStopWatchImpl::QueryPerformancCounter()
 //------------------------------------------------------------------------
 
-void StartStopWatchImpl::QueryPerformanceCounter(ii64 & count)
+void StartStopWatchImpl::QueryPerformanceCounter(int64 & count)
 {
     ::QueryPerformanceCounter(reinterpret_cast<LARGE_INTEGER*>(&count));
 }
@@ -83,11 +83,11 @@ public:
     StartStopWatchImpl()  {  }
     double Now();
     double TimerRate() const
-        {  return 0;  }
+    {  return 0;  }
 
 private:
-  
-	struct timeval now;	
+
+    struct timeval now;
 };
 
 //------------------------------------------------------------------------
@@ -96,11 +96,11 @@ private:
 
 double StartStopWatchImpl::Now()
 {
-	
+
     gettimeofday(&now, NULL);
     double ret_val = now.tv_sec;
     ret_val += now.tv_usec/Meg;
-   
+
     return ret_val;
 }
 
@@ -143,10 +143,10 @@ StartStopWatch::~StartStopWatch()
 StartStopWatch & StartStopWatch::operator =(const StartStopWatch & other)
 {
     if (this != &other)
-        {
+    {
         delete impl;
         impl = new StartStopWatchImpl();
-        }
+    }
 
     return *this;
 }
@@ -193,12 +193,12 @@ double StartStopWatch::Elapsed()
 
 void StartStopWatch::uS(int Delay)
 {
-	
+
     double Then = Now() + static_cast<double>(Delay)/Meg;
 
     while (Now() < Then)
         ;
-   
+
 }
 
 //---------------------------------------------------------------------------

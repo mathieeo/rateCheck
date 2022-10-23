@@ -74,7 +74,7 @@ void StdFileManager::GetSize()
     off_t offset = 0;
     fseek(Handle, offset, SEEK_END);
     clearerr(Handle);
-    FSize = static_cast<ii64>(ftell(Handle));
+    FSize = static_cast<int64>(ftell(Handle));
 }
 
 //---------------------------------------------------------------------------
@@ -186,7 +186,7 @@ unsigned int StdFileManager::Write(const char * buffer, unsigned int size)
     size_t result;
     result = fwrite(buffer, 1, size, Handle);
     FPosition += result;
-    FSize = std::max<ii64>(FPosition, FSize);
+    FSize = std::max<int64>(FPosition, FSize);
 
     return static_cast<unsigned int>(result);
 }
@@ -213,7 +213,7 @@ std::string StdFileManager::FileName() const
 //  StdFileManager::Position() --
 //---------------------------------------------------------------------------
 
-bool StdFileManager::Position(ii64 offset)
+bool StdFileManager::Position(int64 offset)
 {
     if (!Opened())
     { return false;}
@@ -228,7 +228,7 @@ bool StdFileManager::Position(ii64 offset)
 //  StdFileManager::Position() --
 //---------------------------------------------------------------------------
 
-ii64 StdFileManager::Position() const
+int64 StdFileManager::Position() const
 {
     return FPosition;
 }
@@ -237,7 +237,7 @@ ii64 StdFileManager::Position() const
 //  StdFileManager::Size() --  Set file size
 //---------------------------------------------------------------------------
 
-void StdFileManager::Size(ii64 size)
+void StdFileManager::Size(int64 size)
 {
     Position(size);
     Write("\0", 1);
@@ -249,7 +249,7 @@ void StdFileManager::Size(ii64 size)
 //  StdFileManager::Size() --  Get file size
 //---------------------------------------------------------------------------
 
-ii64 StdFileManager::Size() const
+int64 StdFileManager::Size() const
 {
     return FSize;
 }
@@ -461,7 +461,7 @@ std::string FileAPIFileManager::FileName() const
 //  FileAPIFileManager::Position() --
 //---------------------------------------------------------------------------
 
-bool FileAPIFileManager::Position(ii64 offset)
+bool FileAPIFileManager::Position(int64 offset)
 {
     if(offset > 2)
         return false;
@@ -483,7 +483,7 @@ FILE_END 2
 //  FileAPIFileManager::Position() --
 //---------------------------------------------------------------------------
 
-ii64 FileAPIFileManager::Position() const
+int64 FileAPIFileManager::Position() const
 {
     return FPosition;
 }
@@ -492,7 +492,7 @@ ii64 FileAPIFileManager::Position() const
 //  FileAPIFileManager::Size() --  Set file size
 //---------------------------------------------------------------------------
 
-void FileAPIFileManager::Size(ii64 size)
+void FileAPIFileManager::Size(int64 size)
 {
     Position(size);
     Write("\0", 1);
@@ -504,7 +504,7 @@ void FileAPIFileManager::Size(ii64 size)
 //  FileAPIFileManager::Size() --  Get file size
 //---------------------------------------------------------------------------
 
-ii64 FileAPIFileManager::Size() const
+int64 FileAPIFileManager::Size() const
 {
     return FSize;
 }
@@ -570,16 +570,16 @@ FileAPIFileManager::~FileAPIFileManager()
 
 void FileAPIFileManager::GetSize()
 {
-   // unsigned long  high = 0;
+    // unsigned long  high = 0;
 
     //DWORD size = GetFileSize(Handle, &high);
-//    FSize = size;
+    //    FSize = size;
 
-//    if(high!=0){
-//        long long newHigh = high;
-//        newHigh = newHigh << 32;
-//        FSize = newHigh + size;
-//    }
+    //    if(high!=0){
+    //        long long newHigh = high;
+    //        newHigh = newHigh << 32;
+    //        FSize = newHigh + size;
+    //    }
 
 }
 #define O_DIRECT 040000
@@ -611,11 +611,11 @@ bool FileAPIFileManager::Opened() const
 
 bool FileAPIFileManager::Create()
 {
-   remove(FileName().c_str());
-   int result = ::creat(FFileName.c_str(), O_CREAT | O_DIRECT);
-   if(result == -1){
+    remove(FileName().c_str());
+    int result = ::creat(FFileName.c_str(), O_CREAT | O_DIRECT);
+    if(result == -1){
         throw std::string("Unable to create file");
-       return false;
+        return false;
     }
 
     Position(0);
@@ -706,7 +706,7 @@ std::string FileAPIFileManager::FileName() const
 //  FileAPIFileManager::Position() --
 //---------------------------------------------------------------------------
 
-bool FileAPIFileManager::Position(ii64 offset)
+bool FileAPIFileManager::Position(int64 offset)
 {
     if (!Opened())
     { return false;}
@@ -721,7 +721,7 @@ bool FileAPIFileManager::Position(ii64 offset)
 //  FileAPIFileManager::Position() --
 //---------------------------------------------------------------------------
 
-ii64 FileAPIFileManager::Position() const
+int64 FileAPIFileManager::Position() const
 {
     return FPosition;
 }
@@ -730,7 +730,7 @@ ii64 FileAPIFileManager::Position() const
 //  FileAPIFileManager::Size() --  Set file size
 //---------------------------------------------------------------------------
 
-void FileAPIFileManager::Size(ii64 size)
+void FileAPIFileManager::Size(int64 size)
 {
     Position(size);
     Write("\0", 1);
@@ -742,7 +742,7 @@ void FileAPIFileManager::Size(ii64 size)
 //  FileAPIFileManager::Size() --  Get file size
 //---------------------------------------------------------------------------
 
-ii64 FileAPIFileManager::Size() const
+int64 FileAPIFileManager::Size() const
 {
     return FSize;
 }
@@ -886,7 +886,7 @@ bool FileManager::Opened() const
 //  FileManager::Position() --
 //---------------------------------------------------------------------------
 
-bool FileManager::Position(ii64 offset)
+bool FileManager::Position(int64 offset)
 {
     return Impl->Position(offset);
 }
@@ -895,7 +895,7 @@ bool FileManager::Position(ii64 offset)
 //  FileManager::Position() --
 //---------------------------------------------------------------------------
 
-ii64 FileManager::Position() const
+int64 FileManager::Position() const
 {
     return Impl->Position();
 }
@@ -922,7 +922,7 @@ std::string FileManager::FileName() const
 //  FileManager::Size() --  Set file size
 //---------------------------------------------------------------------------
 
-void FileManager::Size(ii64 size)
+void FileManager::Size(int64 size)
 {
     Impl->Size(size);
 }
@@ -931,7 +931,7 @@ void FileManager::Size(ii64 size)
 //  FileManager::Size() --  Get file size
 //---------------------------------------------------------------------------
 
-ii64 FileManager::Size() const
+int64 FileManager::Size() const
 {
     return Impl->Size();
 }
@@ -954,7 +954,7 @@ bool FileManager::WriteThrough() const
 }
 
 
-}  // namespace Innovative
+}  // namespace
 
 // Undefining _FILE_OFFSET_BITS macro, so that other classes are not affected.
 #if defined(LINUX)

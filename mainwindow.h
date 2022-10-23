@@ -18,10 +18,12 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 private slots:
-    void on_pushButton_2_clicked();
 
-    void on_StartStopButton_clicked();
+    void on_dirBrowseBtn_clicked();
 
+    void on_StartBtn_clicked();
+
+    void goToWebsite();
 public:
 
     friend class GUI_Interface_Impl;
@@ -49,8 +51,8 @@ public:
 
     Ui::MainWindow *ui;
 
-   // HANDLE WriteFileHandle;
-  //  HANDLE ReadFileHandle;
+    // HANDLE WriteFileHandle;
+    //  HANDLE ReadFileHandle;
 
 };
 

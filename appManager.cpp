@@ -12,6 +12,9 @@ using namespace rateCheckApp;
 using namespace std::chrono;
 
 
+//------------------------------------------------------------------------
+//  Constructor of class appManager
+//------------------------------------------------------------------------
 appManager::appManager(GUI_Interface *_gui_interface) :
     gui_interface(_gui_interface)
 {
@@ -72,10 +75,16 @@ appManager::appManager(GUI_Interface *_gui_interface) :
     IoSizeTagsVec.push_back("256 MB");
 
 }
-
+//------------------------------------------------------------------------
+//  Destractor of class appManager
+//------------------------------------------------------------------------
 appManager::~appManager() {
     delete gui_interface;
 }
+
+//---------------------------------------------------------------------------
+//  appManager::fillRandomly() --
+//---------------------------------------------------------------------------
 
 void appManager::fillRandomly(unsigned int size, int *ptr)
 {
@@ -88,6 +97,10 @@ void appManager::fillRandomly(unsigned int size, int *ptr)
         counter++;
     }
 }
+
+//---------------------------------------------------------------------------
+//  appManager::AttachTag() --
+//---------------------------------------------------------------------------
 
 string appManager::AttachTag(double rate)
 {
@@ -105,10 +118,11 @@ string appManager::AttachTag(double rate)
         return QString::number(rate).toStdString() + " MB/S";
 
 }
-//#define ROUND_UP_SIZE(Value,Pow2) ((SIZE_T) ((((ULONG)(Value)) + (Pow2) - 1) & (~(((LONG)(Pow2)) - 1))))
 
-//#define ROUND_UP_PTR(Ptr,Pow2)  ((void *) ((((ULONG_PTR)(Ptr)) + (Pow2) - 1) & (~(((LONG_PTR)(Pow2)) - 1))))
 
+//---------------------------------------------------------------------------
+//  appManager::StartWorking() --
+//---------------------------------------------------------------------------
 
 int appManager::StartWorking(bool directMode)
 {
@@ -123,9 +137,9 @@ int appManager::StartWorking(bool directMode)
     int BS_Start_Idx, BS_Stop_Idx;
     bool CheckData;
 
-    BS_Start_Idx =  gui_interface->blockSizeStartIndex(); //ui->BlockSizeStartCombo->currentIndex();
-    BS_Stop_Idx =  gui_interface->blockSizeEndIndex(); //ui->BlockSizeEndCombo->currentIndex();
-    CheckData = gui_interface->isValidateChecked();//ui->ValidateDataCheck->isChecked();
+    BS_Start_Idx =  gui_interface->blockSizeStartIndex();
+    BS_Stop_Idx =  gui_interface->blockSizeEndIndex();
+    CheckData = gui_interface->isValidateChecked();
     StartBlockSize = blockSizeVec[static_cast<size_t>(BS_Start_Idx)];
     StopBlockSize = blockSizeVec[static_cast<size_t>(BS_Stop_Idx)];
     CurrentFileSize = FileSizeVec[static_cast<size_t>(gui_interface->fileSizeComboIndex())];
@@ -140,7 +154,7 @@ int appManager::StartWorking(bool directMode)
     gui_interface->updateStatusMessage("Initilizing the file for operation.");
 
     //Get Dir and create the file
-    MainDIR = gui_interface->rootDirectory(); // ui->DirectoryEdit->text().toStdString();
+    MainDIR = gui_interface->rootDirectory();
     FilePath = MainDIR + "\\" + "WriteFile.bin";
     remove(FilePath.c_str());
 
@@ -188,7 +202,6 @@ int appManager::StartWorking(bool directMode)
 
             while(counter < IOCount){
                 uint bytes = file.Write(reinterpret_cast<char*>(WriteData), CurrentBlockSize);
-                //WriteFile(WriteFileHandle, WriteData, CurrentBlockSize, &dwBytesWritten, nullptr);
                 if(bytes == 0)
                 {
                     gui_interface->updateStatusMessage("Failed to write to the file.");
@@ -228,7 +241,6 @@ int appManager::StartWorking(bool directMode)
             unsigned long bytes;
             watch.Start();
             while(true){
-                //ReadFile(ReadFileHandle, ReadData, CurrentBlockSize, &bytes, nullptr);
                 bytes = file.Read(reinterpret_cast<char*>(ReadData), CurrentBlockSize);
                 if(bytes == 0)
                 {
@@ -251,10 +263,8 @@ int appManager::StartWorking(bool directMode)
             long long num1 = (counter*(CurrentBlockSize<1000? CurrentBlockSize : CurrentBlockSize/1000));
             double num2 =  (timediff*1.0e6);
             FTxBlockRate =  CurrentBlockSize<1000? (num1/num2): (num1/num2)*1000;
-            // AddToControl(this->ui->ReadRateEdit, AttachTag(FTxBlockRate));
             gui_interface->appendToReadRate(AttachTag(FTxBlockRate));
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
-            //CloseHandle(ReadFileHandle);
             file.Close();
         }
         remove(FilePath.c_str());
@@ -271,6 +281,10 @@ int appManager::StartWorking(bool directMode)
 
     return 1;
 }
+
+//---------------------------------------------------------------------------
+//  appManager::FinishedBenchmarking() --
+//---------------------------------------------------------------------------
 
 void appManager::FinishedBenchmarking()
 {

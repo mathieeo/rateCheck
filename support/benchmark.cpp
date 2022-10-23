@@ -42,10 +42,10 @@ double AveragedRate::Process(double sample)
     Sum += sample;
     History[Cursor++] = sample;
     if (Cursor == Taps)
-        {
+    {
         Cursor = 0;
         Settled = true;
-        }
+    }
 
     return (!Settled) ? 0.0 : Sum/Taps;
 }

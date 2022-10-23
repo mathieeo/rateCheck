@@ -11,8 +11,9 @@
 #include <chrono>
 #include <thread>
 #include <QThread>
+#include <QDesktopServices>
 
-typedef uint64_t ii64;
+typedef uint64_t int64;
 
 
 #ifndef LINUX
@@ -22,18 +23,31 @@ typedef uint64_t ii64;
 #include <unistd.h>
 #endif
 
+//------------------------------------------------------------------------
+// MainWindow::MainWindow
+//------------------------------------------------------------------------
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)/*, File("Data.bin", ios::binary|ios::ate)*/
+    : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    QString version = "v0.9.1";
+    this->setWindowTitle("DiskRateCheck " + version + " - Integrated Software Technologies Inc.");
 
     UI = new GUI_Interface_Impl(this);
     manager = new appManager(UI);
 
     ui->statusbar->showMessage("Idle");
+
+
+    connect(ui->actionWebsite, SIGNAL(triggered()), this, SLOT(goToWebsite()));
 }
+
+//------------------------------------------------------------------------
+// MainWindow::~MainWindow
+//------------------------------------------------------------------------
 
 MainWindow::~MainWindow()
 {
@@ -41,84 +55,149 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::goToWebsite()
+{
+    QString link = "http://www.integratedsw.tech";
+    QDesktopServices::openUrl(QUrl(link));
+}
+
+//------------------------------------------------------------------------
+// MainWindow::blockSizeStartIndex()
+//------------------------------------------------------------------------
+
 unsigned int MainWindow::blockSizeStartIndex()
 {
     return ui->BlockSizeStartCombo->currentIndex();
 }
+
+//------------------------------------------------------------------------
+// MainWindow::blockSizeStartIndex()
+//------------------------------------------------------------------------
 
 unsigned int MainWindow::blockSizeEndIndex()
 {
     return ui->BlockSizeEndCombo->currentIndex();
 }
 
+//------------------------------------------------------------------------
+// MainWindow::blockSizeStartIndex()
+//------------------------------------------------------------------------
+
+
 unsigned int MainWindow::fileSizeComboIndex()
 {
     return ui->FileSizeCombo->currentIndex();
 }
+
+//------------------------------------------------------------------------
+// MainWindow::blockSizeStartIndex()
+//------------------------------------------------------------------------
+
 
 bool MainWindow::isValidateChecked()
 {
     return ui->ValidateDataCheck->isChecked();
 }
 
+//------------------------------------------------------------------------
+// MainWindow::blockSizeStartIndex()
+//------------------------------------------------------------------------
+
+
 string MainWindow::rootDirectory()
 {
     return ui->DirectoryEdit->text().toStdString();
 }
+
+//------------------------------------------------------------------------
+// MainWindow::blockSizeStartIndex()
+//------------------------------------------------------------------------
+
 
 void MainWindow::updateStatusMessage(string msg)
 {
     ui->statusbar->showMessage(QString::fromStdString(msg));
 }
 
+//------------------------------------------------------------------------
+// MainWindow::blockSizeStartIndex()
+//------------------------------------------------------------------------
+
+
 void MainWindow::appendToBlockSize(string size)
 {
     ui->BlockSizeEdit->append(QString::fromStdString(size));
 }
+
+//------------------------------------------------------------------------
+// MainWindow::blockSizeStartIndex()
+//------------------------------------------------------------------------
+
 
 void MainWindow::appendToWriteRate(string size)
 {
     ui->WriteRateEdit->append(QString::fromStdString(size));
 }
 
+//------------------------------------------------------------------------
+// MainWindow::blockSizeStartIndex()
+//------------------------------------------------------------------------
+
+
 void MainWindow::appendToReadRate(string size)
 {
     ui->ReadRateEdit->append(QString::fromStdString(size));
 }
 
+//------------------------------------------------------------------------
+// MainWindow::blockSizeStartIndex()
+//------------------------------------------------------------------------
+
+
 void MainWindow::restrictGUIElements(bool state)
 {
-        this->ui->StartStopButton->setEnabled(state);
-        this->ui->pushButton_2->setEnabled(state);
-        this->ui->BlockSizeEndCombo->setEnabled(state);
-        this->ui->BlockSizeStartCombo->setEnabled(state);
+    this->ui->StartBtn->setEnabled(state);
+    this->ui->dirBrowseBtn->setEnabled(state);
+    this->ui->BlockSizeEndCombo->setEnabled(state);
+    this->ui->BlockSizeStartCombo->setEnabled(state);
     this->ui->FileSizeCombo->setEnabled(state);
 }
+
+//------------------------------------------------------------------------
+// MainWindow::blockSizeStartIndex()
+//------------------------------------------------------------------------
+
 
 void MainWindow::updateProgressBar(int value)
 {
     this->ui->progressBar->setValue(value);
 }
 
+//------------------------------------------------------------------------
+// MainWindow::blockSizeStartIndex()
+//------------------------------------------------------------------------
 
 
-
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on_dirBrowseBtn_clicked()
 {
     QString s1 = QFileDialog::getExistingDirectory(this, "Open a file", "directoryToOpen");
     ui->DirectoryEdit->setText(s1);
 }
 
+//------------------------------------------------------------------------
+// MainWindow::blockSizeStartIndex()
+//------------------------------------------------------------------------
 
-void MainWindow::on_StartStopButton_clicked()
+
+void MainWindow::on_StartBtn_clicked()
 {
     //clear
     ui->BlockSizeEdit->clear();
     ui->ReadRateEdit->clear();
     ui->WriteRateEdit->clear();
 
-    this->ui->StartStopButton->setEnabled(false);
-    this->ui->pushButton_2->setEnabled(false);
+    this->ui->StartBtn->setEnabled(false);
+    this->ui->dirBrowseBtn->setEnabled(false);
     this->ui->BlockSizeEndCombo->setEnabled(false);
     this->ui->BlockSizeStartCombo->setEnabled(false);
     this->ui->FileSizeCombo->setEnabled(false);
@@ -127,3 +206,4 @@ void MainWindow::on_StartStopButton_clicked()
     QThread *thread = QThread::create(&appManager::StartWorking, manager, directMode);
     thread->start();
 }
+
