@@ -1,7 +1,7 @@
 # Rate Check
 ## Free Disk benchmarking application for Windows, Ubuntu, MacOS.
 
-[![N|Qt](//upload.wikimedia.org/wikipedia/commons/thumb/a/ae/TheQtCompany_Logo.png/200px-TheQtCompany_Logo.png)](https://www.qt.io/)
+[<img src="//upload.wikimedia.org/wikipedia/commons/thumb/a/ae/TheQtCompany_Logo.png/200px-TheQtCompany_Logo.png" />](https://www.qt.io/)
 
 Dillinger is a free applcaiton written in C++ that performs benchmarking on host machine disks and partitions.
 
