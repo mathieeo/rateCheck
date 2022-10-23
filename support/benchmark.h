@@ -17,7 +17,7 @@ namespace rateCheckApp
 class AveragedRate
 {
 public:
-    AveragedRate(int taps=21);
+    AveragedRate(int taps=20);
 
     // Methods
     void   Reset();

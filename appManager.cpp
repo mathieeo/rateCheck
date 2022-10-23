@@ -92,8 +92,8 @@ void appManager::fillRandomly(unsigned int size, int *ptr)
     unsigned int counter = 0;
     while(counter < size)
     {
-        // fixme use arc4randm for clang?
-        ptr[counter] = (arc4random() % 50) + 1;
+        // fixme use arc4random for clang?
+        ptr[counter] = (rand() % 50) + 1;
         counter++;
     }
 }
