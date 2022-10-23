@@ -2,11 +2,13 @@ name: Ubuntu
 on: 
   push:
     paths:
+      - '**'
       - '*.pro'
       - 'support/**'
       - '.github/workflows/ubuntu.yml'
   pull_request:
     paths:
+      - '**'
       - '*.pro'
       - 'support/**'
       - '.github/workflows/ubuntu.yml' 
