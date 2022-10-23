@@ -29,9 +29,11 @@ jobs:
 #             qt_tools_mingw_install: mingw900_64
     env:
       targetName: RateCheck.exe
+      VERSION: Win64
+      orgName: IntegratedSoftwareTech
     steps:
       - name: Install Qt
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v2.13.0
         with:
           version: ${{ matrix.qt_ver }}
           aqtversion: '==2.0.5'
