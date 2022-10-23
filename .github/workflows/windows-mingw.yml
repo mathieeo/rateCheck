@@ -71,7 +71,6 @@ jobs:
           archiveName: ${{ env.orgName }}-${{ env.VERSION }}
         shell: pwsh
         run: |
-          Import-Module scripts
           & scripts\windows-mingw-publish.ps1 ${env:archiveName} ${env:targetName}
            $name = ${env:archiveName}
            echo "::set-output name=packageName::$name"       
