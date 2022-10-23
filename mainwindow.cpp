@@ -200,8 +200,13 @@ void MainWindow::on_StartBtn_clicked()
     this->ui->FileSizeCombo->setEnabled(false);
     bool directMode = this->ui->directModeCheckBox->isChecked();
 
+    try{
     QThread *thread = QThread::create(&appManager::StartWorking, manager, directMode);
     thread->start();
+    }
+    catch(...){
+        restrictGUIElements(true);
+    }
 }
 
 //------------------------------------------------------------------------

@@ -45,3 +45,5 @@ Release/
 *.user
 
 moc_mainwindow.cpp
+
+Debug/

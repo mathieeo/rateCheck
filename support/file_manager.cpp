@@ -336,7 +336,7 @@ void FileAPIFileManager::GetSize()
 
 bool FileAPIFileManager::Open()
 {
-    Handle = CreateFileA(FFileName.c_str(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN | FILE_FLAG_NO_BUFFERING , nullptr);
+    Handle = CreateFileA(FFileName.c_str(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_FLAG_NO_BUFFERING , nullptr);
     if (Handle == INVALID_HANDLE_VALUE)
     {
         throw std::string("Unable to open file");
@@ -357,12 +357,13 @@ bool FileAPIFileManager::Create()
 {
     remove(FileName().c_str());
 
-    Handle = CreateFileA(FFileName.c_str(), GENERIC_READ, 0, nullptr, CREATE_NEW, FILE_FLAG_SEQUENTIAL_SCAN | FILE_FLAG_NO_BUFFERING , nullptr);
+    Handle = CreateFileA(FFileName.c_str(), GENERIC_ALL, 0, nullptr, CREATE_NEW, FILE_ATTRIBUTE_TEMPORARY | FILE_FLAG_WRITE_THROUGH | FILE_FLAG_NO_BUFFERING , nullptr);
 
-    if (!Opened())
+    if (Handle == INVALID_HANDLE_VALUE)
         throw std::string("Unable to create file");
 
     Position(0);
+    isOpen = true;
 
     return true;
 }
@@ -401,9 +402,9 @@ bool FileAPIFileManager::Close()
             Result = CloseHandle(Handle);
         FSize = 0;
         FPosition = 0;
-        isOpen = Result==0? true : false; //if not closed properly the result is zero
+        isOpen = false; //if not closed properly the result is zero
 
-        return Result;
+        return true;
     } catch (...) {
         return false;
     }
