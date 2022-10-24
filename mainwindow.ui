@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>586</width>
+    <width>664</width>
     <height>711</height>
    </rect>
   </property>
@@ -570,7 +570,7 @@
          <string>Direct Disk Access (no cache)</string>
         </property>
         <property name="checked">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -754,7 +754,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>586</width>
+     <width>664</width>
      <height>22</height>
     </rect>
    </property>

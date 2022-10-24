@@ -42,6 +42,13 @@ else {
 INCLUDEPATH = support/poco/include \
               support
 
+unix:!macx {
+    DEFINES += NOT_MAC
+}
+
+macx: {
+    DEFINES += MAC_OS
+}
 
 win32:LIBS += -lversion -lIphlpapi -lSetupApi -lNewdev -lws2_32
 

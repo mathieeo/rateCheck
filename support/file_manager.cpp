@@ -1,5 +1,5 @@
 #include <file_manager.h>
-
+#include <iostream>
 
 #if defined(LINUX)
 #undef _FILE_OFFSET_BITS
@@ -529,6 +529,7 @@ FileAPIFileManager::FileAPIFileManager()
 
 FileAPIFileManager::FileAPIFileManager(const FileAPIFileManager & other)
 {
+    Handle = other.Handle;
     FFileName = other.FFileName;
     FPosition = other.FPosition;
     FSize = other.FSize;
@@ -544,7 +545,7 @@ FileAPIFileManager & FileAPIFileManager::operator = (const FileAPIFileManager & 
     // protect against invalid self-assignment
     if (this != &other)
     {
-        Handle = 0;
+        Handle = other.Handle;
         FFileName = other.FFileName;
         FPosition = other.FPosition;
         FSize = other.FSize;
@@ -583,15 +584,26 @@ void FileAPIFileManager::GetSize()
     //    }
 
 }
-#define O_DIRECT 040000
+#ifdef MAC_OS
+    #define O_DIRECT F_NOCACHE
+#endif
 //---------------------------------------------------------------------------
 //  FileAPIFileManager::Open() --  Open file for reading
 //---------------------------------------------------------------------------
 
 bool FileAPIFileManager::Open()
 {
-    if ( (Handle = ::open(FFileName.c_str(), O_DIRECT | O_WRONLY | O_CREAT, S_IWRITE | S_IREAD))  == -1) {
-        throw "can't open input file!";
+    Handle = ::open(FFileName.c_str(), O_DIRECT);
+    if ( Handle == -1 ) {
+
+        // check if value of errno same as value of EDOM i.e. 33
+        if (errno == EDOM) {
+            std::cout << " Value of errno is : " << errno << '\n';
+            std::cout << " log(-1) is not valid : "
+                 << strerror(errno) << '\n';
+        }
+
+        throw std::string("can't open input file!");
     }
 
     // Cache file size
@@ -603,7 +615,7 @@ bool FileAPIFileManager::Open()
 
 bool FileAPIFileManager::Opened() const
 {
-    return false;
+    return isOpen;
 }
 
 //---------------------------------------------------------------------------
@@ -613,15 +625,15 @@ bool FileAPIFileManager::Opened() const
 bool FileAPIFileManager::Create()
 {
     remove(FileName().c_str());
-    int result = ::creat(FFileName.c_str(), O_CREAT | O_DIRECT | O_WRONLY);
+    int result = ::creat(FFileName.c_str(), O_CREAT | O_DIRECT);
     if(result == -1){
         throw std::string("Unable to create file");
-        return false;
     }
 
     Position(0);
+    isOpen = true;
 
-    return true;
+    return isOpen;
 }
 
 //---------------------------------------------------------------------------
@@ -642,11 +654,10 @@ bool FileAPIFileManager::Close()
     try {
         bool Result = true;
 
-        if(Opened())
-            Result = ::close(Handle);
+        Result = ::close(Handle);
         FSize = 0;
         FPosition = 0;
-        isOpen = Result==0? true : false; //if not closed properly the result is zero
+        isOpen = false; //if not closed properly the result is zero
 
         return Result;
     } catch (...) {

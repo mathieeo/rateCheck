@@ -205,14 +205,14 @@ void MainWindow::on_StartBtn_clicked()
 
 //    manager->StartWorking(directMode);
     try{
-//    QThread *thread = QThread::create(&appManager::StartWorking, manager, directMode);
-//    thread->start();
+    QThread *thread = QThread::create(&appManager::StartWorking, manager, directMode);
+    thread->start();
 
-  manager->StartWorking(directMode);
+  //manager->StartWorking(directMode);
     }
     catch(std::string &msg){
         QMessageBox messageBox;
-        messageBox.critical(0,"Error","Unable to perform benchmark." + QString::fromStdString(msg));
+        messageBox.critical(0,"Error","Unable to perform benchmark. Operation aborted. Reason is \n{" + QString::fromStdString(msg) + "}");
         restrictGUIElements(true);
     }
 }
