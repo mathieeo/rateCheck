@@ -155,7 +155,7 @@ int appManager::StartWorking(bool directMode)
 
     //Get Dir and create the file
     MainDIR = gui_interface->rootDirectory();
-    FilePath = MainDIR + "\\" + "WriteFile.bin";
+    FilePath = MainDIR + "/" + "WriteFile.bin";
     remove(FilePath.c_str());
 
     //Dummy Data

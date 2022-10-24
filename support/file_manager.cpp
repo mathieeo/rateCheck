@@ -590,7 +590,7 @@ void FileAPIFileManager::GetSize()
 
 bool FileAPIFileManager::Open()
 {
-    if ( (Handle = ::open(FFileName.c_str(), O_DIRECT) ) == -1) {
+    if ( (Handle = ::open(FFileName.c_str(), O_DIRECT | O_WRONLY | O_CREAT, S_IWRITE | S_IREAD))  == -1) {
         throw "can't open input file!";
     }
 
@@ -613,7 +613,7 @@ bool FileAPIFileManager::Opened() const
 bool FileAPIFileManager::Create()
 {
     remove(FileName().c_str());
-    int result = ::creat(FFileName.c_str(), O_CREAT | O_DIRECT);
+    int result = ::creat(FFileName.c_str(), O_CREAT | O_DIRECT | O_WRONLY);
     if(result == -1){
         throw std::string("Unable to create file");
         return false;
