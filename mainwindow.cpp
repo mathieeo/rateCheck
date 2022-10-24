@@ -205,10 +205,10 @@ void MainWindow::on_StartBtn_clicked()
 
 //    manager->StartWorking(directMode);
     try{
-    QThread *thread = QThread::create(&appManager::StartWorking, manager, directMode);
-    thread->start();
+//    QThread *thread = QThread::create(&appManager::StartWorking, manager, directMode);
+//    thread->start();
 
-  //manager->StartWorking(directMode);
+  manager->StartWorking(directMode);
     }
     catch(std::string &msg){
         QMessageBox messageBox;
