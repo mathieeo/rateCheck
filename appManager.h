@@ -45,16 +45,22 @@ public:
     appManager(GUI_Interface* _gui_interface);
     ~appManager();
 
-    int StartWorking(bool directMode);
+    int StartWorking(bool directMode, bool report=true);
     void FinishedBenchmarking();
     void fillRandomly(unsigned int size, int *ptr);
     std::string AttachTag(double rate);
+    std::string generateReport();
 
 
+    std::vector<std::string> measuredReadRateVec;
+    std::vector<std::string> measuredWriteRateVec;
+    std::vector<std::string> measuredBlockSizeVec;
     std::vector<unsigned long long> blockSizeVec;
     std::vector<unsigned long long> FileSizeVec;
     std::vector<unsigned long long> IoCountVec;
     std::vector<std::string>    IoSizeTagsVec;
+
+    float BenchmarkProgress;
 
 private:
     GUI_Interface *gui_interface;

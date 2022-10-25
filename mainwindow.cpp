@@ -35,9 +35,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    this->setFixedSize(650,800);
+    this->setFixedSize(620,800);
 
-    this->setWindowTitle("DiskRateCheck " + QString(APP_VERSION) + " -");
+    this->setWindowTitle("DiskRateCheck " + QString(APP_VERSION) + " [BETA]");
 
     UI = new GUI_Interface_Impl(this);
     manager = new appManager(UI);
@@ -45,6 +45,13 @@ MainWindow::MainWindow(QWidget *parent)
     ui->statusbar->showMessage("Idle");
 
     ui->infoLabel->setText(QString("Integrated Software Technologies Inc. | RateCheck v" + QString(APP_VERSION) + " |"));
+
+#ifdef LINUX
+    ui->DirectoryEdit->setText("~/");
+#else
+    ui->DirectoryEdit->setText("C:\\");
+#endif
+
 }
 
 //------------------------------------------------------------------------
@@ -166,7 +173,7 @@ void MainWindow::restrictGUIElements(bool state)
     this->ui->AboutBtn->setEnabled(state);
     this->ui->DirectoryEdit->setEnabled(state);
     this->ui->dirBrowseBtn->setEnabled(state);
-    this->ui->ValidateDataCheck->setEnabled(state);
+    //this->ui->ValidateDataCheck->setEnabled(state);
     this->ui->reportCheckBox->setEnabled(state);
     this->ui->directModeCheckBox->setEnabled(state);
     this->ui->ReadRateEdit->setTextInteractionFlags(Qt::TextSelectableByMouse);
@@ -181,6 +188,13 @@ void MainWindow::restrictGUIElements(bool state)
 
 void MainWindow::updateProgressBar(int value)
 {
+    QString danger = "QProgressBar::chunk {background: QLinearGradient( x1: 0, y1: 0, x2: 1, y2: 0,stop: 0 #FF0350,stop: 0.4999 #FF0020,stop: 0.5 #FF0019,stop: 1 #FF0000 );border-bottom-right-radius: 5px;border-bottom-left-radius: 5px;border: .px solid black;}";
+    QString safe= "QProgressBar::chunk {background: QLinearGradient( x1: 0, y1: 0, x2: 1, y2: 0,stop: 0 #78d,stop: 0.4999 #46a,stop: 0.5 #45a,stop: 1 #238 );border-bottom-right-radius: 7px;border-bottom-left-radius: 7px;border: 1px solid black;}";
+    if(ui->progressBar->value()<80)
+        ui->progressBar->setStyleSheet(danger);
+    else
+        ui->progressBar->setStyleSheet(safe);
+
     this->ui->progressBar->setValue(value);
 }
 
@@ -215,7 +229,7 @@ void MainWindow::on_StartBtn_clicked()
     this->ui->AboutBtn->setEnabled(false);
     this->ui->DirectoryEdit->setEnabled(false);
     this->ui->dirBrowseBtn->setEnabled(false);
-    this->ui->ValidateDataCheck->setEnabled(false);
+   // this->ui->ValidateDataCheck->setEnabled(false);
     this->ui->reportCheckBox->setEnabled(false);
     this->ui->directModeCheckBox->setEnabled(false);
     this->ui->ReadRateEdit->setTextInteractionFlags(Qt::NoTextInteraction);
@@ -223,13 +237,20 @@ void MainWindow::on_StartBtn_clicked()
     this->ui->BlockSizeEdit->setTextInteractionFlags(Qt::NoTextInteraction);
 
     bool directMode = this->ui->directModeCheckBox->isChecked();
+    bool report = this->ui->reportCheckBox->isChecked();
 
     try{
-        QThread *thread = QThread::create(&appManager::StartWorking, manager, directMode);
+        QThread *thread = QThread::create(&appManager::StartWorking, manager, directMode, report);
         thread->start();
         while(thread->isRunning()){
-            usleep(100);
-                qApp->processEvents();
+
+#ifdef LINUX
+            usleep(1);
+#else
+            Sleep(1);
+#endif
+            qApp->processEvents();
+            updateProgressBar(manager->BenchmarkProgress);
         }
 
         //manager->StartWorking(directMode); // single thread?

@@ -5,8 +5,10 @@
 #include <support/start_stop_watch.h>
 #include <support/benchmark.h>
 #include <support/file_manager.h>
-#include <QString>
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <sstream>
 
 using namespace rateCheckApp;
 using namespace std::chrono;
@@ -18,6 +20,7 @@ using namespace std::chrono;
 appManager::appManager(GUI_Interface *_gui_interface) :
     gui_interface(_gui_interface)
 {
+    BenchmarkProgress = 0.0f;
 
     //Block size init
     blockSizeVec.push_back(512);
@@ -107,16 +110,37 @@ std::string appManager::AttachTag(double rate)
     if(rate < 1)
     {
         rate = rate * 1000;
-        return QString::number(rate).toStdString() + " KB/S";
+        return std::to_string(rate) + " KB/S";
     }
     else if(rate > 1010)
     {
         rate = rate / 1000;
-        return QString::number(rate).toStdString() + " GB/S";
+        return std::to_string(rate) + " GB/S";
     }
     else
-        return QString::number(rate).toStdString() + " MB/S";
+        return std::to_string(rate) + " MB/S";
 
+}
+
+//---------------------------------------------------------------------------
+//  appManager::generateReport() --
+//---------------------------------------------------------------------------
+
+std::string appManager::generateReport()
+{
+    std::stringstream ss;
+
+    ss << "| Block-Size | Write-Rate | Read-Rate |";
+    for(size_t i=0;i<measuredBlockSizeVec.size();++i)
+    {
+        ss << "| " << measuredBlockSizeVec[i] << " | " << measuredWriteRateVec[i] << " | " << measuredReadRateVec[i] << " |" << std::endl;
+    }
+
+    std::ofstream out_file("report.txt");
+    out_file << ss.str();
+    out_file.close();
+
+    return ss.str();
 }
 
 
@@ -124,18 +148,23 @@ std::string appManager::AttachTag(double rate)
 //  appManager::StartWorking() --
 //---------------------------------------------------------------------------
 
-int appManager::StartWorking(bool directMode)
+int appManager::StartWorking(bool directMode, bool report)
 {
     // Required Parm
     unsigned int counter = 0;
     StartStopWatch watch;
     AveragedRate TxBytesPerBlock(10);
     std::string MainDIR, FilePath;
-    double FTxBlockRate = 0.0;
+    double rate = 0.0;
     unsigned long long StartBlockSize, StopBlockSize, CurrentFileSize;
     unsigned long CurrentBlockSize;
     int BS_Start_Idx, BS_Stop_Idx;
     bool CheckData;
+
+    // clear the vectors
+    measuredBlockSizeVec.clear();
+    measuredReadRateVec.clear();
+    measuredWriteRateVec.clear();
 
     BS_Start_Idx =  gui_interface->blockSizeStartIndex();
     BS_Stop_Idx =  gui_interface->blockSizeEndIndex();
@@ -169,12 +198,11 @@ int appManager::StartWorking(bool directMode)
     float number_of_runs = BS_Stop_Idx-BS_Start_Idx;
     for (int idx =BS_Start_Idx;idx <=BS_Stop_Idx;++idx) {
 
-        gui_interface->updateProgressBar((float(float(idx)/float(number_of_runs)))*100);
-
         size_t idx_t = static_cast<size_t>(idx);
         CurrentBlockSize = static_cast<unsigned long>(blockSizeVec[idx_t]);
 
         gui_interface->appendToBlockSize(IoSizeTagsVec[idx_t]);
+        measuredBlockSizeVec.push_back(IoSizeTagsVec[idx_t]);
 
         //---------------
         // Write
@@ -200,7 +228,7 @@ int appManager::StartWorking(bool directMode)
             watch.Start();
 
             while(counter < IOCount){
-                uint __bytes = file.Write(reinterpret_cast<char*>(WriteData), CurrentBlockSize);
+                unsigned int __bytes = file.Write(reinterpret_cast<char*>(WriteData), CurrentBlockSize);
                 if(__bytes == 0)
                 {
                     gui_interface->updateStatusMessage("Failed to write to the file.");
@@ -214,9 +242,9 @@ int appManager::StartWorking(bool directMode)
             }
 
             double timediff = watch.Stop();
-            FTxBlockRate = (IOCount*CurrentBlockSize) / (timediff*1.0e6);
-
-            gui_interface->appendToWriteRate(AttachTag(FTxBlockRate));
+            rate = (IOCount*CurrentBlockSize) / (timediff*1.0e6);
+            measuredWriteRateVec.push_back(AttachTag(rate));
+            gui_interface->appendToWriteRate(AttachTag(rate));
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
             file.Close();
         }
@@ -260,11 +288,16 @@ int appManager::StartWorking(bool directMode)
             double timediff = watch.Stop();
             long long num1 = (counter*(CurrentBlockSize<1000? CurrentBlockSize : CurrentBlockSize/1000));
             double num2 =  (timediff*1.0e6);
-            FTxBlockRate =  CurrentBlockSize<1000? (num1/num2): (num1/num2)*1000;
-            gui_interface->appendToReadRate(AttachTag(FTxBlockRate));
+            rate =  CurrentBlockSize<1000? (num1/num2): (num1/num2)*1000;
+            measuredReadRateVec.push_back(AttachTag(rate));
+            gui_interface->appendToReadRate(AttachTag(rate));
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
             file.Close();
         }
+        // calculate benchmark progress
+        BenchmarkProgress = float(float(idx)/float(number_of_runs)) * 100;
+
+        gui_interface->updateStatusMessage("Benchmarking is in the process...");
         remove(FilePath.c_str());
     }
 
@@ -272,6 +305,9 @@ int appManager::StartWorking(bool directMode)
     delete[] WriteData;
 
     remove(FilePath.c_str());
+
+    if(report)
+        generateReport();
 
     std::this_thread::sleep_for(std::chrono::milliseconds(2000));
     gui_interface->updateStatusMessage("Finished Benchmarking.");
