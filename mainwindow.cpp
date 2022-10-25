@@ -161,12 +161,12 @@ void MainWindow::restrictGUIElements(bool state)
     this->ui->BlockSizeEndCombo->setEnabled(state);
     this->ui->BlockSizeStartCombo->setEnabled(state);
     this->ui->FileSizeCombo->setEnabled(state);
-    this->ui->directModeCheckBox->setEnabled(state);
-    this->ui->ValidateDataCheck->setEnabled(state);
     this->ui->AboutBtn->setEnabled(state);
-    this->ui->reportCheckBox->setEnabled(state);
-    this->ui->dirBrowseBtn->setEnabled(state);
     this->ui->DirectoryEdit->setEnabled(state);
+    this->ui->dirBrowseBtn->setEnabled(state);
+    this->ui->ValidateDataCheck->setEnabled(state);
+    this->ui->reportCheckBox->setEnabled(state);
+    this->ui->directModeCheckBox->setEnabled(state);
 }
 
 //------------------------------------------------------------------------
@@ -206,12 +206,6 @@ void MainWindow::on_StartBtn_clicked()
     this->ui->dirBrowseBtn->setEnabled(false);
     this->ui->BlockSizeEndCombo->setEnabled(false);
     this->ui->BlockSizeStartCombo->setEnabled(false);
-    this->ui->directModeCheckBox->setEnabled(false);
-    this->ui->dirBrowseBtn->setEnabled(false);
-    this->ui->ValidateDataCheck->setEnabled(false);
-    this->ui->AboutBtn->setEnabled(false);
-    this->ui->DirectoryEdit->setEnabled(false);
-    this->ui->reportCheckBox->setEnabled(false);
     this->ui->FileSizeCombo->setEnabled(false);
     this->ui->AboutBtn->setEnabled(false);
     this->ui->DirectoryEdit->setEnabled(false);
@@ -223,7 +217,7 @@ void MainWindow::on_StartBtn_clicked()
     bool directMode = this->ui->directModeCheckBox->isChecked();
 
     try{
-       QThread *thread = QThread::create(&appManager::StartWorking, manager, directMode);
+        QThread *thread = QThread::create(&appManager::StartWorking, manager, directMode);
         thread->start();
 
         //manager->StartWorking(directMode); // single thread?
