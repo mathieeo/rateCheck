@@ -93,7 +93,12 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName("MainWindow");
-        MainWindow->resize(664, 711);
+        MainWindow->resize(664, 793);
+        QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy.setHorizontalStretch(0);
+        sizePolicy.setVerticalStretch(0);
+        sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
+        MainWindow->setSizePolicy(sizePolicy);
         actionWebsite = new QAction(MainWindow);
         actionWebsite->setObjectName("actionWebsite");
         centralwidget = new QWidget(MainWindow);
@@ -120,11 +125,11 @@ public:
 
         dirBrowseBtn = new QPushButton(centralwidget);
         dirBrowseBtn->setObjectName("dirBrowseBtn");
-        QSizePolicy sizePolicy(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy.setHorizontalStretch(20);
-        sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(dirBrowseBtn->sizePolicy().hasHeightForWidth());
-        dirBrowseBtn->setSizePolicy(sizePolicy);
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(20);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(dirBrowseBtn->sizePolicy().hasHeightForWidth());
+        dirBrowseBtn->setSizePolicy(sizePolicy1);
         dirBrowseBtn->setMinimumSize(QSize(50, 0));
         dirBrowseBtn->setMaximumSize(QSize(60, 16777215));
 
@@ -353,7 +358,11 @@ public:
         BlockSizeEdit = new QTextEdit(centralwidget);
         BlockSizeEdit->setObjectName("BlockSizeEdit");
         BlockSizeEdit->setMaximumSize(QSize(100, 16777215));
+        BlockSizeEdit->setMouseTracking(false);
+        BlockSizeEdit->setUndoRedoEnabled(false);
         BlockSizeEdit->setReadOnly(true);
+        BlockSizeEdit->setAcceptRichText(false);
+        BlockSizeEdit->setTextInteractionFlags(Qt::TextSelectableByMouse);
 
         verticalLayout_5->addWidget(BlockSizeEdit);
 
@@ -379,7 +388,11 @@ public:
         WriteRateEdit = new QTextEdit(centralwidget);
         WriteRateEdit->setObjectName("WriteRateEdit");
         WriteRateEdit->setMaximumSize(QSize(150, 16777215));
+        WriteRateEdit->setMouseTracking(false);
+        WriteRateEdit->setUndoRedoEnabled(false);
         WriteRateEdit->setReadOnly(true);
+        WriteRateEdit->setAcceptRichText(false);
+        WriteRateEdit->setTextInteractionFlags(Qt::TextSelectableByMouse);
 
         verticalLayout_6->addWidget(WriteRateEdit);
 
@@ -405,7 +418,11 @@ public:
         ReadRateEdit = new QTextEdit(centralwidget);
         ReadRateEdit->setObjectName("ReadRateEdit");
         ReadRateEdit->setMaximumSize(QSize(150, 16777215));
+        ReadRateEdit->setMouseTracking(false);
+        ReadRateEdit->setUndoRedoEnabled(false);
         ReadRateEdit->setReadOnly(true);
+        ReadRateEdit->setAcceptRichText(false);
+        ReadRateEdit->setTextInteractionFlags(Qt::TextSelectableByMouse);
 
         verticalLayout_7->addWidget(ReadRateEdit);
 
@@ -449,7 +466,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 664, 21));
+        menubar->setGeometry(QRect(0, 0, 664, 22));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName("statusbar");

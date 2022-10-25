@@ -35,6 +35,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    this->setFixedSize(650,800);
+
     this->setWindowTitle("DiskRateCheck " + QString(APP_VERSION) + " -");
 
     UI = new GUI_Interface_Impl(this);
@@ -167,6 +169,9 @@ void MainWindow::restrictGUIElements(bool state)
     this->ui->ValidateDataCheck->setEnabled(state);
     this->ui->reportCheckBox->setEnabled(state);
     this->ui->directModeCheckBox->setEnabled(state);
+    this->ui->ReadRateEdit->setTextInteractionFlags(Qt::TextSelectableByMouse);
+    this->ui->WriteRateEdit->setTextInteractionFlags(Qt::TextSelectableByMouse);
+    this->ui->BlockSizeEdit->setTextInteractionFlags(Qt::TextSelectableByMouse);
 }
 
 //------------------------------------------------------------------------
@@ -213,18 +218,31 @@ void MainWindow::on_StartBtn_clicked()
     this->ui->ValidateDataCheck->setEnabled(false);
     this->ui->reportCheckBox->setEnabled(false);
     this->ui->directModeCheckBox->setEnabled(false);
+    this->ui->ReadRateEdit->setTextInteractionFlags(Qt::NoTextInteraction);
+    this->ui->WriteRateEdit->setTextInteractionFlags(Qt::NoTextInteraction);
+    this->ui->BlockSizeEdit->setTextInteractionFlags(Qt::NoTextInteraction);
 
     bool directMode = this->ui->directModeCheckBox->isChecked();
 
     try{
         QThread *thread = QThread::create(&appManager::StartWorking, manager, directMode);
         thread->start();
+        while(thread->isRunning()){
+            usleep(100);
+                qApp->processEvents();
+        }
 
         //manager->StartWorking(directMode); // single thread?
     }
     catch(std::string &msg){
         QMessageBox messageBox;
         messageBox.critical(0,"Error","Unable to perform benchmark. Operation aborted. Reason is \n{" + QString::fromStdString(msg) + "}");
+        restrictGUIElements(true);
+    }
+    catch(...)
+    {
+        QMessageBox messageBox;
+        messageBox.critical(0,"Error","Unable to perform benchmark. Operation aborted.");
         restrictGUIElements(true);
     }
 }
