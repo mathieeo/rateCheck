@@ -534,7 +534,7 @@
     <item row="2" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout_5">
       <item>
-       <widget class="QCheckBox" name="checkBox">
+       <widget class="QCheckBox" name="reportCheckBox">
         <property name="enabled">
          <bool>false</bool>
         </property>
@@ -755,7 +755,7 @@
      <x>0</x>
      <y>0</y>
      <width>664</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
