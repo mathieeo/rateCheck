@@ -593,7 +593,7 @@ void FileAPIFileManager::GetSize()
 
 bool FileAPIFileManager::Open()
 {
-    Handle = ::open(FFileName.c_str(), O_DIRECT, S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
+    Handle = ::open(FFileName.c_str(), O_DIRECT, S_IRWXO | S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
     if ( Handle == -1 ) {
 
         // check if value of errno same as value of EDOM i.e. 33
@@ -625,8 +625,8 @@ bool FileAPIFileManager::Opened() const
 bool FileAPIFileManager::Create()
 {
     remove(FileName().c_str());
-    int result = ::creat(FFileName.c_str(), S_IRWXO | S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
-    if(result == -1){
+    Handle = ::creat(FFileName.c_str(), S_IRWXO | S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
+    if(Handle == -1){
         throw std::string("Unable to create file");
     }
 
