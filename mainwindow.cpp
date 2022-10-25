@@ -203,12 +203,11 @@ void MainWindow::on_StartBtn_clicked()
     this->ui->FileSizeCombo->setEnabled(false);
     bool directMode = this->ui->directModeCheckBox->isChecked();
 
-//    manager->StartWorking(directMode);
     try{
-//    QThread *thread = QThread::create(&appManager::StartWorking, manager, directMode);
-//    thread->start();
+        QThread *thread = QThread::create(&appManager::StartWorking, manager, directMode);
+        thread->start();
 
-  manager->StartWorking(directMode);
+        //manager->StartWorking(directMode); // single thread?
     }
     catch(std::string &msg){
         QMessageBox messageBox;
@@ -223,6 +222,6 @@ void MainWindow::on_StartBtn_clicked()
 
 void MainWindow::on_AboutBtn_clicked()
 {
-  goToWebsite();
+    goToWebsite();
 }
 
