@@ -46,8 +46,8 @@ public:
     bool            Append();
     bool            Close();
 
-    unsigned int    Write(const char * buffer, unsigned int size);
-    unsigned int    Read(char * buffer, unsigned int size);
+    int    Write(const char * buffer, unsigned int size);
+    int Read(char * buffer, unsigned int size);
 
     // Properties
     void            WriteThrough(bool state);
@@ -86,8 +86,8 @@ public:
     virtual bool            Create() = 0;
     virtual bool            Close() = 0;
 
-    virtual unsigned int    Write(const char * buffer, unsigned int size) = 0;
-    virtual unsigned int    Read(char * buffer, unsigned int size) = 0;
+    virtual int    Write(const char * buffer, unsigned int size) = 0;
+    virtual int    Read(char * buffer, unsigned int size) = 0;
 
     virtual void            Size(int64 size) = 0;
     virtual int64            Size() const = 0;
@@ -122,8 +122,8 @@ public:
     virtual bool            Create() ;
     virtual bool            Close() ;
 
-    virtual unsigned int    Write(const char * buffer, unsigned int size) ;
-    virtual unsigned int    Read(char * buffer, unsigned int size) ;
+    virtual int    Write(const char * buffer, unsigned int size) ;
+    virtual int    Read(char * buffer, unsigned int size) ;
 
     virtual void            Size(int64 size) ;
     virtual int64            Size() const ;
@@ -168,8 +168,8 @@ public:
     virtual bool            Create() ;
     virtual bool            Close() ;
 
-    virtual unsigned int    Write(const char * buffer, unsigned int size) ;
-    virtual unsigned int    Read(char * buffer, unsigned int size) ;
+    virtual int    Write(const char * buffer, unsigned int size) ;
+    virtual int    Read(char * buffer, unsigned int size) ;
 
     virtual void            Size(int64 size) ;
     virtual int64            Size() const ;
@@ -209,8 +209,8 @@ public:
     virtual bool            Create();
     virtual bool            Close();
 
-    virtual unsigned int    Write(const char * /*buffer*/, unsigned int /*size*/);
-    virtual unsigned int    Read(char * /*buffer*/, unsigned int /*size*/);
+    virtual int Write(const char * /*buffer*/, unsigned int /*size*/);
+    virtual int    Read(char * /*buffer*/, unsigned int /*size*/);
 
     virtual void            Size(int64 /*size*/) ;
     virtual int64            Size() const;

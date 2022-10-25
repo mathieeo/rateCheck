@@ -1,5 +1,6 @@
 #include <file_manager.h>
 #include <iostream>
+#include <malloc.h>
 
 #if defined(LINUX)
 #undef _FILE_OFFSET_BITS
@@ -162,7 +163,7 @@ bool StdFileManager::Close()
 //  StdFileManager::Read() --
 //---------------------------------------------------------------------------
 
-unsigned int StdFileManager::Read(char * buffer, unsigned int size)
+int StdFileManager::Read(char * buffer, unsigned int size)
 {
     if (!Opened())
         return 0;
@@ -178,7 +179,7 @@ unsigned int StdFileManager::Read(char * buffer, unsigned int size)
 //  StdFileManager::Write() --
 //---------------------------------------------------------------------------
 
-unsigned int StdFileManager::Write(const char * buffer, unsigned int size)
+int StdFileManager::Write(const char * buffer, unsigned int size)
 {
     if (!Opened())
         return 0;
@@ -416,28 +417,28 @@ bool FileAPIFileManager::Close()
 //  StdFileManager::FileAPIFileManager() --
 //---------------------------------------------------------------------------
 
-unsigned int FileAPIFileManager::Read(char * buffer, unsigned int size)
+int FileAPIFileManager::Read(char * buffer, unsigned int size)
 {
-    unsigned long result = 0;
+    long result = 0;
 
     ReadFile(Handle, buffer, size, &result, nullptr);
     FPosition += result;
 
-    return static_cast<unsigned int>(result);
+    return static_cast<int>(result);
 }
 
 //---------------------------------------------------------------------------
 //  FileAPIFileManager::Write() --
 //---------------------------------------------------------------------------
 
-unsigned int FileAPIFileManager::Write(const char * buffer, unsigned int size)
+int FileAPIFileManager::Write(const char * buffer, unsigned int size)
 {
-    unsigned long result;
+    long result;
     WriteFile(Handle, buffer, size, &result, nullptr);
     FPosition += result;
     FSize = std::max<long long>(FPosition, FSize);
 
-    return static_cast<unsigned int>(result);
+    return static_cast<int>(result);
 }
 
 //---------------------------------------------------------------------------
@@ -593,7 +594,7 @@ void FileAPIFileManager::GetSize()
 
 bool FileAPIFileManager::Open()
 {
-    Handle = ::open(FFileName.c_str(), O_DIRECT, S_IRWXO | S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
+    Handle = ::open(FFileName.c_str(), O_DIRECT | O_LARGEFILE, S_IRWXO | S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
     if ( Handle == -1 ) {
 
         // check if value of errno same as value of EDOM i.e. 33
@@ -671,29 +672,49 @@ bool FileAPIFileManager::Close()
 //  StdFileManager::FileAPIFileManager() --
 //---------------------------------------------------------------------------
 
-unsigned int FileAPIFileManager::Read(char * buffer, unsigned int size)
+int FileAPIFileManager::Read(char * buffer, unsigned int size)
 {
-    unsigned long result = 0;
+    long result;
 
-    result = ::read(Handle, buffer, size);
+#if defined(LINUX) && !defined(MAC_OS)
+    int alignment = 4096;
+
+    buffer = reinterpret_cast<char *>(memalign(alignment * 2, size + alignment));
+    if (buffer == NULL)
+        throw std::string("memalign");
+
+    buffer += alignment;
+#endif
+
+    result = ::read(Handle,buffer, size);
+
+    if(result == -1){
+//        std::cout << " Value of errno is : " << errno << '\n';
+//        std::cout << " function : " << strerror(errno) << '\n';
+        throw std::string("Error reading from the file. " + FFileName);
+    }
+
     FPosition += result;
-
-    return static_cast<unsigned int>(result);
+    return static_cast<int>(result);
 }
 
 //---------------------------------------------------------------------------
 //  FileAPIFileManager::Write() --
 //---------------------------------------------------------------------------
 
-unsigned int FileAPIFileManager::Write(const char * buffer, unsigned int size)
+int FileAPIFileManager::Write(const char * buffer, unsigned int size)
 {
-    unsigned long result = 0;
+    long result = 0;
 
     result = ::write(Handle, buffer, size);
+
+    if(result == -1)
+        throw std::string("Error writing to the file. " + FFileName);
+
     FPosition += result;
     FSize = std::max<long long>(FPosition, FSize);
 
-    return static_cast<unsigned int>(result);
+    return static_cast<int>(result);
 }
 
 //---------------------------------------------------------------------------
@@ -871,7 +892,7 @@ bool FileManager::Close()
 //  FileManager::Read() --
 //---------------------------------------------------------------------------
 
-unsigned int FileManager::Read(char * buffer, unsigned int size)
+int FileManager::Read(char * buffer, unsigned int size)
 {
     return Impl->Read(buffer, size);
 }
@@ -880,7 +901,7 @@ unsigned int FileManager::Read(char * buffer, unsigned int size)
 //  FileManager::Write() --
 //---------------------------------------------------------------------------
 
-unsigned int FileManager::Write(const char * buffer, unsigned int size)
+int FileManager::Write(const char * buffer, unsigned int size)
 {
     return Impl->Write(buffer, size);
 }

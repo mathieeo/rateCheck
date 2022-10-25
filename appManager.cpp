@@ -237,12 +237,11 @@ int appManager::StartWorking(bool directMode)
             }
 
             counter = 0;
-            unsigned long __bytes;
+            long __bytes;
             watch.Start();
             while(true){
                 __bytes = file.Read(reinterpret_cast<char*>(ReadData), CurrentBlockSize);
-                if(__bytes == 0)
-                {
+                if(__bytes <= 0){
                     break;
                 }
                 if(CheckData)
