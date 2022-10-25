@@ -401,9 +401,8 @@ bool FileAPIFileManager::Append()
 bool FileAPIFileManager::Close()
 {
     try {
-        bool Result = true;
         if(Opened())
-            Result = CloseHandle(Handle);
+            CloseHandle(Handle);
         FSize = 0;
         FPosition = 0;
         isOpen = false; //if not closed properly the result is zero
@@ -422,7 +421,7 @@ bool FileAPIFileManager::Close()
 
 int FileAPIFileManager::Read(char * buffer, unsigned int size)
 {
-    long result = 0;
+    unsigned long result = 0;
 
     ReadFile(Handle, buffer, size, &result, nullptr);
     FPosition += result;
@@ -436,7 +435,7 @@ int FileAPIFileManager::Read(char * buffer, unsigned int size)
 
 int FileAPIFileManager::Write(const char * buffer, unsigned int size)
 {
-    long result;
+    unsigned long result;
     WriteFile(Handle, buffer, size, &result, nullptr);
     FPosition += result;
     FSize = std::max<long long>(FPosition, FSize);
