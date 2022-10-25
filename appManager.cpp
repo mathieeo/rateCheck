@@ -130,7 +130,7 @@ std::string appManager::generateReport()
 {
     std::stringstream ss;
 
-    ss << "| Block-Size | Write-Rate | Read-Rate |";
+    ss << "| Block-Size | Write-Rate | Read-Rate |" << std::endl;
     for(size_t i=0;i<measuredBlockSizeVec.size();++i)
     {
         ss << "| " << measuredBlockSizeVec[i] << " | " << measuredWriteRateVec[i] << " | " << measuredReadRateVec[i] << " |" << std::endl;

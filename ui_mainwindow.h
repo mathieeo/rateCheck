@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 6.4.0
+** Created by: Qt User Interface Compiler version 6.2.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -87,7 +87,7 @@ public:
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
-            MainWindow->setObjectName("MainWindow");
+            MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
         MainWindow->resize(569, 793);
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
@@ -95,28 +95,28 @@ public:
         sizePolicy.setHeightForWidth(MainWindow->sizePolicy().hasHeightForWidth());
         MainWindow->setSizePolicy(sizePolicy);
         actionWebsite = new QAction(MainWindow);
-        actionWebsite->setObjectName("actionWebsite");
+        actionWebsite->setObjectName(QString::fromUtf8("actionWebsite"));
         centralwidget = new QWidget(MainWindow);
-        centralwidget->setObjectName("centralwidget");
+        centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         gridLayout_2 = new QGridLayout(centralwidget);
-        gridLayout_2->setObjectName("gridLayout_2");
+        gridLayout_2->setObjectName(QString::fromUtf8("gridLayout_2"));
         horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setObjectName("horizontalLayout_5");
+        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
         reportCheckBox = new QCheckBox(centralwidget);
-        reportCheckBox->setObjectName("reportCheckBox");
+        reportCheckBox->setObjectName(QString::fromUtf8("reportCheckBox"));
         reportCheckBox->setEnabled(true);
         reportCheckBox->setChecked(true);
 
         horizontalLayout_5->addWidget(reportCheckBox);
 
         directModeCheckBox = new QCheckBox(centralwidget);
-        directModeCheckBox->setObjectName("directModeCheckBox");
+        directModeCheckBox->setObjectName(QString::fromUtf8("directModeCheckBox"));
         directModeCheckBox->setChecked(true);
 
         horizontalLayout_5->addWidget(directModeCheckBox);
 
         ValidateDataCheck = new QCheckBox(centralwidget);
-        ValidateDataCheck->setObjectName("ValidateDataCheck");
+        ValidateDataCheck->setObjectName(QString::fromUtf8("ValidateDataCheck"));
         ValidateDataCheck->setEnabled(false);
 
         horizontalLayout_5->addWidget(ValidateDataCheck);
@@ -125,21 +125,21 @@ public:
         gridLayout_2->addLayout(horizontalLayout_5, 2, 0, 1, 1);
 
         progressBar = new QProgressBar(centralwidget);
-        progressBar->setObjectName("progressBar");
+        progressBar->setObjectName(QString::fromUtf8("progressBar"));
         progressBar->setValue(0);
 
         gridLayout_2->addWidget(progressBar, 4, 0, 1, 1);
 
         horizontalLayout_6 = new QHBoxLayout();
-        horizontalLayout_6->setObjectName("horizontalLayout_6");
+        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
         AboutBtn = new QPushButton(centralwidget);
-        AboutBtn->setObjectName("AboutBtn");
+        AboutBtn->setObjectName(QString::fromUtf8("AboutBtn"));
         AboutBtn->setMaximumSize(QSize(100, 16777215));
 
         horizontalLayout_6->addWidget(AboutBtn);
 
         infoLabel = new QLabel(centralwidget);
-        infoLabel->setObjectName("infoLabel");
+        infoLabel->setObjectName(QString::fromUtf8("infoLabel"));
         infoLabel->setLayoutDirection(Qt::RightToLeft);
         infoLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
 
@@ -149,25 +149,25 @@ public:
         gridLayout_2->addLayout(horizontalLayout_6, 5, 0, 1, 1);
 
         verticalLayout_2 = new QVBoxLayout();
-        verticalLayout_2->setObjectName("verticalLayout_2");
+        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
         verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName("verticalLayout");
+        verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         label_4 = new QLabel(centralwidget);
-        label_4->setObjectName("label_4");
+        label_4->setObjectName(QString::fromUtf8("label_4"));
 
         verticalLayout->addWidget(label_4);
 
         horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName("horizontalLayout");
+        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
         DirectoryEdit = new QLineEdit(centralwidget);
-        DirectoryEdit->setObjectName("DirectoryEdit");
+        DirectoryEdit->setObjectName(QString::fromUtf8("DirectoryEdit"));
         DirectoryEdit->setMaximumSize(QSize(16777215, 16777215));
         DirectoryEdit->setReadOnly(false);
 
         horizontalLayout->addWidget(DirectoryEdit);
 
         dirBrowseBtn = new QPushButton(centralwidget);
-        dirBrowseBtn->setObjectName("dirBrowseBtn");
+        dirBrowseBtn->setObjectName(QString::fromUtf8("dirBrowseBtn"));
         QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(20);
         sizePolicy1.setVerticalStretch(0);
@@ -185,20 +185,20 @@ public:
         verticalLayout_2->addLayout(verticalLayout);
 
         line_11 = new QFrame(centralwidget);
-        line_11->setObjectName("line_11");
+        line_11->setObjectName(QString::fromUtf8("line_11"));
         line_11->setFrameShape(QFrame::HLine);
         line_11->setFrameShadow(QFrame::Sunken);
 
         verticalLayout_2->addWidget(line_11);
 
         horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName("horizontalLayout_4");
+        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
         groupBox_3 = new QGroupBox(centralwidget);
-        groupBox_3->setObjectName("groupBox_3");
+        groupBox_3->setObjectName(QString::fromUtf8("groupBox_3"));
         groupBox_3->setMaximumSize(QSize(80, 16777215));
         gridLayout = new QGridLayout(groupBox_3);
         gridLayout->setSpacing(5);
-        gridLayout->setObjectName("gridLayout");
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(5, 5, 5, 5);
         FileSizeCombo = new QComboBox(groupBox_3);
         FileSizeCombo->addItem(QString());
@@ -212,7 +212,7 @@ public:
         FileSizeCombo->addItem(QString());
         FileSizeCombo->addItem(QString());
         FileSizeCombo->addItem(QString());
-        FileSizeCombo->setObjectName("FileSizeCombo");
+        FileSizeCombo->setObjectName(QString::fromUtf8("FileSizeCombo"));
         FileSizeCombo->setMaximumSize(QSize(100, 16777215));
         FileSizeCombo->setMaxVisibleItems(11);
 
@@ -222,14 +222,14 @@ public:
         horizontalLayout_4->addWidget(groupBox_3);
 
         groupBox = new QGroupBox(centralwidget);
-        groupBox->setObjectName("groupBox");
-        groupBox->setMaximumSize(QSize(200, 16777215));
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        groupBox->setMaximumSize(QSize(250, 16777215));
         horizontalLayout_3 = new QHBoxLayout(groupBox);
         horizontalLayout_3->setSpacing(5);
-        horizontalLayout_3->setObjectName("horizontalLayout_3");
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
         horizontalLayout_3->setContentsMargins(5, 5, 5, 5);
         label_5 = new QLabel(groupBox);
-        label_5->setObjectName("label_5");
+        label_5->setObjectName(QString::fromUtf8("label_5"));
 
         horizontalLayout_3->addWidget(label_5);
 
@@ -254,13 +254,13 @@ public:
         BlockSizeStartCombo->addItem(QString());
         BlockSizeStartCombo->addItem(QString());
         BlockSizeStartCombo->addItem(QString());
-        BlockSizeStartCombo->setObjectName("BlockSizeStartCombo");
+        BlockSizeStartCombo->setObjectName(QString::fromUtf8("BlockSizeStartCombo"));
         BlockSizeStartCombo->setMaximumSize(QSize(100, 16777215));
 
         horizontalLayout_3->addWidget(BlockSizeStartCombo);
 
         label_6 = new QLabel(groupBox);
-        label_6->setObjectName("label_6");
+        label_6->setObjectName(QString::fromUtf8("label_6"));
 
         horizontalLayout_3->addWidget(label_6);
 
@@ -285,7 +285,7 @@ public:
         BlockSizeEndCombo->addItem(QString());
         BlockSizeEndCombo->addItem(QString());
         BlockSizeEndCombo->addItem(QString());
-        BlockSizeEndCombo->setObjectName("BlockSizeEndCombo");
+        BlockSizeEndCombo->setObjectName(QString::fromUtf8("BlockSizeEndCombo"));
         BlockSizeEndCombo->setMaximumSize(QSize(100, 16777215));
 
         horizontalLayout_3->addWidget(BlockSizeEndCombo);
@@ -294,14 +294,14 @@ public:
         horizontalLayout_4->addWidget(groupBox);
 
         groupBox_2 = new QGroupBox(centralwidget);
-        groupBox_2->setObjectName("groupBox_2");
+        groupBox_2->setObjectName(QString::fromUtf8("groupBox_2"));
         groupBox_2->setMinimumSize(QSize(0, 0));
         gridLayout_3 = new QGridLayout(groupBox_2);
         gridLayout_3->setSpacing(5);
-        gridLayout_3->setObjectName("gridLayout_3");
+        gridLayout_3->setObjectName(QString::fromUtf8("gridLayout_3"));
         gridLayout_3->setContentsMargins(5, 5, 5, 5);
         StartBtn = new QPushButton(groupBox_2);
-        StartBtn->setObjectName("StartBtn");
+        StartBtn->setObjectName(QString::fromUtf8("StartBtn"));
         StartBtn->setMinimumSize(QSize(0, 0));
         StartBtn->setMaximumSize(QSize(16777215, 16777215));
 
@@ -317,15 +317,15 @@ public:
         gridLayout_2->addLayout(verticalLayout_2, 0, 0, 1, 1);
 
         horizontalLayout_2 = new QHBoxLayout();
-        horizontalLayout_2->setObjectName("horizontalLayout_2");
+        horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
 
         horizontalLayout_2->addItem(horizontalSpacer_3);
 
         verticalLayout_5 = new QVBoxLayout();
-        verticalLayout_5->setObjectName("verticalLayout_5");
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
         label_8 = new QLabel(centralwidget);
-        label_8->setObjectName("label_8");
+        label_8->setObjectName(QString::fromUtf8("label_8"));
         QFont font;
         font.setPointSize(10);
         font.setBold(true);
@@ -336,7 +336,7 @@ public:
         verticalLayout_5->addWidget(label_8);
 
         BlockSizeEdit = new QTextEdit(centralwidget);
-        BlockSizeEdit->setObjectName("BlockSizeEdit");
+        BlockSizeEdit->setObjectName(QString::fromUtf8("BlockSizeEdit"));
         BlockSizeEdit->setMaximumSize(QSize(100, 16777215));
         BlockSizeEdit->setMouseTracking(false);
         BlockSizeEdit->setUndoRedoEnabled(false);
@@ -350,23 +350,23 @@ public:
         horizontalLayout_2->addLayout(verticalLayout_5);
 
         line = new QFrame(centralwidget);
-        line->setObjectName("line");
+        line->setObjectName(QString::fromUtf8("line"));
         line->setFrameShape(QFrame::VLine);
         line->setFrameShadow(QFrame::Sunken);
 
         horizontalLayout_2->addWidget(line);
 
         verticalLayout_6 = new QVBoxLayout();
-        verticalLayout_6->setObjectName("verticalLayout_6");
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
         label_9 = new QLabel(centralwidget);
-        label_9->setObjectName("label_9");
+        label_9->setObjectName(QString::fromUtf8("label_9"));
         label_9->setFont(font);
         label_9->setAlignment(Qt::AlignCenter);
 
         verticalLayout_6->addWidget(label_9);
 
         WriteRateEdit = new QTextEdit(centralwidget);
-        WriteRateEdit->setObjectName("WriteRateEdit");
+        WriteRateEdit->setObjectName(QString::fromUtf8("WriteRateEdit"));
         WriteRateEdit->setMaximumSize(QSize(150, 16777215));
         WriteRateEdit->setMouseTracking(false);
         WriteRateEdit->setUndoRedoEnabled(false);
@@ -380,23 +380,23 @@ public:
         horizontalLayout_2->addLayout(verticalLayout_6);
 
         line_2 = new QFrame(centralwidget);
-        line_2->setObjectName("line_2");
+        line_2->setObjectName(QString::fromUtf8("line_2"));
         line_2->setFrameShape(QFrame::VLine);
         line_2->setFrameShadow(QFrame::Sunken);
 
         horizontalLayout_2->addWidget(line_2);
 
         verticalLayout_7 = new QVBoxLayout();
-        verticalLayout_7->setObjectName("verticalLayout_7");
+        verticalLayout_7->setObjectName(QString::fromUtf8("verticalLayout_7"));
         label_10 = new QLabel(centralwidget);
-        label_10->setObjectName("label_10");
+        label_10->setObjectName(QString::fromUtf8("label_10"));
         label_10->setFont(font);
         label_10->setAlignment(Qt::AlignCenter);
 
         verticalLayout_7->addWidget(label_10);
 
         ReadRateEdit = new QTextEdit(centralwidget);
-        ReadRateEdit->setObjectName("ReadRateEdit");
+        ReadRateEdit->setObjectName(QString::fromUtf8("ReadRateEdit"));
         ReadRateEdit->setMaximumSize(QSize(150, 16777215));
         ReadRateEdit->setMouseTracking(false);
         ReadRateEdit->setUndoRedoEnabled(false);
@@ -417,7 +417,7 @@ public:
         gridLayout_2->addLayout(horizontalLayout_2, 3, 0, 1, 1);
 
         line_5 = new QFrame(centralwidget);
-        line_5->setObjectName("line_5");
+        line_5->setObjectName(QString::fromUtf8("line_5"));
         line_5->setFrameShape(QFrame::HLine);
         line_5->setFrameShadow(QFrame::Sunken);
 
@@ -425,11 +425,11 @@ public:
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
-        menubar->setObjectName("menubar");
-        menubar->setGeometry(QRect(0, 0, 569, 21));
+        menubar->setObjectName(QString::fromUtf8("menubar"));
+        menubar->setGeometry(QRect(0, 0, 569, 22));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
-        statusbar->setObjectName("statusbar");
+        statusbar->setObjectName(QString::fromUtf8("statusbar"));
         MainWindow->setStatusBar(statusbar);
 
         retranslateUi(MainWindow);

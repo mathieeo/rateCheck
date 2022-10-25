@@ -44,13 +44,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->statusbar->showMessage("Idle");
 
-    ui->infoLabel->setText(QString("Integrated Software Technologies Inc. | RateCheck v" + QString(APP_VERSION) + " |"));
+    ui->infoLabel->setText(QString("| RateCheck v" + QString(APP_VERSION) + " | Integrated Software Technologies Inc. |"));
 
 #ifdef LINUX
     ui->DirectoryEdit->setText("~/");
 #else
     ui->DirectoryEdit->setText("C:\\");
 #endif
+
+    ui->progressBar->hide();
 
 }
 
@@ -188,12 +190,12 @@ void MainWindow::restrictGUIElements(bool state)
 
 void MainWindow::updateProgressBar(int value)
 {
-    QString danger = "QProgressBar::chunk {background: QLinearGradient( x1: 0, y1: 0, x2: 1, y2: 0,stop: 0 #FF0350,stop: 0.4999 #FF0020,stop: 0.5 #FF0019,stop: 1 #FF0000 );border-bottom-right-radius: 5px;border-bottom-left-radius: 5px;border: .px solid black;}";
-    QString safe= "QProgressBar::chunk {background: QLinearGradient( x1: 0, y1: 0, x2: 1, y2: 0,stop: 0 #78d,stop: 0.4999 #46a,stop: 0.5 #45a,stop: 1 #238 );border-bottom-right-radius: 7px;border-bottom-left-radius: 7px;border: 1px solid black;}";
-    if(ui->progressBar->value()<80)
-        ui->progressBar->setStyleSheet(danger);
-    else
-        ui->progressBar->setStyleSheet(safe);
+//    QString danger = "QProgressBar::chunk {background: QLinearGradient( x1: 0, y1: 0, x2: 1, y2: 0,stop: 0 #FF0350,stop: 0.4999 #FF0020,stop: 0.5 #FF0019,stop: 1 #FF0000 );border-bottom-right-radius: 5px;border-bottom-left-radius: 5px;border: .px solid black;}";
+//    QString safe= "QProgressBar::chunk {background: QLinearGradient( x1: 0, y1: 0, x2: 1, y2: 0,stop: 0 #78d,stop: 0.4999 #46a,stop: 0.5 #45a,stop: 1 #238 );border-bottom-right-radius: 7px;border-bottom-left-radius: 7px;border: 1px solid black;}";
+//    if(ui->progressBar->value()<80)
+//        ui->progressBar->setStyleSheet(danger);
+//    else
+//        ui->progressBar->setStyleSheet(safe);
 
     this->ui->progressBar->setValue(value);
 }
@@ -216,6 +218,7 @@ void MainWindow::on_dirBrowseBtn_clicked()
 
 void MainWindow::on_StartBtn_clicked()
 {
+    ui->progressBar->show();
     //clear
     ui->BlockSizeEdit->clear();
     ui->ReadRateEdit->clear();
@@ -254,6 +257,9 @@ void MainWindow::on_StartBtn_clicked()
         }
 
         //manager->StartWorking(directMode); // single thread?
+
+        QMessageBox messageBox;
+        messageBox.information(0,"Successfully performed benchmarking","Benchmarking finished.");
     }
     catch(std::string &msg){
         QMessageBox messageBox;
