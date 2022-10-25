@@ -1,6 +1,9 @@
 #include <file_manager.h>
 #include <iostream>
+
+#if defined(LINUX) && !defined(MAC_OS)
 #include <malloc.h>
+#endif
 
 #if defined(LINUX)
 #undef _FILE_OFFSET_BITS
@@ -587,6 +590,7 @@ void FileAPIFileManager::GetSize()
 }
 #ifdef MAC_OS
     #define O_DIRECT F_NOCACHE
+    #define O_LARGEFILE 0x0 // no such thing in MacOS
 #endif
 //---------------------------------------------------------------------------
 //  FileAPIFileManager::Open() --  Open file for reading
