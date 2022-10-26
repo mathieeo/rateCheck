@@ -161,7 +161,7 @@ int appManager::StartWorking(bool directMode, bool report)
     int BS_Start_Idx, BS_Stop_Idx;
     bool CheckData;
 
-    // clear the vectors
+    ///< clear the vectors
     measuredBlockSizeVec.clear();
     measuredReadRateVec.clear();
     measuredWriteRateVec.clear();
@@ -182,7 +182,7 @@ int appManager::StartWorking(bool directMode, bool report)
 
     gui_interface->updateStatusMessage("Initilizing the file for operation.");
 
-    //Get Dir and create the file
+    ///< Get Dir and create the file
     MainDIR = gui_interface->rootDirectory();
     FilePath = MainDIR + "//" + "WriteFile.bin";
     remove(FilePath.c_str());
@@ -204,9 +204,9 @@ int appManager::StartWorking(bool directMode, bool report)
         gui_interface->appendToBlockSize(IoSizeTagsVec[idx_t]);
         measuredBlockSizeVec.push_back(IoSizeTagsVec[idx_t]);
 
-        //---------------
-        // Write
-        //---------------
+        ///<---------------
+        ////< Write
+        ///<---------------
         {
             FileManager file(FilePath, !directMode);
 
@@ -249,11 +249,11 @@ int appManager::StartWorking(bool directMode, bool report)
             file.Close();
         }
 
-        //---------------
-        // Read
-        //---------------
+        ///<---------------
+        ///< Read
+        ///<---------------
         {
-            //Open The File
+            ///< Open The File
             FileManager file(FilePath, !directMode);
             if(file.Open() == false)
             {
@@ -294,7 +294,7 @@ int appManager::StartWorking(bool directMode, bool report)
             std::this_thread::sleep_for(std::chrono::milliseconds(500));
             file.Close();
         }
-        // calculate benchmark progress
+        ///< calculate benchmark progress
         BenchmarkProgress = float(float(idx)/float(number_of_runs)) * 100;
 
         gui_interface->updateStatusMessage("Benchmarking is in the process...");

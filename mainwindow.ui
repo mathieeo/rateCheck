@@ -24,6 +24,16 @@
     <item row="2" column="0">
      <layout class="QHBoxLayout" name="horizontalLayout_5">
       <item>
+       <widget class="QCheckBox" name="multithreadCheckBox">
+        <property name="text">
+         <string>Multi-Threading</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QCheckBox" name="reportCheckBox">
         <property name="enabled">
          <bool>true</bool>
@@ -783,7 +793,7 @@
      <x>0</x>
      <y>0</y>
      <width>569</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>
