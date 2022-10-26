@@ -408,7 +408,7 @@ bool FileAPIFileManager::Append()
     ///   Handle = CreateFileA(FFileName.c_str(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_FLAG_NO_BUFFERING , nullptr);
 
     ///   if (!Opened())
-    ///       throw MalibuException("Unable to append file");
+    ///       throw std::string("Unable to append file");
 
     ///   ///Cache file size
     ///   GetSize();
