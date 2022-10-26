@@ -1,0 +1,39 @@
+name: Doxygen
+on: 
+  push:
+    paths:
+      - '**'
+      - '*.pro'
+      - 'support/**'
+      - '.github/workflows/doxygen.yml'
+  pull_request:
+    paths:
+      - '**'
+      - '*.pro'
+      - 'support/**'
+      - '.github/workflows/doxygen.yml' 
+jobs:
+  build:
+    name: Build
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-20.04]
+    steps:
+      - name: Doxygen Action
+        uses: mattnotmitt/doxygen-action@1.9.4
+      # artifacts          
+      - uses: actions/upload-artifact@v2
+        with:
+          name: doc.zip
+          path: doc/html/*
+      # tag Release
+      - name: uploadRelease
+        if: startsWith(github.event.ref, 'refs/tags/')
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: doc.zip
+          asset_name: doc.zip
+          tag: ${{ github.ref }}
+          overwrite: true
