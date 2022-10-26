@@ -18,9 +18,7 @@ class MainWindow : public QMainWindow
 private slots:
 
     void on_dirBrowseBtn_clicked();
-
     void on_StartBtn_clicked();
-
     void goToWebsite();
     void on_AboutBtn_clicked();
 
@@ -50,9 +48,6 @@ public:
     appManager *manager;
 
     Ui::MainWindow *ui;
-
-    // HANDLE WriteFileHandle;
-    //  HANDLE ReadFileHandle;
 
 };
 

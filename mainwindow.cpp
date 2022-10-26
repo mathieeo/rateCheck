@@ -245,7 +245,7 @@ void MainWindow::on_StartBtn_clicked()
 
     try{
         if(mt_enabled){
-            QThread *thread = QThread::create(&appManager::StartWorking, manager, directMode, report);
+            QThread *thread = QThread::create(&appManager::startBenchmarking, manager, directMode, report);
             thread->start();
             while(thread->isRunning()){
 
@@ -255,12 +255,12 @@ void MainWindow::on_StartBtn_clicked()
                 Sleep(1);
 #endif
                 qApp->processEvents();
-                updateProgressBar(manager->BenchmarkProgress);
+                updateProgressBar(manager->benchmarkProgress());
             }
         }
 
         else{
-            manager->StartWorking(directMode); // single thread?
+            manager->startBenchmarking(directMode); // single thread?
         }
         QMessageBox messageBox;
         messageBox.information(0,"Successfully performed benchmarking","Benchmarking finished.");
