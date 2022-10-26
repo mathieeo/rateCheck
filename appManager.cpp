@@ -14,9 +14,9 @@ using namespace rateCheckApp;
 using namespace std::chrono;
 
 
-//------------------------------------------------------------------------
-//  Constructor of class appManager
-//------------------------------------------------------------------------
+///
+///  Constructor of class appManager
+///
 appManager::appManager(GUI_Interface *_gui_interface) :
     gui_interface(_gui_interface)
 {
@@ -78,16 +78,16 @@ appManager::appManager(GUI_Interface *_gui_interface) :
     IoSizeTagsVec.push_back("256 MB");
 
 }
-//------------------------------------------------------------------------
-//  Destractor of class appManager
-//------------------------------------------------------------------------
+///
+///  Destractor of class appManager
+///
 appManager::~appManager() {
     delete gui_interface;
 }
 
-//---------------------------------------------------------------------------
-//  appManager::fillRandomly() --
-//---------------------------------------------------------------------------
+///
+/// appManager::fillRandomly().
+///
 
 void appManager::fillRandomly(unsigned int size, int *ptr)
 {
@@ -101,9 +101,9 @@ void appManager::fillRandomly(unsigned int size, int *ptr)
     }
 }
 
-//---------------------------------------------------------------------------
-//  appManager::AttachTag() --
-//---------------------------------------------------------------------------
+///
+///  appManager::AttachTag().
+///
 
 std::string appManager::AttachTag(double rate)
 {
@@ -122,9 +122,9 @@ std::string appManager::AttachTag(double rate)
 
 }
 
-//---------------------------------------------------------------------------
-//  appManager::generateReport() --
-//---------------------------------------------------------------------------
+///
+///  appManager::generateReport().
+///
 
 std::string appManager::generateReport()
 {
@@ -144,9 +144,9 @@ std::string appManager::generateReport()
 }
 
 
-//---------------------------------------------------------------------------
-//  appManager::StartWorking() --
-//---------------------------------------------------------------------------
+///
+///  appManager::StartWorking().
+///
 
 int appManager::StartWorking(bool directMode, bool report)
 {
@@ -316,9 +316,9 @@ int appManager::StartWorking(bool directMode, bool report)
     return 1;
 }
 
-//---------------------------------------------------------------------------
-//  appManager::FinishedBenchmarking() --
-//---------------------------------------------------------------------------
+///
+///  appManager::FinishedBenchmarking().
+///
 
 void appManager::FinishedBenchmarking()
 {

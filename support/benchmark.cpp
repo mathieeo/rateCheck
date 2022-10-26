@@ -4,14 +4,14 @@
 
 namespace rateCheckApp
 {
+///
+/// CLASS AveragedRate.
+/// Simple low-pass filtered rate data
+///
 
-//===========================================================================
-//  CLASS AveragedRate  -- Simple low-pass filtered rate data
-//===========================================================================
-
-//---------------------------------------------------------------------------
-//  constructor for class AveragedRate
-//---------------------------------------------------------------------------
+///
+/// constructor for class AveragedRate
+///
 
 AveragedRate::AveragedRate(int taps)
     : Taps(taps), History(taps), Cursor(0), LastSample(0.0), Sum(0.0)
@@ -19,9 +19,10 @@ AveragedRate::AveragedRate(int taps)
     Reset();
 }
 
-//---------------------------------------------------------------------------
-//  AveragedRate::Reset() --
-//---------------------------------------------------------------------------
+///
+/// AveragedRate::Reset().
+/// Reset the prams
+///
 
 void AveragedRate::Reset()
 {
@@ -32,9 +33,10 @@ void AveragedRate::Reset()
     Sum = 0.0;
 }
 
-//---------------------------------------------------------------------------
-//  AveragedRate::Process() --
-//---------------------------------------------------------------------------
+///
+/// AveragedRate::Process().
+/// Process the average rate from number of recent cached taps
+///
 
 double AveragedRate::Process(double sample)
 {
@@ -50,9 +52,10 @@ double AveragedRate::Process(double sample)
     return (!Settled) ? 0.0 : Sum/Taps;
 }
 
-//---------------------------------------------------------------------------
-//  AveragedRate::Differential() --
-//---------------------------------------------------------------------------
+///
+///  AveragedRate::Differential().
+/// Set the different sample.
+///
 
 double AveragedRate::Differential(double sample)
 {
@@ -62,9 +65,10 @@ double AveragedRate::Differential(double sample)
     return result;
 }
 
-//---------------------------------------------------------------------------
-//  AveragedRate::Differential() --
-//---------------------------------------------------------------------------
+///
+/// AveragedRate::Differential().
+/// Get the different sample.
+///
 
 double AveragedRate::Differential()
 {

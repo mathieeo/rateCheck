@@ -13,9 +13,10 @@ typedef uint64_t int64;
 #pragma managed(push, off)
 #endif
 
-//===========================================================================
-//  CLASS AveragedRate  -- Simple low-pass filtered rate data
-//===========================================================================
+///
+///  CLASS AveragedRate.
+///  Simple low-pass filtered rate data
+///
 
 class AveragedRate
 {

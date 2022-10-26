@@ -25,9 +25,9 @@ typedef uint64_t int64;
 #include <unistd.h>
 #endif
 
-//------------------------------------------------------------------------
-// MainWindow::MainWindow
-//------------------------------------------------------------------------
+///
+/// MainWindow::MainWindow.
+///
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -56,9 +56,9 @@ MainWindow::MainWindow(QWidget *parent)
 
 }
 
-//------------------------------------------------------------------------
-// MainWindow::~MainWindow
-//------------------------------------------------------------------------
+///
+/// MainWindow::~MainWindow.
+///
 
 MainWindow::~MainWindow()
 {
@@ -72,27 +72,27 @@ void MainWindow::goToWebsite()
     QDesktopServices::openUrl(QUrl(link));
 }
 
-//------------------------------------------------------------------------
-// MainWindow::blockSizeStartIndex()
-//------------------------------------------------------------------------
+///
+/// MainWindow::blockSizeStartIndex().
+///
 
 unsigned int MainWindow::blockSizeStartIndex()
 {
     return ui->BlockSizeStartCombo->currentIndex();
 }
 
-//------------------------------------------------------------------------
-// MainWindow::blockSizeStartIndex()
-//------------------------------------------------------------------------
+///
+/// MainWindow::blockSizeStartIndex().
+///
 
 unsigned int MainWindow::blockSizeEndIndex()
 {
     return ui->BlockSizeEndCombo->currentIndex();
 }
 
-//------------------------------------------------------------------------
-// MainWindow::blockSizeStartIndex()
-//------------------------------------------------------------------------
+///
+/// MainWindow::blockSizeStartIndex().
+///
 
 
 unsigned int MainWindow::fileSizeComboIndex()
@@ -100,9 +100,9 @@ unsigned int MainWindow::fileSizeComboIndex()
     return ui->FileSizeCombo->currentIndex();
 }
 
-//------------------------------------------------------------------------
-// MainWindow::blockSizeStartIndex()
-//------------------------------------------------------------------------
+///
+/// MainWindow::blockSizeStartIndex().
+///
 
 
 bool MainWindow::isValidateChecked()
@@ -110,9 +110,9 @@ bool MainWindow::isValidateChecked()
     return ui->ValidateDataCheck->isChecked();
 }
 
-//------------------------------------------------------------------------
-// MainWindow::blockSizeStartIndex()
-//------------------------------------------------------------------------
+///
+/// MainWindow::blockSizeStartIndex().
+///
 
 
 std::string MainWindow::rootDirectory()
@@ -120,9 +120,9 @@ std::string MainWindow::rootDirectory()
     return ui->DirectoryEdit->text().toStdString();
 }
 
-//------------------------------------------------------------------------
-// MainWindow::blockSizeStartIndex()
-//------------------------------------------------------------------------
+///
+/// MainWindow::blockSizeStartIndex().
+///
 
 
 void MainWindow::updateStatusMessage(std::string msg)
@@ -130,9 +130,9 @@ void MainWindow::updateStatusMessage(std::string msg)
     ui->statusbar->showMessage(QString::fromStdString(msg));
 }
 
-//------------------------------------------------------------------------
-// MainWindow::blockSizeStartIndex()
-//------------------------------------------------------------------------
+///
+/// MainWindow::blockSizeStartIndex().
+///
 
 
 void MainWindow::appendToBlockSize(std::string size)
@@ -140,9 +140,9 @@ void MainWindow::appendToBlockSize(std::string size)
     ui->BlockSizeEdit->append(QString::fromStdString(size));
 }
 
-//------------------------------------------------------------------------
-// MainWindow::blockSizeStartIndex()
-//------------------------------------------------------------------------
+///
+/// MainWindow::blockSizeStartIndex().
+///
 
 
 void MainWindow::appendToWriteRate(std::string size)
@@ -150,9 +150,9 @@ void MainWindow::appendToWriteRate(std::string size)
     ui->WriteRateEdit->append(QString::fromStdString(size));
 }
 
-//------------------------------------------------------------------------
-// MainWindow::blockSizeStartIndex()
-//------------------------------------------------------------------------
+///
+/// MainWindow::blockSizeStartIndex().
+///
 
 
 void MainWindow::appendToReadRate(std::string size)
@@ -160,9 +160,9 @@ void MainWindow::appendToReadRate(std::string size)
     ui->ReadRateEdit->append(QString::fromStdString(size));
 }
 
-//------------------------------------------------------------------------
-// MainWindow::blockSizeStartIndex()
-//------------------------------------------------------------------------
+///
+/// MainWindow::blockSizeStartIndex().
+///
 
 
 void MainWindow::restrictGUIElements(bool state)
@@ -183,9 +183,9 @@ void MainWindow::restrictGUIElements(bool state)
     this->ui->BlockSizeEdit->setTextInteractionFlags(Qt::TextSelectableByMouse);
 }
 
-//------------------------------------------------------------------------
-// MainWindow::blockSizeStartIndex()
-//------------------------------------------------------------------------
+///
+/// MainWindow::blockSizeStartIndex().
+///
 
 
 void MainWindow::updateProgressBar(int value)
@@ -200,9 +200,9 @@ void MainWindow::updateProgressBar(int value)
     this->ui->progressBar->setValue(value);
 }
 
-//------------------------------------------------------------------------
-// MainWindow::blockSizeStartIndex()
-//------------------------------------------------------------------------
+///
+/// MainWindow::blockSizeStartIndex().
+///
 
 
 void MainWindow::on_dirBrowseBtn_clicked()
@@ -211,9 +211,9 @@ void MainWindow::on_dirBrowseBtn_clicked()
     ui->DirectoryEdit->setText(s1);
 }
 
-//------------------------------------------------------------------------
-// MainWindow::blockSizeStartIndex()
-//------------------------------------------------------------------------
+///
+/// MainWindow::blockSizeStartIndex().
+///
 
 
 void MainWindow::on_StartBtn_clicked()
@@ -274,9 +274,9 @@ void MainWindow::on_StartBtn_clicked()
     }
 }
 
-//------------------------------------------------------------------------
-// MainWindow::on_AboutBtn_clicked()
-//------------------------------------------------------------------------
+///
+/// MainWindow::on_AboutBtn_clicked().
+///
 
 void MainWindow::on_AboutBtn_clicked()
 {

@@ -13,9 +13,10 @@ namespace rateCheckApp
 
 typedef uint64_t int64;
 
-//========================================================================
-//  CLASS StartStopWatch --  Accurate StartStopWatch timer class
-//========================================================================
+///
+///  CLASS StartStopWatch.
+///  Accurate StartStopWatch timer class
+///
 
 class StartStopWatch
 {

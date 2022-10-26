@@ -21,11 +21,13 @@ namespace rateCheckApp
 {
 
 typedef uint64_t int64;
-//===========================================================================
-//  CLASS  FileManager   ---  Large disk file access support class
-//===========================================================================
 
 class IFileManagerImpl;
+
+///
+///  CLASS FileManager.
+///  Disk file access support class
+///
 
 class FileManager
 {

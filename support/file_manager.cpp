@@ -13,14 +13,16 @@
 namespace rateCheckApp
 {
 
+///
+/// CLASS StdFileManager.
+/// Use the standard file access which supports the standard file caching method
+///
 
-//=============================================================================
-//  CLASS StdFileManager  --
-//=============================================================================
 
-//---------------------------------------------------------------------------
-//  StdFileManager::StdFileManager() --  Ctor
-//---------------------------------------------------------------------------
+///
+/// StdFileManager::StdFileManager().
+/// Ctor
+///
 
 StdFileManager::StdFileManager()
     : Handle(nullptr),
@@ -28,9 +30,10 @@ StdFileManager::StdFileManager()
 {
 }
 
-//---------------------------------------------------------------------------
-// StdFileManager::FileManagerImpl() --
-//---------------------------------------------------------------------------
+///
+/// StdFileManager::FileManagerImpl().
+///
+///
 
 StdFileManager::StdFileManager(const StdFileManager & other)
     : Handle(nullptr),
@@ -40,13 +43,14 @@ StdFileManager::StdFileManager(const StdFileManager & other)
 {
 }
 
-//---------------------------------------------------------------------------
-//  StdFileManager::operator = --  Assignment operator
-//---------------------------------------------------------------------------
+///
+/// StdFileManager::operator =
+/// Assignment operator
+///
 
 StdFileManager & StdFileManager::operator = (const StdFileManager & other)
 {
-    // protect against invalid self-assignment
+    //protect against invalid self-assignment
     if (this != &other)
     {
         Handle = nullptr;
@@ -55,13 +59,14 @@ StdFileManager & StdFileManager::operator = (const StdFileManager & other)
         FSize = other.FSize;
     }
 
-    // by convention, always return *this
+    //by convention, always return *this
     return *this;
 }
 
-//---------------------------------------------------------------------------
-//  StdFileManager::~StdFileManager() --  Set file buffer mode state
-//---------------------------------------------------------------------------
+///
+/// StdFileManager::~StdFileManager.
+/// Set file buffer mode state
+///
 
 StdFileManager::~StdFileManager()
 {
@@ -69,9 +74,10 @@ StdFileManager::~StdFileManager()
 }
 
 
-//---------------------------------------------------------------------------
-//  StdFileManager::GetSize() --  Get current file size
-//---------------------------------------------------------------------------
+///
+/// StdFileManager::GetSize().
+/// Get current file size
+///
 
 void StdFileManager::GetSize()
 {
@@ -81,9 +87,10 @@ void StdFileManager::GetSize()
     FSize = static_cast<int64>(ftell(Handle));
 }
 
-//---------------------------------------------------------------------------
-//  StdFileManager::Open() --  Open file for reading
-//---------------------------------------------------------------------------
+///
+/// StdFileManager::Open().
+/// Open file for reading
+///
 
 bool StdFileManager::Open()
 {
@@ -95,16 +102,17 @@ bool StdFileManager::Open()
     if (!Opened())
         throw std::string("Unable to open file");
 
-    // Cache file size
+    //Cache file size
     GetSize();
     Position(0);
 
     return true;
 }
 
-//---------------------------------------------------------------------------
-//  StdFileManager::Create() --  Create file for writing
-//---------------------------------------------------------------------------
+///
+/// StdFileManager::Create().
+/// Create file for writing
+///
 
 bool StdFileManager::Create()
 {
@@ -123,9 +131,10 @@ bool StdFileManager::Create()
     return true;
 }
 
-//---------------------------------------------------------------------------
-//  StdFileManager::Append() --  Open file for append
-//---------------------------------------------------------------------------
+///
+/// StdFileManager::Append().
+/// Open file for append
+///
 
 bool StdFileManager::Append()
 {
@@ -137,16 +146,16 @@ bool StdFileManager::Append()
     if (!Opened())
         throw std::string("Unable to append file");
 
-    // Cache file size
+    ///Cache file size
     GetSize();
     Position(FSize);
 
     return true;
 }
 
-//---------------------------------------------------------------------------
-//  StdFileManager::Close() --
-//---------------------------------------------------------------------------
+///
+/// StdFileManager::Close().
+///
 
 bool StdFileManager::Close()
 {
@@ -162,9 +171,9 @@ bool StdFileManager::Close()
     return Result;
 }
 
-//---------------------------------------------------------------------------
-//  StdFileManager::Read() --
-//---------------------------------------------------------------------------
+///
+/// StdFileManager::Read().
+///
 
 int StdFileManager::Read(char * buffer, unsigned int size)
 {
@@ -178,9 +187,9 @@ int StdFileManager::Read(char * buffer, unsigned int size)
     return static_cast<unsigned int>(result);
 }
 
-//---------------------------------------------------------------------------
-//  StdFileManager::Write() --
-//---------------------------------------------------------------------------
+///
+/// StdFileManager::Write().
+///
 
 int StdFileManager::Write(const char * buffer, unsigned int size)
 {
@@ -195,27 +204,29 @@ int StdFileManager::Write(const char * buffer, unsigned int size)
     return static_cast<unsigned int>(result);
 }
 
-//---------------------------------------------------------------------------
-//  StdFileManager::FileName() --  Set file name
-//---------------------------------------------------------------------------
+///
+/// StdFileManager::FileName().
+/// Set file name
+///
 
 void StdFileManager::FileName(const std::string & name)
 {
     FFileName = name;
 }
 
-//---------------------------------------------------------------------------
-//  StdFileManager::FileName() --  Get file name
-//---------------------------------------------------------------------------
+///
+/// StdFileManager::FileName().
+/// Get file name
+///
 
 std::string StdFileManager::FileName() const
 {
     return FFileName;
 }
 
-//---------------------------------------------------------------------------
-//  StdFileManager::Position() --
-//---------------------------------------------------------------------------
+///
+/// StdFileManager::Position().
+///
 
 bool StdFileManager::Position(int64 offset)
 {
@@ -228,18 +239,19 @@ bool StdFileManager::Position(int64 offset)
     return (result == 0);
 }
 
-//---------------------------------------------------------------------------
-//  StdFileManager::Position() --
-//---------------------------------------------------------------------------
+///
+/// StdFileManager::Position().
+///
 
 int64 StdFileManager::Position() const
 {
     return FPosition;
 }
 
-//---------------------------------------------------------------------------
-//  StdFileManager::Size() --  Set file size
-//---------------------------------------------------------------------------
+///
+/// StdFileManager::Size().
+/// Set file size
+///
 
 void StdFileManager::Size(int64 size)
 {
@@ -249,9 +261,10 @@ void StdFileManager::Size(int64 size)
     FSize = size;
 }
 
-//---------------------------------------------------------------------------
-//  StdFileManager::Size() --  Get file size
-//---------------------------------------------------------------------------
+///
+/// StdFileManager::Size().
+/// Get file size
+///
 
 int64 StdFileManager::Size() const
 {
@@ -260,22 +273,26 @@ int64 StdFileManager::Size() const
 
 
 #ifndef LINUX
-//=============================================================================
-//  CLASS FileAPIFileManager  --
-//=============================================================================
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::FileAPIFileManager() --  Ctor
-//---------------------------------------------------------------------------
+///
+/// CLASS FileAPIFileManager.
+/// Direct file access class manager
+///
+
+///
+/// FileAPIFileManager::FileAPIFileManager().
+/// Ctor
+///
 
 FileAPIFileManager::FileAPIFileManager()
     : FFileName(std::string("")), FPosition(0), FSize(0), isOpen(false)
 {
 }
 
-//---------------------------------------------------------------------------
-// FileAPIFileManager::FileAPIFileManager() --
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::FileAPIFileManager().
+///
+///
 
 FileAPIFileManager::FileAPIFileManager(const FileAPIFileManager & other)
 {
@@ -285,13 +302,14 @@ FileAPIFileManager::FileAPIFileManager(const FileAPIFileManager & other)
     isOpen = other.isOpen;
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::operator = --  Assignment operator
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::operator =.
+/// Assignment operator
+///
 
 FileAPIFileManager & FileAPIFileManager::operator = (const FileAPIFileManager & other)
 {
-    // protect against invalid self-assignment
+    ///protect against invalid self-assignment
     if (this != &other)
     {
         Handle = nullptr;
@@ -301,13 +319,14 @@ FileAPIFileManager & FileAPIFileManager::operator = (const FileAPIFileManager & 
         isOpen = other.isOpen;
     }
 
-    // by convention, always return *this
+    //by convention, always return *this
     return *this;
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::~FileAPIFileManager() --  Set file buffer mode state
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::~FileAPIFileManager().
+/// Set file buffer mode state
+///
 
 FileAPIFileManager::~FileAPIFileManager()
 {
@@ -315,9 +334,10 @@ FileAPIFileManager::~FileAPIFileManager()
 }
 
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::GetSize() --  Get current file size
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::GetSize().
+/// Get current file size
+///
 
 void FileAPIFileManager::GetSize()
 {
@@ -334,9 +354,10 @@ void FileAPIFileManager::GetSize()
 
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::Open() --  Open file for reading
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::Open().
+/// Open file for reading
+///
 
 bool FileAPIFileManager::Open()
 {
@@ -346,16 +367,17 @@ bool FileAPIFileManager::Open()
         throw std::string("Unable to open file");
     }
 
-    // Cache file size
+    ///Cache file size
     GetSize();
     Position(0);
     isOpen = true;
     return true;
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::Create() --  Create file for writing
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::Create().
+/// Create file for writing
+///
 
 bool FileAPIFileManager::Create()
 {
@@ -372,31 +394,32 @@ bool FileAPIFileManager::Create()
     return true;
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::Append() --  Open file for append
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::Append().
+/// Open file for append
+///
 
 bool FileAPIFileManager::Append()
 {
     return false;
-    //    if (Opened())
-    //        return false;
+    ///   if (Opened())
+    ///       return false;
 
-    //    Handle = CreateFileA(FFileName.c_str(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_FLAG_NO_BUFFERING , nullptr);
+    ///   Handle = CreateFileA(FFileName.c_str(), GENERIC_READ, 0, nullptr, OPEN_EXISTING, FILE_FLAG_NO_BUFFERING , nullptr);
 
-    //    if (!Opened())
-    //        throw MalibuException("Unable to append file");
+    ///   if (!Opened())
+    ///       throw MalibuException("Unable to append file");
 
-    //    // Cache file size
-    //    GetSize();
-    //    Position(FSize);
+    ///   ///Cache file size
+    ///   GetSize();
+    ///   Position(FSize);
 
-    //    return true;
+    ///   return true;
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::Close() --
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::Close.
+///
 
 bool FileAPIFileManager::Close()
 {
@@ -415,9 +438,9 @@ bool FileAPIFileManager::Close()
 
 }
 
-//---------------------------------------------------------------------------
-//  StdFileManager::FileAPIFileManager() --
-//---------------------------------------------------------------------------
+///
+/// StdFileManager::FileAPIFileManager().
+///
 
 int FileAPIFileManager::Read(char * buffer, unsigned int size)
 {
@@ -429,9 +452,9 @@ int FileAPIFileManager::Read(char * buffer, unsigned int size)
     return static_cast<int>(result);
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::Write() --
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::Write().
+///
 
 int FileAPIFileManager::Write(const char * buffer, unsigned int size)
 {
@@ -443,27 +466,29 @@ int FileAPIFileManager::Write(const char * buffer, unsigned int size)
     return static_cast<int>(result);
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::FileName() --  Set file name
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::FileName().
+/// Set file name
+///
 
 void FileAPIFileManager::FileName(const std::string & name)
 {
     FFileName = name;
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::FileName() --  Get file name
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::FileName().
+/// Get file name
+///
 
 std::string FileAPIFileManager::FileName() const
 {
     return FFileName;
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::Position() --
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::Position().
+///
 
 bool FileAPIFileManager::Position(int64 offset)
 {
@@ -483,18 +508,19 @@ FILE_END 2
     return (result == 0);
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::Position() --
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::Position().
+///
 
 int64 FileAPIFileManager::Position() const
 {
     return FPosition;
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::Size() --  Set file size
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::Size().
+/// Set file size
+///
 
 void FileAPIFileManager::Size(int64 size)
 {
@@ -504,31 +530,33 @@ void FileAPIFileManager::Size(int64 size)
     FSize = size;
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::Size() --  Get file size
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::Size().
+/// Get file size
+///
 
 int64 FileAPIFileManager::Size() const
 {
     return FSize;
 }
 #else
-//=============================================================================
-//  CLASS FileAPIFileManager  --
-//=============================================================================
+///
+/// CLASS FileAPIFileManager.
+///
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::FileAPIFileManager() --  Ctor
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::FileAPIFileManager().
+/// Ctor
+///
 
 FileAPIFileManager::FileAPIFileManager()
     : FFileName(std::string("")), FPosition(0), FSize(0), isOpen(false)
 {
 }
 
-//---------------------------------------------------------------------------
-// FileAPIFileManager::FileAPIFileManager() --
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::FileAPIFileManager.
+///
 
 FileAPIFileManager::FileAPIFileManager(const FileAPIFileManager & other)
 {
@@ -539,13 +567,14 @@ FileAPIFileManager::FileAPIFileManager(const FileAPIFileManager & other)
     isOpen = other.isOpen;
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::operator = --  Assignment operator
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::operator =.
+/// Assignment operator
+///
 
 FileAPIFileManager & FileAPIFileManager::operator = (const FileAPIFileManager & other)
 {
-    // protect against invalid self-assignment
+    ///protect against invalid self-assignment
     if (this != &other)
     {
         Handle = other.Handle;
@@ -555,13 +584,14 @@ FileAPIFileManager & FileAPIFileManager::operator = (const FileAPIFileManager & 
         isOpen = other.isOpen;
     }
 
-    // by convention, always return *this
+    ///by convention, always return *this
     return *this;
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::~FileAPIFileManager() --  Set file buffer mode state
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::~FileAPIFileManager().
+/// Set file buffer mode state
+///
 
 FileAPIFileManager::~FileAPIFileManager()
 {
@@ -569,38 +599,39 @@ FileAPIFileManager::~FileAPIFileManager()
 }
 
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::GetSize() --  Get current file size
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::GetSize().
+/// Get current file size
+///
 
 void FileAPIFileManager::GetSize()
 {
-    // unsigned long  high = 0;
+    ///unsigned long  high = 0;
 
     //DWORD size = GetFileSize(Handle, &high);
-    //    FSize = size;
+    ///   FSize = size;
 
-    //    if(high!=0){
-    //        long long newHigh = high;
-    //        newHigh = newHigh << 32;
-    //        FSize = newHigh + size;
-    //    }
+    ///   if(high!=0){
+    ///       long long newHigh = high;
+    ///       newHigh = newHigh << 32;
+    ///       FSize = newHigh + size;
+    ///   }
 
 }
 #ifdef MAC_OS
     #define O_DIRECT F_NOCACHE
-    #define O_LARGEFILE 0x0 // no such thing in MacOS
+    #define O_LARGEFILE 0x0 ///no such thing in MacOS
 #endif
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::Open() --  Open file for reading
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::Open() --  Open file for reading
+///
 
 bool FileAPIFileManager::Open()
 {
     Handle = ::open(FFileName.c_str(), O_DIRECT | O_LARGEFILE, S_IRWXO | S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP);
     if ( Handle == -1 ) {
 
-        // check if value of errno same as value of EDOM i.e. 33
+        ///check if value of errno same as value of EDOM i.e. 33
 
             std::cout << " Value of errno is : " << errno << '\n';
             std::cout << " log(-1) is not valid : "
@@ -610,21 +641,27 @@ bool FileAPIFileManager::Open()
         throw std::string("can't open input file!");
     }
 
-    // Cache file size
+    ///Cache file size
     GetSize();
     Position(0);
     isOpen = true;
     return isOpen;
 }
 
+///
+/// FileAPIFileManager::Opened().
+/// Is the file open?
+///
+///
 bool FileAPIFileManager::Opened() const
 {
     return isOpen;
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::Create() --  Create file for writing
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::Create().
+/// Create file for writing
+///
 
 bool FileAPIFileManager::Create()
 {
@@ -640,18 +677,20 @@ bool FileAPIFileManager::Create()
     return isOpen;
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::Append() --  Open file for append
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::Append().
+/// Open file for append
+///
 
 bool FileAPIFileManager::Append()
 {
     return false;
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::Close() --
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::Close().
+///
+///
 
 bool FileAPIFileManager::Close()
 {
@@ -671,9 +710,9 @@ bool FileAPIFileManager::Close()
 
 }
 
-//---------------------------------------------------------------------------
-//  StdFileManager::FileAPIFileManager() --
-//---------------------------------------------------------------------------
+///
+/// StdFileManager::FileAPIFileManager().
+///
 
 int FileAPIFileManager::Read(char * buffer, unsigned int size)
 {
@@ -692,8 +731,8 @@ int FileAPIFileManager::Read(char * buffer, unsigned int size)
     result = ::read(Handle,buffer, size);
 
     if(result == -1){
-//        std::cout << " Value of errno is : " << errno << '\n';
-//        std::cout << " function : " << strerror(errno) << '\n';
+///       std::cout << " Value of errno is : " << errno << '\n';
+///       std::cout << " function : " << strerror(errno) << '\n';
         throw std::string("Error reading from the file. " + FFileName);
     }
 
@@ -701,9 +740,9 @@ int FileAPIFileManager::Read(char * buffer, unsigned int size)
     return static_cast<int>(result);
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::Write() --
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::Write().
+///
 
 int FileAPIFileManager::Write(const char * buffer, unsigned int size)
 {
@@ -720,27 +759,29 @@ int FileAPIFileManager::Write(const char * buffer, unsigned int size)
     return static_cast<int>(result);
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::FileName() --  Set file name
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::FileName().
+/// Set file name
+///
 
 void FileAPIFileManager::FileName(const std::string & name)
 {
     FFileName = name;
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::FileName() --  Get file name
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::FileName().
+/// Get file name
+///
 
 std::string FileAPIFileManager::FileName() const
 {
     return FFileName;
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::Position() --
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::Position().
+///
 
 bool FileAPIFileManager::Position(int64 offset)
 {
@@ -753,18 +794,19 @@ bool FileAPIFileManager::Position(int64 offset)
     return (result == 0);
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::Position() --
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::Position().
+///
 
 int64 FileAPIFileManager::Position() const
 {
     return FPosition;
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::Size() --  Set file size
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::Size().
+/// Set file size
+///
 
 void FileAPIFileManager::Size(int64 size)
 {
@@ -774,9 +816,10 @@ void FileAPIFileManager::Size(int64 size)
     FSize = size;
 }
 
-//---------------------------------------------------------------------------
-//  FileAPIFileManager::Size() --  Get file size
-//---------------------------------------------------------------------------
+///
+/// FileAPIFileManager::Size().
+/// Get file size
+///
 
 int64 FileAPIFileManager::Size() const
 {
@@ -784,13 +827,15 @@ int64 FileAPIFileManager::Size() const
 }
 #endif
 
-//===========================================================================
-//  CLASS  FileManager   ---  Large disk file access support class
-//===========================================================================
+///
+/// CLASS  FileManager.
+/// Large disk file access support class
+///
 
-//---------------------------------------------------------------------------
-//  FileManager::FileManager() --  Ctor
-//---------------------------------------------------------------------------
+///
+/// FileManager::FileManager().
+/// Ctor
+///
 
 FileManager::FileManager(bool useStdioFile) : _useStdioFile(useStdioFile)
 {
@@ -801,9 +846,10 @@ FileManager::FileManager(bool useStdioFile) : _useStdioFile(useStdioFile)
     }
 }
 
-//---------------------------------------------------------------------------
-//  FileManager::FileManager() --  Ctor
-//---------------------------------------------------------------------------
+///
+/// FileManager::FileManager().
+/// Ctor
+///
 
 FileManager::FileManager(const std::string & filename,bool useStdioFile) :
     _useStdioFile(useStdioFile)
@@ -816,9 +862,10 @@ FileManager::FileManager(const std::string & filename,bool useStdioFile) :
     FileName(filename);
 }
 
-//---------------------------------------------------------------------------
-// FileManager::FileManager() --  Copy ctor
-//---------------------------------------------------------------------------
+///
+/// FileManager::FileManager().
+/// Copy ctor
+///
 
 FileManager::FileManager(const FileManager & other) :
     _useStdioFile(other.isStdioFile())
@@ -831,9 +878,10 @@ FileManager::FileManager(const FileManager & other) :
     *Impl = *other.Impl;
 }
 
-//---------------------------------------------------------------------------
-//  FileManager::FileManager() --  Dtor
-//---------------------------------------------------------------------------
+///
+/// FileManager::FileManager().
+/// Dtor
+///
 
 FileManager::~FileManager()
 {
@@ -841,148 +889,155 @@ FileManager::~FileManager()
     Impl = nullptr;
 }
 
-//---------------------------------------------------------------------------
-//  FileManager::operator = --
-//---------------------------------------------------------------------------
+///
+/// FileManager::operator =.
+///
 
 FileManager & FileManager::operator = (const FileManager & other)
 {
-    // protect against invalid self-assignment
+    ///protect against invalid self-assignment
     if (this != &other)
         *Impl = *other.Impl;
 
-    // by convention, always return *this
+    ///by convention, always return *this
     return *this;
 }
 
-//---------------------------------------------------------------------------
-//  FileManager::Open() --  Open file for reading
-//---------------------------------------------------------------------------
+///
+/// FileManager::Open().
+/// Open file for reading
+///
 
 bool FileManager::Open()
 {
     return Impl->Open();
 }
 
-//---------------------------------------------------------------------------
-//  FileManager::Create() --  Create file for writing
-//---------------------------------------------------------------------------
+///
+/// FileManager::Create().
+/// Create file for writing
+///
 
 bool FileManager::Create()
 {
     return Impl->Create();
 }
 
-//---------------------------------------------------------------------------
-//  FileManager::Append() --  Open file for append
-//---------------------------------------------------------------------------
+///
+/// FileManager::Append().
+/// Open file for append
+///
 
 bool FileManager::Append()
 {
     return Impl->Append();
 }
 
-//---------------------------------------------------------------------------
-//  FileManager::Close() --
-//---------------------------------------------------------------------------
+///
+/// FileManager::Close().
+///
 
 bool FileManager::Close()
 {
     return Impl->Close();
 }
 
-//---------------------------------------------------------------------------
-//  FileManager::Read() --
-//---------------------------------------------------------------------------
+///
+/// FileManager::Read().
+///
 
 int FileManager::Read(char * buffer, unsigned int size)
 {
     return Impl->Read(buffer, size);
 }
 
-//---------------------------------------------------------------------------
-//  FileManager::Write() --
-//---------------------------------------------------------------------------
+///
+/// FileManager::Write().
+///
 
 int FileManager::Write(const char * buffer, unsigned int size)
 {
     return Impl->Write(buffer, size);
 }
 
-//---------------------------------------------------------------------------
-//  FileManager::Opened() --
-//---------------------------------------------------------------------------
+///
+/// FileManager::Opened().
+///
 
 bool FileManager::Opened() const
 {
     return Impl->Opened();
 }
 
-//---------------------------------------------------------------------------
-//  FileManager::Position() --
-//---------------------------------------------------------------------------
+///
+/// FileManager::Position().
+///
 
 bool FileManager::Position(int64 offset)
 {
     return Impl->Position(offset);
 }
 
-//---------------------------------------------------------------------------
-//  FileManager::Position() --
-//---------------------------------------------------------------------------
+///
+/// FileManager::Position().
+///
 
 int64 FileManager::Position() const
 {
     return Impl->Position();
 }
 
-//---------------------------------------------------------------------------
-//  FileManager::FileName() --  Set file name
-//---------------------------------------------------------------------------
+///
+/// FileManager::FileName().
+/// Set file name
+///
 
 void FileManager::FileName(const std::string & name)
 {
     Impl->FileName(name);
 }
 
-//---------------------------------------------------------------------------
-//  FileManager::FileName() --  Get file name
-//---------------------------------------------------------------------------
+///
+/// FileManager::FileName().
+/// Get file name
+///
 
 std::string FileManager::FileName() const
 {
     return Impl->FileName();
 }
 
-//---------------------------------------------------------------------------
-//  FileManager::Size() --  Set file size
-//---------------------------------------------------------------------------
+///
+/// FileManager::Size().
+/// Set file size
+///
 
 void FileManager::Size(int64 size)
 {
     Impl->Size(size);
 }
 
-//---------------------------------------------------------------------------
-//  FileManager::Size() --  Get file size
-//---------------------------------------------------------------------------
+///
+/// FileManager::Size().
+/// Get file size
+///
 
 int64 FileManager::Size() const
 {
     return Impl->Size();
 }
 
-//---------------------------------------------------------------------------
-//  FileManager::WriteThrough() --
-//---------------------------------------------------------------------------
+///
+/// FileManager::WriteThrough().
+///
 
 void FileManager::WriteThrough(bool)
 {
 }
 
-//---------------------------------------------------------------------------
-//  FileManager::WriteThrough() --
-//---------------------------------------------------------------------------
+///
+/// FileManager::WriteThrough().
+///
 
 bool FileManager::WriteThrough() const
 {
@@ -990,9 +1045,9 @@ bool FileManager::WriteThrough() const
 }
 
 
-}  // namespace
+}  ///E
 
-// Undefining _FILE_OFFSET_BITS macro, so that other classes are not affected.
+///Undefining _FILE_OFFSET_BITS macro, so that other classes are not affected.
 #if defined(LINUX)
 #undef _FILE_OFFSET_BITS
 #endif

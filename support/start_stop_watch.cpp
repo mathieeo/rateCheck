@@ -13,9 +13,10 @@ namespace   rateCheckApp
 static const double Meg = 1.0e6;
 //static const double Gig = 1.0e9;
 
-//------------------------------------------------------------------------
-// class StartStopWatchImpl -- Windows implementation.
-//------------------------------------------------------------------------
+///
+/// class StartStopWatchImpl.
+/// Windows implementation.
+///
 #ifndef LINUX
 
 class StartStopWatchImpl
@@ -33,9 +34,9 @@ private:
     void QueryPerformanceCounter(int64 & count);
 };
 
-//------------------------------------------------------------------------
-//  Constructor of class StartStopWatchImpl
-//------------------------------------------------------------------------
+///
+///  Constructor of class StartStopWatchImpl
+///
 
 StartStopWatchImpl::StartStopWatchImpl()
     : FTimerRate(1)
@@ -46,9 +47,10 @@ StartStopWatchImpl::StartStopWatchImpl()
         throw std::string("Performance timer unavailable!");
 }
 
-//------------------------------------------------------------------------
-// StartStopWatchImpl::Now() - returns a high precision time value
-//------------------------------------------------------------------------
+///
+/// StartStopWatchImpl::Now().
+/// returns a high precision time value
+///
 
 double StartStopWatchImpl::Now()
 {
@@ -58,18 +60,18 @@ double StartStopWatchImpl::Now()
     return static_cast<double>(Current)/TimerRate();
 }
 
-//------------------------------------------------------------------------
-// StartStopWatchImpl::QueryPerformanceFrequency()
-//------------------------------------------------------------------------
+///
+/// StartStopWatchImpl::QueryPerformanceFrequency().
+///
 
 void StartStopWatchImpl::QueryPerformanceFrequency(int64 & timerRate)
 {
     ::QueryPerformanceFrequency(reinterpret_cast<LARGE_INTEGER*>(&timerRate));
 }
 
-//------------------------------------------------------------------------
-// StartStopWatchImpl::QueryPerformancCounter()
-//------------------------------------------------------------------------
+///
+/// StartStopWatchImpl::QueryPerformancCounter().
+///
 
 void StartStopWatchImpl::QueryPerformanceCounter(int64 & count)
 {
@@ -90,9 +92,10 @@ private:
     struct timeval now;
 };
 
-//------------------------------------------------------------------------
-// StartStopWatchImpl::Now() - returns a high precision time value
-//------------------------------------------------------------------------
+///
+/// StartStopWatchImpl::Now().
+/// returns a high precision time value
+///
 
 double StartStopWatchImpl::Now()
 {
@@ -105,12 +108,13 @@ double StartStopWatchImpl::Now()
 }
 
 #endif
-//========================================================================
-//  CLASS StartStopWatch --  Accurate StartStopWatch timer class
-//========================================================================
-//------------------------------------------------------------------------
+///
+/// CLASS StartStopWatch.
+/// Accurate StartStopWatch timer class
+///
+///
 //  constructor of class StartStopWatch
-//------------------------------------------------------------------------
+///
 
 StartStopWatch::StartStopWatch()
     : impl(new StartStopWatchImpl())
@@ -118,27 +122,27 @@ StartStopWatch::StartStopWatch()
 
 }
 
-//------------------------------------------------------------------------
-//  Copy constructor
-//------------------------------------------------------------------------
+///
+///  Copy constructor
+///
 
 StartStopWatch::StartStopWatch(const StartStopWatch & /*other*/)
     : impl(new StartStopWatchImpl())
 {
 }
 
-//------------------------------------------------------------------------
-//  destructor of class StartStopWatch
-//------------------------------------------------------------------------
+///
+///  destructor of class StartStopWatch
+///
 
 StartStopWatch::~StartStopWatch()
 {
     delete impl;  impl = 0;
 }
 
-//------------------------------------------------------------------------
-//  Assignment operator
-//------------------------------------------------------------------------
+///
+///  Assignment operator
+///
 
 StartStopWatch & StartStopWatch::operator =(const StartStopWatch & other)
 {
@@ -151,18 +155,20 @@ StartStopWatch & StartStopWatch::operator =(const StartStopWatch & other)
     return *this;
 }
 
-//---------------------------------------------------------------------------
-// StartStopWatch::Start() -- Push a timer reading
-//---------------------------------------------------------------------------
+///
+/// StartStopWatch::Start().
+/// Push a timer reading
+///
 
 void StartStopWatch::Start()
 {
     Timer.push(Now());
 }
 
-//---------------------------------------------------------------------------
-// StartStopWatch::Stop() -- Calculate elapsed time (destructive)
-//---------------------------------------------------------------------------
+///
+/// StartStopWatch::Stop().
+/// Calculate elapsed time (destructive)
+///
 
 double StartStopWatch::Stop()
 {
@@ -175,9 +181,10 @@ double StartStopWatch::Stop()
     return Delta;
 }
 
-//---------------------------------------------------------------------------
-// StartStopWatch::Elapsed() -- Calculate elapsed time (non-destructive)
-//---------------------------------------------------------------------------
+///
+/// StartStopWatch::Elapsed().
+/// Calculate elapsed time (non-destructive)
+///
 
 double StartStopWatch::Elapsed()
 {
@@ -187,9 +194,10 @@ double StartStopWatch::Elapsed()
     return Now() - Timer.top();
 }
 
-//---------------------------------------------------------------------------
-// StartStopWatch::uS() -- Dwell for specified number of uS
-//---------------------------------------------------------------------------
+///
+/// StartStopWatch::uS().
+/// Dwell for specified number of uS
+///
 
 void StartStopWatch::uS(int Delay)
 {
@@ -201,18 +209,20 @@ void StartStopWatch::uS(int Delay)
 
 }
 
-//---------------------------------------------------------------------------
-// StartStopWatch::Mhz() -- Timer clock rate
-//---------------------------------------------------------------------------
+///
+/// StartStopWatch::Mhz().
+/// Timer clock rate
+///
 
 double StartStopWatch::Mhz() const
 {
     return impl->TimerRate()/Meg;
 }
 
-//---------------------------------------------------------------------------
-// StartStopWatch::Now() -- Return current time
-//---------------------------------------------------------------------------
+///
+/// StartStopWatch::Now().
+/// Return current time
+///
 
 double StartStopWatch::Now()
 {
@@ -220,4 +230,4 @@ double StartStopWatch::Now()
 }
 
 
-}  // namespace
+}  //
