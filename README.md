@@ -7,6 +7,8 @@ Rate Check is a free disk benchmarking application for Windows, Ubuntu, MacOS. A
 
 [<img src="https://en.wikipedia.org/wiki/Qt_(software)#/media/File:Qt_logo_2016.svg" />](https://www.qt.io/)
 
+[<img alt="alt_text" width="700x" src="https://static.wixstatic.com/media/b3d4ff_9b0c9af0d16942ccbdca68ee79b7ff4c~mv2.gif" />](https://video.wixstatic.com/video/b3d4ff_9227c1b30bae445bb319db21a647fd96/720p/mp4/file.mp4)
+
 ## Features
 - Benchmarking with different file sizes.
 - Support for direct disk access mode and cached access mode.
