@@ -296,7 +296,7 @@ void MainWindow::on_StartBtn_clicked()
 
     try{
         /// smake sure we have a valiade directory
-        if( fs::filesystem::exists(ui->DirectoryEdit->text().toStdString().c_str()) == false )
+        if( fs::exists(ui->DirectoryEdit->text().toStdString().c_str()) == false )
             throw std::string( "cannot access " + ui->DirectoryEdit->text().toStdString());
 
         /// show the progress bar
