@@ -24,7 +24,6 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QSpacerItem>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QTextEdit>
 #include <QtWidgets/QVBoxLayout>
@@ -37,22 +36,11 @@ class Ui_MainWindow
 public:
     QAction *actionWebsite;
     QWidget *centralwidget;
-    QGridLayout *gridLayout_2;
-    QHBoxLayout *horizontalLayout_5;
-    QCheckBox *multithreadCheckBox;
-    QCheckBox *reportCheckBox;
-    QCheckBox *directModeCheckBox;
-    QCheckBox *ValidateDataCheck;
+    QGridLayout *gridLayout_4;
     QProgressBar *progressBar;
-    QHBoxLayout *horizontalLayout_6;
-    QPushButton *AboutBtn;
-    QLabel *infoLabel;
+    QGroupBox *groupBox_4;
+    QGridLayout *gridLayout_9;
     QVBoxLayout *verticalLayout_2;
-    QVBoxLayout *verticalLayout;
-    QLabel *label_4;
-    QHBoxLayout *horizontalLayout;
-    QLineEdit *DirectoryEdit;
-    QPushButton *dirBrowseBtn;
     QFrame *line_11;
     QHBoxLayout *horizontalLayout_4;
     QGroupBox *groupBox_3;
@@ -67,21 +55,36 @@ public:
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_3;
     QPushButton *StartBtn;
+    QVBoxLayout *verticalLayout;
+    QLabel *label_4;
+    QHBoxLayout *horizontalLayout;
+    QLineEdit *DirectoryEdit;
+    QPushButton *dirBrowseBtn;
+    QGroupBox *groupBox_9;
+    QVBoxLayout *verticalLayout_3;
+    QHBoxLayout *horizontalLayout_5;
+    QCheckBox *multithreadCheckBox;
+    QCheckBox *reportCheckBox;
     QHBoxLayout *horizontalLayout_2;
-    QSpacerItem *horizontalSpacer_3;
-    QVBoxLayout *verticalLayout_5;
-    QLabel *label_8;
-    QTextEdit *BlockSizeEdit;
-    QFrame *line;
-    QVBoxLayout *verticalLayout_6;
-    QLabel *label_9;
-    QTextEdit *WriteRateEdit;
+    QCheckBox *ValidateDataCheck;
+    QCheckBox *directModeCheckBox;
+    QGroupBox *groupBox_5;
+    QGridLayout *gridLayout_8;
     QFrame *line_2;
-    QVBoxLayout *verticalLayout_7;
-    QLabel *label_10;
+    QGroupBox *groupBox_7;
+    QGridLayout *gridLayout_6;
+    QTextEdit *WriteRateEdit;
+    QGroupBox *groupBox_8;
+    QGridLayout *gridLayout_7;
     QTextEdit *ReadRateEdit;
-    QSpacerItem *horizontalSpacer_2;
-    QFrame *line_5;
+    QFrame *line;
+    QGroupBox *groupBox_6;
+    QGridLayout *gridLayout_5;
+    QTextEdit *BlockSizeEdit;
+    QHBoxLayout *horizontalLayout_6;
+    QPushButton *AboutBtn;
+    QLabel *infoLabel;
+    QFrame *line_3;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -99,99 +102,21 @@ public:
         actionWebsite->setObjectName("actionWebsite");
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
-        gridLayout_2 = new QGridLayout(centralwidget);
-        gridLayout_2->setObjectName("gridLayout_2");
-        horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setObjectName("horizontalLayout_5");
-        multithreadCheckBox = new QCheckBox(centralwidget);
-        multithreadCheckBox->setObjectName("multithreadCheckBox");
-        multithreadCheckBox->setChecked(true);
-
-        horizontalLayout_5->addWidget(multithreadCheckBox);
-
-        reportCheckBox = new QCheckBox(centralwidget);
-        reportCheckBox->setObjectName("reportCheckBox");
-        reportCheckBox->setEnabled(true);
-        reportCheckBox->setChecked(true);
-
-        horizontalLayout_5->addWidget(reportCheckBox);
-
-        directModeCheckBox = new QCheckBox(centralwidget);
-        directModeCheckBox->setObjectName("directModeCheckBox");
-        directModeCheckBox->setChecked(true);
-
-        horizontalLayout_5->addWidget(directModeCheckBox);
-
-        ValidateDataCheck = new QCheckBox(centralwidget);
-        ValidateDataCheck->setObjectName("ValidateDataCheck");
-        ValidateDataCheck->setEnabled(false);
-
-        horizontalLayout_5->addWidget(ValidateDataCheck);
-
-
-        gridLayout_2->addLayout(horizontalLayout_5, 2, 0, 1, 1);
-
+        gridLayout_4 = new QGridLayout(centralwidget);
+        gridLayout_4->setObjectName("gridLayout_4");
         progressBar = new QProgressBar(centralwidget);
         progressBar->setObjectName("progressBar");
         progressBar->setValue(0);
 
-        gridLayout_2->addWidget(progressBar, 4, 0, 1, 1);
+        gridLayout_4->addWidget(progressBar, 3, 0, 1, 1);
 
-        horizontalLayout_6 = new QHBoxLayout();
-        horizontalLayout_6->setObjectName("horizontalLayout_6");
-        AboutBtn = new QPushButton(centralwidget);
-        AboutBtn->setObjectName("AboutBtn");
-        AboutBtn->setMaximumSize(QSize(100, 16777215));
-
-        horizontalLayout_6->addWidget(AboutBtn);
-
-        infoLabel = new QLabel(centralwidget);
-        infoLabel->setObjectName("infoLabel");
-        infoLabel->setLayoutDirection(Qt::RightToLeft);
-        infoLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
-
-        horizontalLayout_6->addWidget(infoLabel);
-
-
-        gridLayout_2->addLayout(horizontalLayout_6, 5, 0, 1, 1);
-
+        groupBox_4 = new QGroupBox(centralwidget);
+        groupBox_4->setObjectName("groupBox_4");
+        gridLayout_9 = new QGridLayout(groupBox_4);
+        gridLayout_9->setObjectName("gridLayout_9");
         verticalLayout_2 = new QVBoxLayout();
         verticalLayout_2->setObjectName("verticalLayout_2");
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName("verticalLayout");
-        label_4 = new QLabel(centralwidget);
-        label_4->setObjectName("label_4");
-
-        verticalLayout->addWidget(label_4);
-
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName("horizontalLayout");
-        DirectoryEdit = new QLineEdit(centralwidget);
-        DirectoryEdit->setObjectName("DirectoryEdit");
-        DirectoryEdit->setMaximumSize(QSize(16777215, 16777215));
-        DirectoryEdit->setReadOnly(false);
-
-        horizontalLayout->addWidget(DirectoryEdit);
-
-        dirBrowseBtn = new QPushButton(centralwidget);
-        dirBrowseBtn->setObjectName("dirBrowseBtn");
-        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
-        sizePolicy1.setHorizontalStretch(20);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(dirBrowseBtn->sizePolicy().hasHeightForWidth());
-        dirBrowseBtn->setSizePolicy(sizePolicy1);
-        dirBrowseBtn->setMinimumSize(QSize(50, 0));
-        dirBrowseBtn->setMaximumSize(QSize(60, 16777215));
-
-        horizontalLayout->addWidget(dirBrowseBtn);
-
-
-        verticalLayout->addLayout(horizontalLayout);
-
-
-        verticalLayout_2->addLayout(verticalLayout);
-
-        line_11 = new QFrame(centralwidget);
+        line_11 = new QFrame(groupBox_4);
         line_11->setObjectName("line_11");
         line_11->setFrameShape(QFrame::HLine);
         line_11->setFrameShadow(QFrame::Sunken);
@@ -200,7 +125,7 @@ public:
 
         horizontalLayout_4 = new QHBoxLayout();
         horizontalLayout_4->setObjectName("horizontalLayout_4");
-        groupBox_3 = new QGroupBox(centralwidget);
+        groupBox_3 = new QGroupBox(groupBox_4);
         groupBox_3->setObjectName("groupBox_3");
         groupBox_3->setMaximumSize(QSize(80, 16777215));
         gridLayout = new QGridLayout(groupBox_3);
@@ -228,7 +153,7 @@ public:
 
         horizontalLayout_4->addWidget(groupBox_3);
 
-        groupBox = new QGroupBox(centralwidget);
+        groupBox = new QGroupBox(groupBox_4);
         groupBox->setObjectName("groupBox");
         groupBox->setMaximumSize(QSize(250, 16777215));
         horizontalLayout_3 = new QHBoxLayout(groupBox);
@@ -300,7 +225,7 @@ public:
 
         horizontalLayout_4->addWidget(groupBox);
 
-        groupBox_2 = new QGroupBox(centralwidget);
+        groupBox_2 = new QGroupBox(groupBox_4);
         groupBox_2->setObjectName("groupBox_2");
         groupBox_2->setMinimumSize(QSize(0, 0));
         gridLayout_3 = new QGridLayout(groupBox_2);
@@ -321,114 +246,197 @@ public:
         verticalLayout_2->addLayout(horizontalLayout_4);
 
 
-        gridLayout_2->addLayout(verticalLayout_2, 0, 0, 1, 1);
+        gridLayout_9->addLayout(verticalLayout_2, 1, 0, 1, 1);
+
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName("verticalLayout");
+        label_4 = new QLabel(groupBox_4);
+        label_4->setObjectName("label_4");
+
+        verticalLayout->addWidget(label_4);
+
+        horizontalLayout = new QHBoxLayout();
+        horizontalLayout->setObjectName("horizontalLayout");
+        DirectoryEdit = new QLineEdit(groupBox_4);
+        DirectoryEdit->setObjectName("DirectoryEdit");
+        DirectoryEdit->setMaximumSize(QSize(16777215, 16777215));
+        DirectoryEdit->setReadOnly(false);
+
+        horizontalLayout->addWidget(DirectoryEdit);
+
+        dirBrowseBtn = new QPushButton(groupBox_4);
+        dirBrowseBtn->setObjectName("dirBrowseBtn");
+        QSizePolicy sizePolicy1(QSizePolicy::Minimum, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(20);
+        sizePolicy1.setVerticalStretch(0);
+        sizePolicy1.setHeightForWidth(dirBrowseBtn->sizePolicy().hasHeightForWidth());
+        dirBrowseBtn->setSizePolicy(sizePolicy1);
+        dirBrowseBtn->setMinimumSize(QSize(50, 0));
+        dirBrowseBtn->setMaximumSize(QSize(60, 16777215));
+
+        horizontalLayout->addWidget(dirBrowseBtn);
+
+
+        verticalLayout->addLayout(horizontalLayout);
+
+
+        gridLayout_9->addLayout(verticalLayout, 0, 0, 1, 1);
+
+        groupBox_9 = new QGroupBox(groupBox_4);
+        groupBox_9->setObjectName("groupBox_9");
+        verticalLayout_3 = new QVBoxLayout(groupBox_9);
+        verticalLayout_3->setSpacing(3);
+        verticalLayout_3->setObjectName("verticalLayout_3");
+        verticalLayout_3->setContentsMargins(3, 3, 3, 3);
+        horizontalLayout_5 = new QHBoxLayout();
+        horizontalLayout_5->setObjectName("horizontalLayout_5");
+        multithreadCheckBox = new QCheckBox(groupBox_9);
+        multithreadCheckBox->setObjectName("multithreadCheckBox");
+        multithreadCheckBox->setChecked(true);
+
+        horizontalLayout_5->addWidget(multithreadCheckBox);
+
+        reportCheckBox = new QCheckBox(groupBox_9);
+        reportCheckBox->setObjectName("reportCheckBox");
+        reportCheckBox->setEnabled(true);
+        reportCheckBox->setChecked(true);
+
+        horizontalLayout_5->addWidget(reportCheckBox);
+
+
+        verticalLayout_3->addLayout(horizontalLayout_5);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName("horizontalLayout_2");
-        horizontalSpacer_3 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        ValidateDataCheck = new QCheckBox(groupBox_9);
+        ValidateDataCheck->setObjectName("ValidateDataCheck");
+        ValidateDataCheck->setEnabled(false);
 
-        horizontalLayout_2->addItem(horizontalSpacer_3);
+        horizontalLayout_2->addWidget(ValidateDataCheck);
 
-        verticalLayout_5 = new QVBoxLayout();
-        verticalLayout_5->setObjectName("verticalLayout_5");
-        label_8 = new QLabel(centralwidget);
-        label_8->setObjectName("label_8");
-        QFont font;
-        font.setPointSize(10);
-        font.setBold(true);
-        font.setItalic(false);
-        label_8->setFont(font);
-        label_8->setAlignment(Qt::AlignCenter);
+        directModeCheckBox = new QCheckBox(groupBox_9);
+        directModeCheckBox->setObjectName("directModeCheckBox");
+        directModeCheckBox->setChecked(true);
 
-        verticalLayout_5->addWidget(label_8);
-
-        BlockSizeEdit = new QTextEdit(centralwidget);
-        BlockSizeEdit->setObjectName("BlockSizeEdit");
-        BlockSizeEdit->setMaximumSize(QSize(100, 16777215));
-        BlockSizeEdit->setMouseTracking(false);
-        BlockSizeEdit->setUndoRedoEnabled(false);
-        BlockSizeEdit->setReadOnly(true);
-        BlockSizeEdit->setAcceptRichText(false);
-        BlockSizeEdit->setTextInteractionFlags(Qt::TextSelectableByMouse);
-
-        verticalLayout_5->addWidget(BlockSizeEdit);
+        horizontalLayout_2->addWidget(directModeCheckBox);
 
 
-        horizontalLayout_2->addLayout(verticalLayout_5);
+        verticalLayout_3->addLayout(horizontalLayout_2);
 
-        line = new QFrame(centralwidget);
-        line->setObjectName("line");
-        line->setFrameShape(QFrame::VLine);
-        line->setFrameShadow(QFrame::Sunken);
 
-        horizontalLayout_2->addWidget(line);
+        gridLayout_9->addWidget(groupBox_9, 2, 0, 1, 1);
 
-        verticalLayout_6 = new QVBoxLayout();
-        verticalLayout_6->setObjectName("verticalLayout_6");
-        label_9 = new QLabel(centralwidget);
-        label_9->setObjectName("label_9");
-        label_9->setFont(font);
-        label_9->setAlignment(Qt::AlignCenter);
 
-        verticalLayout_6->addWidget(label_9);
+        gridLayout_4->addWidget(groupBox_4, 0, 0, 1, 1);
 
-        WriteRateEdit = new QTextEdit(centralwidget);
+        groupBox_5 = new QGroupBox(centralwidget);
+        groupBox_5->setObjectName("groupBox_5");
+        gridLayout_8 = new QGridLayout(groupBox_5);
+        gridLayout_8->setSpacing(5);
+        gridLayout_8->setObjectName("gridLayout_8");
+        gridLayout_8->setContentsMargins(5, 5, 5, 5);
+        line_2 = new QFrame(groupBox_5);
+        line_2->setObjectName("line_2");
+        line_2->setFrameShape(QFrame::VLine);
+        line_2->setFrameShadow(QFrame::Sunken);
+
+        gridLayout_8->addWidget(line_2, 0, 3, 1, 1);
+
+        groupBox_7 = new QGroupBox(groupBox_5);
+        groupBox_7->setObjectName("groupBox_7");
+        gridLayout_6 = new QGridLayout(groupBox_7);
+        gridLayout_6->setSpacing(3);
+        gridLayout_6->setObjectName("gridLayout_6");
+        gridLayout_6->setContentsMargins(3, 3, 3, 3);
+        WriteRateEdit = new QTextEdit(groupBox_7);
         WriteRateEdit->setObjectName("WriteRateEdit");
-        WriteRateEdit->setMaximumSize(QSize(150, 16777215));
+        WriteRateEdit->setMaximumSize(QSize(16777215, 16777215));
         WriteRateEdit->setMouseTracking(false);
         WriteRateEdit->setUndoRedoEnabled(false);
         WriteRateEdit->setReadOnly(true);
         WriteRateEdit->setAcceptRichText(false);
         WriteRateEdit->setTextInteractionFlags(Qt::TextSelectableByMouse);
 
-        verticalLayout_6->addWidget(WriteRateEdit);
+        gridLayout_6->addWidget(WriteRateEdit, 0, 0, 1, 1);
 
 
-        horizontalLayout_2->addLayout(verticalLayout_6);
+        gridLayout_8->addWidget(groupBox_7, 0, 2, 1, 1);
 
-        line_2 = new QFrame(centralwidget);
-        line_2->setObjectName("line_2");
-        line_2->setFrameShape(QFrame::VLine);
-        line_2->setFrameShadow(QFrame::Sunken);
-
-        horizontalLayout_2->addWidget(line_2);
-
-        verticalLayout_7 = new QVBoxLayout();
-        verticalLayout_7->setObjectName("verticalLayout_7");
-        label_10 = new QLabel(centralwidget);
-        label_10->setObjectName("label_10");
-        label_10->setFont(font);
-        label_10->setAlignment(Qt::AlignCenter);
-
-        verticalLayout_7->addWidget(label_10);
-
-        ReadRateEdit = new QTextEdit(centralwidget);
+        groupBox_8 = new QGroupBox(groupBox_5);
+        groupBox_8->setObjectName("groupBox_8");
+        gridLayout_7 = new QGridLayout(groupBox_8);
+        gridLayout_7->setSpacing(3);
+        gridLayout_7->setObjectName("gridLayout_7");
+        gridLayout_7->setContentsMargins(3, 3, 3, 3);
+        ReadRateEdit = new QTextEdit(groupBox_8);
         ReadRateEdit->setObjectName("ReadRateEdit");
-        ReadRateEdit->setMaximumSize(QSize(150, 16777215));
+        ReadRateEdit->setMaximumSize(QSize(16777215, 16777215));
         ReadRateEdit->setMouseTracking(false);
         ReadRateEdit->setUndoRedoEnabled(false);
         ReadRateEdit->setReadOnly(true);
         ReadRateEdit->setAcceptRichText(false);
         ReadRateEdit->setTextInteractionFlags(Qt::TextSelectableByMouse);
 
-        verticalLayout_7->addWidget(ReadRateEdit);
+        gridLayout_7->addWidget(ReadRateEdit, 0, 0, 1, 1);
 
 
-        horizontalLayout_2->addLayout(verticalLayout_7);
+        gridLayout_8->addWidget(groupBox_8, 0, 4, 1, 1);
 
-        horizontalSpacer_2 = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        line = new QFrame(groupBox_5);
+        line->setObjectName("line");
+        line->setFrameShape(QFrame::VLine);
+        line->setFrameShadow(QFrame::Sunken);
 
-        horizontalLayout_2->addItem(horizontalSpacer_2);
+        gridLayout_8->addWidget(line, 0, 1, 1, 1);
+
+        groupBox_6 = new QGroupBox(groupBox_5);
+        groupBox_6->setObjectName("groupBox_6");
+        groupBox_6->setMaximumSize(QSize(100, 16777215));
+        gridLayout_5 = new QGridLayout(groupBox_6);
+        gridLayout_5->setSpacing(3);
+        gridLayout_5->setObjectName("gridLayout_5");
+        gridLayout_5->setContentsMargins(3, 3, 3, 3);
+        BlockSizeEdit = new QTextEdit(groupBox_6);
+        BlockSizeEdit->setObjectName("BlockSizeEdit");
+        BlockSizeEdit->setMaximumSize(QSize(16777215, 16777215));
+        BlockSizeEdit->setMouseTracking(false);
+        BlockSizeEdit->setUndoRedoEnabled(false);
+        BlockSizeEdit->setReadOnly(true);
+        BlockSizeEdit->setAcceptRichText(false);
+        BlockSizeEdit->setTextInteractionFlags(Qt::TextSelectableByMouse);
+
+        gridLayout_5->addWidget(BlockSizeEdit, 0, 0, 1, 1);
 
 
-        gridLayout_2->addLayout(horizontalLayout_2, 3, 0, 1, 1);
+        gridLayout_8->addWidget(groupBox_6, 0, 0, 1, 1);
 
-        line_5 = new QFrame(centralwidget);
-        line_5->setObjectName("line_5");
-        line_5->setFrameShape(QFrame::HLine);
-        line_5->setFrameShadow(QFrame::Sunken);
 
-        gridLayout_2->addWidget(line_5, 1, 0, 1, 1);
+        gridLayout_4->addWidget(groupBox_5, 2, 0, 1, 1);
+
+        horizontalLayout_6 = new QHBoxLayout();
+        horizontalLayout_6->setObjectName("horizontalLayout_6");
+        AboutBtn = new QPushButton(centralwidget);
+        AboutBtn->setObjectName("AboutBtn");
+        AboutBtn->setMaximumSize(QSize(100, 16777215));
+
+        horizontalLayout_6->addWidget(AboutBtn);
+
+        infoLabel = new QLabel(centralwidget);
+        infoLabel->setObjectName("infoLabel");
+        infoLabel->setLayoutDirection(Qt::RightToLeft);
+        infoLabel->setAlignment(Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter);
+
+        horizontalLayout_6->addWidget(infoLabel);
+
+
+        gridLayout_4->addLayout(horizontalLayout_6, 4, 0, 1, 1);
+
+        line_3 = new QFrame(centralwidget);
+        line_3->setObjectName("line_3");
+        line_3->setFrameShape(QFrame::HLine);
+        line_3->setFrameShadow(QFrame::Sunken);
+
+        gridLayout_4->addWidget(line_3, 1, 0, 1, 1);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
@@ -442,7 +450,8 @@ public:
         retranslateUi(MainWindow);
 
         FileSizeCombo->setCurrentIndex(5);
-        BlockSizeEndCombo->setCurrentIndex(19);
+        BlockSizeStartCombo->setCurrentIndex(9);
+        BlockSizeEndCombo->setCurrentIndex(15);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -452,16 +461,8 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "DiskRateCheck - Integrated Software Technologies Inc.", nullptr));
         actionWebsite->setText(QCoreApplication::translate("MainWindow", "Website", nullptr));
-        multithreadCheckBox->setText(QCoreApplication::translate("MainWindow", "Multi-Threading", nullptr));
-        reportCheckBox->setText(QCoreApplication::translate("MainWindow", "Generate Report", nullptr));
-        directModeCheckBox->setText(QCoreApplication::translate("MainWindow", "Direct Disk Access (no cache)", nullptr));
-        ValidateDataCheck->setText(QCoreApplication::translate("MainWindow", "Validate Data (soon)", nullptr));
         progressBar->setFormat(QCoreApplication::translate("MainWindow", "Benchmarking In Progress %p%", nullptr));
-        AboutBtn->setText(QCoreApplication::translate("MainWindow", "About", nullptr));
-        infoLabel->setText(QString());
-        label_4->setText(QCoreApplication::translate("MainWindow", "Directory", nullptr));
-        DirectoryEdit->setText(QCoreApplication::translate("MainWindow", "/home/matt/Personal", nullptr));
-        dirBrowseBtn->setText(QCoreApplication::translate("MainWindow", "Browse", nullptr));
+        groupBox_4->setTitle(QString());
         groupBox_3->setTitle(QCoreApplication::translate("MainWindow", "File Size", nullptr));
         FileSizeCombo->setItemText(0, QCoreApplication::translate("MainWindow", "32MB", nullptr));
         FileSizeCombo->setItemText(1, QCoreApplication::translate("MainWindow", "64MB", nullptr));
@@ -522,9 +523,20 @@ public:
 
         groupBox_2->setTitle(QCoreApplication::translate("MainWindow", "I/O", nullptr));
         StartBtn->setText(QCoreApplication::translate("MainWindow", "Start", nullptr));
-        label_8->setText(QCoreApplication::translate("MainWindow", "Block Size", nullptr));
-        label_9->setText(QCoreApplication::translate("MainWindow", "Write Rate", nullptr));
-        label_10->setText(QCoreApplication::translate("MainWindow", "Read Rate", nullptr));
+        label_4->setText(QCoreApplication::translate("MainWindow", "Directory", nullptr));
+        DirectoryEdit->setText(QCoreApplication::translate("MainWindow", "/home/matt/Personal", nullptr));
+        dirBrowseBtn->setText(QCoreApplication::translate("MainWindow", "Browse", nullptr));
+        groupBox_9->setTitle(QCoreApplication::translate("MainWindow", "Checks", nullptr));
+        multithreadCheckBox->setText(QCoreApplication::translate("MainWindow", "Multi-Threading", nullptr));
+        reportCheckBox->setText(QCoreApplication::translate("MainWindow", "Generate Report", nullptr));
+        ValidateDataCheck->setText(QCoreApplication::translate("MainWindow", "Validate Data (soon)", nullptr));
+        directModeCheckBox->setText(QCoreApplication::translate("MainWindow", "Direct Disk Access (no cache)", nullptr));
+        groupBox_5->setTitle(QString());
+        groupBox_7->setTitle(QCoreApplication::translate("MainWindow", "Write Rate", nullptr));
+        groupBox_8->setTitle(QCoreApplication::translate("MainWindow", "Read Rate", nullptr));
+        groupBox_6->setTitle(QCoreApplication::translate("MainWindow", "Block Size", nullptr));
+        AboutBtn->setText(QCoreApplication::translate("MainWindow", "About", nullptr));
+        infoLabel->setText(QString());
     } // retranslateUi
 
 };

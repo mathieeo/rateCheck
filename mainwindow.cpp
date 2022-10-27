@@ -41,7 +41,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     /// set a fixed main window side.
-    this->setFixedSize(620,800);
+    this->setFixedSize(520,700);
 
     /// set a window title.
     this->setWindowTitle("DiskRateCheck " + QString(APP_VERSION) + " [BETA]");
@@ -61,6 +61,8 @@ MainWindow::MainWindow(QWidget *parent)
 #endif
 
     ui->progressBar->hide();
+
+    updateBlockSizeList();
 }
 
 ///
@@ -71,6 +73,26 @@ MainWindow::~MainWindow()
 {
     delete manager;
     delete ui;
+}
+
+
+///
+/// MainWindow::updateBlockSizeList.
+///
+/// update the GUI control to show the I/O block sizes for the test
+///
+
+void MainWindow::updateBlockSizeList()
+{
+    ui->BlockSizeEdit->clear();
+
+    int start_index = ui->BlockSizeStartCombo->currentIndex();
+    int end_index = ui->BlockSizeEndCombo->currentIndex();
+
+    /// loop throght the I/O blocks and perform benchmarking
+    for (int idx =start_index;idx <=end_index;++idx) {
+        appendToBlockSize(manager->IoSizeTagsVec[idx]);
+    }
 }
 
 ///
@@ -261,7 +283,7 @@ void MainWindow::on_StartBtn_clicked()
         /// show the progress bar
         ui->progressBar->show();
         /// clear vectors
-        ui->BlockSizeEdit->clear();
+        //ui->BlockSizeEdit->clear();
         ui->ReadRateEdit->clear();
         ui->WriteRateEdit->clear();
 
@@ -337,5 +359,26 @@ void MainWindow::on_StartBtn_clicked()
 void MainWindow::on_AboutBtn_clicked()
 {
     goToWebsite();
+}
+
+///
+/// MainWindow::on_BlockSizeStartCombo_currentIndexChanged().
+///
+/// user did change the I/O block size index
+///
+
+void MainWindow::on_BlockSizeStartCombo_currentIndexChanged(int /*index*/)
+{
+    updateBlockSizeList();
+}
+
+///
+/// MainWindow::on_BlockSizeEndCombo_currentIndexChanged().
+///
+/// user did change the I/O block size index
+///
+void MainWindow::on_BlockSizeEndCombo_currentIndexChanged(int /*index*/)
+{
+    updateBlockSizeList();
 }
 

@@ -228,8 +228,8 @@ int appManager::startBenchmarking(bool directMode, bool report)
         size_t idx_t = static_cast<size_t>(idx);
         CurrentBlockSize = static_cast<unsigned long>(blockSizeVec[idx_t]);
 
-        /// append the current block size to the GUI control
-        gui_interface->appendToBlockSize(IoSizeTagsVec[idx_t]);
+        // append the current block size to the GUI control
+        //gui_interface->appendToBlockSize(IoSizeTagsVec[idx_t]);
         /// store the current block size to the vectors
         measuredBlockSizeVec.push_back(IoSizeTagsVec[idx_t]);
 

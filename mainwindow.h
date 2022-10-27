@@ -30,6 +30,10 @@ private slots:
     /// go to the website
     void on_AboutBtn_clicked();
 
+    void on_BlockSizeStartCombo_currentIndexChanged(int index);
+
+    void on_BlockSizeEndCombo_currentIndexChanged(int index);
+
 public:
 
     /// friend class to implement the GUI abstract class defined in appManager.h
@@ -41,6 +45,8 @@ public:
 
     /// push the directory browse view
     bool SelectFileDialog(std::string & file, const std::string & filter);
+    /// update the GUI control to show the I/O block sizes for the test
+    void updateBlockSizeList();
 
     /// get the start I/O block size index from the GUI combobox
     unsigned int blockSizeStartIndex();
@@ -71,10 +77,8 @@ public:
     GUI_Interface_Impl * UI;
     /// appManager object
     appManager *manager;
-
     /// Ui Mainwindow object
-    Ui::MainWindow *ui;
-
+    Ui::MainWindow *ui;  
 };
 
 ///
