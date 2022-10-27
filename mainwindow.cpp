@@ -29,6 +29,25 @@ typedef uint64_t int64;
 #endif
 
 ///
+/// Define the filesystem access method
+///
+#ifndef __has_include
+  static_assert(false, "__has_include not supported");
+#else
+#  if __cplusplus >= 201703L && __has_include(<filesystem>)
+#    include <filesystem>
+     namespace fs = std::filesystem;
+#  elif __has_include(<experimental/filesystem>)
+#    include <experimental/filesystem>
+     namespace fs = std::experimental::filesystem;
+#  elif __has_include(<boost/filesystem.hpp>)
+#    include <boost/filesystem.hpp>
+     namespace fs = boost::filesystem;
+#  endif
+#endif
+
+
+///
 /// MainWindow::MainWindow.
 ///
 
@@ -276,12 +295,10 @@ void MainWindow::on_StartBtn_clicked()
 {
 
     try{
-        //todo fixme
-#ifndef MAC_OS
         /// smake sure we have a valiade directory
-        if( std::filesystem::exists(ui->DirectoryEdit->text().toStdString().c_str()) == false )
+        if( fs::filesystem::exists(ui->DirectoryEdit->text().toStdString().c_str()) == false )
             throw std::string( "cannot access " + ui->DirectoryEdit->text().toStdString());
-#endif
+
         /// show the progress bar
         ui->progressBar->show();
         /// clear vectors
