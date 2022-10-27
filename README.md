@@ -1,18 +1,25 @@
-# Rate Check
-## Free Disk benchmarking application for Windows, Ubuntu, MacOS.
+# [<img alt="" width="30x" src="https://static.wixstatic.com/media/b3d4ff_6d86c4d4b77245d8894a815b759ed7fd~mv2.png/v1/fill/w_132,h_119,al_c,usm_0.66_1.00_0.01,enc_auto/logo.png" />](https://integratedsw.tech) rateCheck by [Integrated Software Technologies Inc.](https://integratedsw.tech)
+
+
+<!-- ABOUT THE PROJECT -->
+## About The Project
+## Rate Check is a free disk benchmarking application for Windows, Ubuntu, MacOS. Applcaiton written in C++ that performs benchmarking on host machine disks and partitions.
 
 [<img src="//upload.wikimedia.org/wikipedia/commons/thumb/a/ae/TheQtCompany_Logo.png/200px-TheQtCompany_Logo.png" />](https://www.qt.io/)
 
-Dillinger is a free applcaiton written in C++ that performs benchmarking on host machine disks and partitions.
-
 ## Features
-
 - Benchmarking with different file sizes.
 - Support for direct disk access mode and cached access mode.
 - Range of different block size for read and write operations.
 - Verifying data.
 - Multi-threading support.
 - Report generating
+
+# Supported Operating-Systems
+* **Microsoft Windows v10 64-bit and up**
+* **MacOS Monterey v12.2.1 and up**
+* **Ubuntu 20.04 and up**
+* **RedHat 8.5**
 
 ## Installation
 
