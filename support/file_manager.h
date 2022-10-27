@@ -26,6 +26,7 @@ class IFileManagerImpl;
 
 ///
 ///  CLASS FileManager.
+///
 ///  Disk file access support class
 ///
 
@@ -72,9 +73,9 @@ private:
 
 
 
-//=============================================================================
-//  CLASS IFileManager  --
-//=============================================================================
+///
+///  CLASS IFileManagerImpl
+///
 
 class IFileManagerImpl
 {
@@ -103,9 +104,9 @@ public:
 };
 
 
-//=============================================================================
-//  CLASS StdFileManager  --
-//=============================================================================
+///
+///  CLASS StdFileManager
+///
 
 
 class StdFileManager : public IFileManagerImpl
@@ -149,9 +150,10 @@ protected:
 
 
 #ifndef LINUX
-//=============================================================================
-//  CLASS FileAPIFileManager  --
-//=============================================================================
+
+///
+///  CLASS FileAPIFileManager
+///
 
 
 class FileAPIFileManager : public IFileManagerImpl
@@ -196,6 +198,9 @@ protected:
 };
 #else
 
+///
+///  CLASS FileAPIFileManager
+///
 class FileAPIFileManager : public IFileManagerImpl
 {
 public:

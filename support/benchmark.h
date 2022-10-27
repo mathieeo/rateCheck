@@ -15,6 +15,7 @@ typedef uint64_t int64;
 
 ///
 ///  CLASS AveragedRate.
+///
 ///  Simple low-pass filtered rate data
 ///
 

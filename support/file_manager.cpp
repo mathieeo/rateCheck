@@ -15,12 +15,14 @@ namespace rateCheckApp
 
 ///
 /// CLASS StdFileManager.
+///
 /// Use the standard file access which supports the standard file caching method
 ///
 
 
 ///
 /// StdFileManager::StdFileManager().
+///
 /// Ctor
 ///
 
@@ -34,6 +36,7 @@ StdFileManager::StdFileManager()
 /// StdFileManager::FileManagerImpl().
 ///
 ///
+///
 
 StdFileManager::StdFileManager(const StdFileManager & other)
     : Handle(nullptr),
@@ -45,6 +48,7 @@ StdFileManager::StdFileManager(const StdFileManager & other)
 
 ///
 /// StdFileManager::operator =
+///
 /// Assignment operator
 ///
 
@@ -65,6 +69,7 @@ StdFileManager & StdFileManager::operator = (const StdFileManager & other)
 
 ///
 /// StdFileManager::~StdFileManager.
+///
 /// Set file buffer mode state
 ///
 
@@ -76,6 +81,7 @@ StdFileManager::~StdFileManager()
 
 ///
 /// StdFileManager::GetSize().
+///
 /// Get current file size
 ///
 
@@ -89,6 +95,7 @@ void StdFileManager::GetSize()
 
 ///
 /// StdFileManager::Open().
+///
 /// Open file for reading
 ///
 
@@ -111,6 +118,7 @@ bool StdFileManager::Open()
 
 ///
 /// StdFileManager::Create().
+///
 /// Create file for writing
 ///
 
@@ -133,6 +141,7 @@ bool StdFileManager::Create()
 
 ///
 /// StdFileManager::Append().
+///
 /// Open file for append
 ///
 
@@ -155,6 +164,7 @@ bool StdFileManager::Append()
 
 ///
 /// StdFileManager::Close().
+///
 ///
 
 bool StdFileManager::Close()
@@ -206,6 +216,7 @@ int StdFileManager::Write(const char * buffer, unsigned int size)
 
 ///
 /// StdFileManager::FileName().
+///
 /// Set file name
 ///
 
@@ -216,6 +227,7 @@ void StdFileManager::FileName(const std::string & name)
 
 ///
 /// StdFileManager::FileName().
+///
 /// Get file name
 ///
 
@@ -250,6 +262,7 @@ int64 StdFileManager::Position() const
 
 ///
 /// StdFileManager::Size().
+///
 /// Set file size
 ///
 
@@ -263,6 +276,7 @@ void StdFileManager::Size(int64 size)
 
 ///
 /// StdFileManager::Size().
+///
 /// Get file size
 ///
 
@@ -276,11 +290,13 @@ int64 StdFileManager::Size() const
 
 ///
 /// CLASS FileAPIFileManager.
+///
 /// Direct file access class manager
 ///
 
 ///
 /// FileAPIFileManager::FileAPIFileManager().
+///
 /// Ctor
 ///
 
@@ -304,6 +320,7 @@ FileAPIFileManager::FileAPIFileManager(const FileAPIFileManager & other)
 
 ///
 /// FileAPIFileManager::operator =.
+///
 /// Assignment operator
 ///
 
@@ -325,6 +342,7 @@ FileAPIFileManager & FileAPIFileManager::operator = (const FileAPIFileManager & 
 
 ///
 /// FileAPIFileManager::~FileAPIFileManager().
+///
 /// Set file buffer mode state
 ///
 
@@ -336,6 +354,7 @@ FileAPIFileManager::~FileAPIFileManager()
 
 ///
 /// FileAPIFileManager::GetSize().
+///
 /// Get current file size
 ///
 
@@ -356,6 +375,7 @@ void FileAPIFileManager::GetSize()
 
 ///
 /// FileAPIFileManager::Open().
+///
 /// Open file for reading
 ///
 
@@ -376,6 +396,7 @@ bool FileAPIFileManager::Open()
 
 ///
 /// FileAPIFileManager::Create().
+///
 /// Create file for writing
 ///
 
@@ -396,6 +417,7 @@ bool FileAPIFileManager::Create()
 
 ///
 /// FileAPIFileManager::Append().
+///
 /// Open file for append
 ///
 
@@ -420,6 +442,7 @@ bool FileAPIFileManager::Append()
 ///
 /// FileAPIFileManager::Close.
 ///
+///
 
 bool FileAPIFileManager::Close()
 {
@@ -440,6 +463,7 @@ bool FileAPIFileManager::Close()
 
 ///
 /// StdFileManager::FileAPIFileManager().
+///
 ///
 
 int FileAPIFileManager::Read(char * buffer, unsigned int size)
@@ -468,6 +492,7 @@ int FileAPIFileManager::Write(const char * buffer, unsigned int size)
 
 ///
 /// FileAPIFileManager::FileName().
+///
 /// Set file name
 ///
 
@@ -478,6 +503,7 @@ void FileAPIFileManager::FileName(const std::string & name)
 
 ///
 /// FileAPIFileManager::FileName().
+///
 /// Get file name
 ///
 
@@ -519,6 +545,7 @@ int64 FileAPIFileManager::Position() const
 
 ///
 /// FileAPIFileManager::Size().
+///
 /// Set file size
 ///
 
@@ -546,6 +573,7 @@ int64 FileAPIFileManager::Size() const
 
 ///
 /// FileAPIFileManager::FileAPIFileManager().
+///
 /// Ctor
 ///
 
@@ -568,7 +596,8 @@ FileAPIFileManager::FileAPIFileManager(const FileAPIFileManager & other)
 }
 
 ///
-/// FileAPIFileManager::operator =.
+/// FileAPIFileManager::operator =
+///
 /// Assignment operator
 ///
 
@@ -590,6 +619,7 @@ FileAPIFileManager & FileAPIFileManager::operator = (const FileAPIFileManager & 
 
 ///
 /// FileAPIFileManager::~FileAPIFileManager().
+///
 /// Set file buffer mode state
 ///
 
@@ -601,6 +631,7 @@ FileAPIFileManager::~FileAPIFileManager()
 
 ///
 /// FileAPIFileManager::GetSize().
+///
 /// Get current file size
 ///
 
@@ -623,7 +654,9 @@ void FileAPIFileManager::GetSize()
     #define O_LARGEFILE 0x0 ///no such thing in MacOS
 #endif
 ///
-/// FileAPIFileManager::Open() --  Open file for reading
+/// FileAPIFileManager::Open().
+///
+/// Open file for reading
 ///
 
 bool FileAPIFileManager::Open()
@@ -650,6 +683,7 @@ bool FileAPIFileManager::Open()
 
 ///
 /// FileAPIFileManager::Opened().
+///
 /// Is the file open?
 ///
 ///
@@ -660,6 +694,7 @@ bool FileAPIFileManager::Opened() const
 
 ///
 /// FileAPIFileManager::Create().
+///
 /// Create file for writing
 ///
 
@@ -679,6 +714,7 @@ bool FileAPIFileManager::Create()
 
 ///
 /// FileAPIFileManager::Append().
+///
 /// Open file for append
 ///
 
@@ -761,6 +797,7 @@ int FileAPIFileManager::Write(const char * buffer, unsigned int size)
 
 ///
 /// FileAPIFileManager::FileName().
+///
 /// Set file name
 ///
 
@@ -771,6 +808,7 @@ void FileAPIFileManager::FileName(const std::string & name)
 
 ///
 /// FileAPIFileManager::FileName().
+///
 /// Get file name
 ///
 
@@ -781,6 +819,7 @@ std::string FileAPIFileManager::FileName() const
 
 ///
 /// FileAPIFileManager::Position().
+///
 ///
 
 bool FileAPIFileManager::Position(int64 offset)
@@ -805,6 +844,7 @@ int64 FileAPIFileManager::Position() const
 
 ///
 /// FileAPIFileManager::Size().
+///
 /// Set file size
 ///
 
@@ -818,6 +858,7 @@ void FileAPIFileManager::Size(int64 size)
 
 ///
 /// FileAPIFileManager::Size().
+///
 /// Get file size
 ///
 
@@ -829,11 +870,13 @@ int64 FileAPIFileManager::Size() const
 
 ///
 /// CLASS  FileManager.
+///
 /// Large disk file access support class
 ///
 
 ///
 /// FileManager::FileManager().
+///
 /// Ctor
 ///
 
@@ -848,6 +891,7 @@ FileManager::FileManager(bool useStdioFile) : _useStdioFile(useStdioFile)
 
 ///
 /// FileManager::FileManager().
+///
 /// Ctor
 ///
 
@@ -864,6 +908,7 @@ FileManager::FileManager(const std::string & filename,bool useStdioFile) :
 
 ///
 /// FileManager::FileManager().
+///
 /// Copy ctor
 ///
 
@@ -880,6 +925,7 @@ FileManager::FileManager(const FileManager & other) :
 
 ///
 /// FileManager::FileManager().
+///
 /// Dtor
 ///
 
@@ -890,7 +936,8 @@ FileManager::~FileManager()
 }
 
 ///
-/// FileManager::operator =.
+/// FileManager::operator =
+///
 ///
 
 FileManager & FileManager::operator = (const FileManager & other)
@@ -905,6 +952,7 @@ FileManager & FileManager::operator = (const FileManager & other)
 
 ///
 /// FileManager::Open().
+///
 /// Open file for reading
 ///
 
@@ -915,6 +963,7 @@ bool FileManager::Open()
 
 ///
 /// FileManager::Create().
+///
 /// Create file for writing
 ///
 
@@ -925,6 +974,7 @@ bool FileManager::Create()
 
 ///
 /// FileManager::Append().
+///
 /// Open file for append
 ///
 
@@ -989,6 +1039,7 @@ int64 FileManager::Position() const
 
 ///
 /// FileManager::FileName().
+///
 /// Set file name
 ///
 
@@ -999,6 +1050,7 @@ void FileManager::FileName(const std::string & name)
 
 ///
 /// FileManager::FileName().
+///
 /// Get file name
 ///
 
@@ -1009,6 +1061,7 @@ std::string FileManager::FileName() const
 
 ///
 /// FileManager::Size().
+///
 /// Set file size
 ///
 
@@ -1019,6 +1072,7 @@ void FileManager::Size(int64 size)
 
 ///
 /// FileManager::Size().
+///
 /// Get file size
 ///
 

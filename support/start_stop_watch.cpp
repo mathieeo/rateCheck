@@ -15,6 +15,7 @@ static const double Meg = 1.0e6;
 
 ///
 /// class StartStopWatchImpl.
+///
 /// Windows implementation.
 ///
 #ifndef LINUX
@@ -49,6 +50,7 @@ StartStopWatchImpl::StartStopWatchImpl()
 
 ///
 /// StartStopWatchImpl::Now().
+///
 /// returns a high precision time value
 ///
 
@@ -94,6 +96,7 @@ private:
 
 ///
 /// StartStopWatchImpl::Now().
+///
 /// returns a high precision time value
 ///
 
@@ -110,6 +113,7 @@ double StartStopWatchImpl::Now()
 #endif
 ///
 /// CLASS StartStopWatch.
+///
 /// Accurate StartStopWatch timer class
 ///
 ///
@@ -157,6 +161,7 @@ StartStopWatch & StartStopWatch::operator =(const StartStopWatch & other)
 
 ///
 /// StartStopWatch::Start().
+///
 /// Push a timer reading
 ///
 
@@ -167,6 +172,7 @@ void StartStopWatch::Start()
 
 ///
 /// StartStopWatch::Stop().
+///
 /// Calculate elapsed time (destructive)
 ///
 
@@ -183,6 +189,7 @@ double StartStopWatch::Stop()
 
 ///
 /// StartStopWatch::Elapsed().
+///
 /// Calculate elapsed time (non-destructive)
 ///
 
@@ -196,6 +203,7 @@ double StartStopWatch::Elapsed()
 
 ///
 /// StartStopWatch::uS().
+///
 /// Dwell for specified number of uS
 ///
 
@@ -211,6 +219,7 @@ void StartStopWatch::uS(int Delay)
 
 ///
 /// StartStopWatch::Mhz().
+///
 /// Timer clock rate
 ///
 
@@ -221,6 +230,7 @@ double StartStopWatch::Mhz() const
 
 ///
 /// StartStopWatch::Now().
+///
 /// Return current time
 ///
 

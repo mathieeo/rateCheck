@@ -1,4 +1,6 @@
-﻿#include "mainwindow.h"
+﻿/// include
+
+#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <stack>
 #include <QFileDialog>
@@ -14,6 +16,7 @@
 #include <QDesktopServices>
 #include <appVersion.h>
 #include <QMessageBox>
+#include <sys/stat.h>
 
 typedef uint64_t int64;
 
@@ -33,17 +36,22 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+
+    /// setup the UI elements
     ui->setupUi(this);
 
+    /// set a fixed main window side.
     this->setFixedSize(620,800);
 
+    /// set a window title.
     this->setWindowTitle("DiskRateCheck " + QString(APP_VERSION) + " [BETA]");
 
+    /// construct the objects
     UI = new GUI_Interface_Impl(this);
     manager = new appManager(UI);
 
+    /// update GUI controls
     ui->statusbar->showMessage("Idle");
-
     ui->infoLabel->setText(QString("| RateCheck v" + QString(APP_VERSION) + " | Integrated Software Technologies Inc. |"));
 
 #ifdef LINUX
@@ -53,7 +61,6 @@ MainWindow::MainWindow(QWidget *parent)
 #endif
 
     ui->progressBar->hide();
-
 }
 
 ///
@@ -66,6 +73,12 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+///
+/// MainWindow::goToWebsite.
+///
+/// go to the website function
+///
+
 void MainWindow::goToWebsite()
 {
     QString link = "http://www.integratedsw.tech";
@@ -75,6 +88,8 @@ void MainWindow::goToWebsite()
 ///
 /// MainWindow::blockSizeStartIndex().
 ///
+/// get the start I/O block size index from the GUI combobox
+///
 
 unsigned int MainWindow::blockSizeStartIndex()
 {
@@ -82,7 +97,9 @@ unsigned int MainWindow::blockSizeStartIndex()
 }
 
 ///
-/// MainWindow::blockSizeStartIndex().
+/// MainWindow::blockSizeEndIndex().
+///
+/// get the end IO block size index from the GUI combobox
 ///
 
 unsigned int MainWindow::blockSizeEndIndex()
@@ -91,7 +108,9 @@ unsigned int MainWindow::blockSizeEndIndex()
 }
 
 ///
-/// MainWindow::blockSizeStartIndex().
+/// MainWindow::fileSizeComboIndex().
+///
+/// get the file size index from the GUI combobox
 ///
 
 
@@ -101,7 +120,9 @@ unsigned int MainWindow::fileSizeComboIndex()
 }
 
 ///
-/// MainWindow::blockSizeStartIndex().
+/// MainWindow::isValidateChecked().
+///
+/// user want to validate the write data?
 ///
 
 
@@ -111,7 +132,9 @@ bool MainWindow::isValidateChecked()
 }
 
 ///
-/// MainWindow::blockSizeStartIndex().
+/// MainWindow::rootDirectory().
+///
+/// get the root directory
 ///
 
 
@@ -121,7 +144,10 @@ std::string MainWindow::rootDirectory()
 }
 
 ///
-/// MainWindow::blockSizeStartIndex().
+/// MainWindow::updateStatusMessage().
+///
+/// update the status message on the GUI
+/// @param msg is the new status message.
 ///
 
 
@@ -131,7 +157,9 @@ void MainWindow::updateStatusMessage(std::string msg)
 }
 
 ///
-/// MainWindow::blockSizeStartIndex().
+/// MainWindow::appendToBlockSize().
+///
+/// append the new I/O block size to the GUI
 ///
 
 
@@ -143,6 +171,8 @@ void MainWindow::appendToBlockSize(std::string size)
 ///
 /// MainWindow::blockSizeStartIndex().
 ///
+/// append the new write rate to the GUI
+///
 
 
 void MainWindow::appendToWriteRate(std::string size)
@@ -151,7 +181,9 @@ void MainWindow::appendToWriteRate(std::string size)
 }
 
 ///
-/// MainWindow::blockSizeStartIndex().
+/// MainWindow::appendToReadRate().
+///
+/// append the new read rate to the GUI
 ///
 
 
@@ -161,7 +193,10 @@ void MainWindow::appendToReadRate(std::string size)
 }
 
 ///
-/// MainWindow::blockSizeStartIndex().
+/// MainWindow::restrictGUIElements().
+///
+/// enable or disable the GUI controls
+/// @param state in which the GUI elements must change.
 ///
 
 
@@ -184,24 +219,21 @@ void MainWindow::restrictGUIElements(bool state)
 }
 
 ///
-/// MainWindow::blockSizeStartIndex().
+/// MainWindow::updateProgressBar().
+///
+/// update the GUI progreess bar
 ///
 
 
 void MainWindow::updateProgressBar(int value)
 {
-    //    QString danger = "QProgressBar::chunk {background: QLinearGradient( x1: 0, y1: 0, x2: 1, y2: 0,stop: 0 #FF0350,stop: 0.4999 #FF0020,stop: 0.5 #FF0019,stop: 1 #FF0000 );border-bottom-right-radius: 5px;border-bottom-left-radius: 5px;border: .px solid black;}";
-    //    QString safe= "QProgressBar::chunk {background: QLinearGradient( x1: 0, y1: 0, x2: 1, y2: 0,stop: 0 #78d,stop: 0.4999 #46a,stop: 0.5 #45a,stop: 1 #238 );border-bottom-right-radius: 7px;border-bottom-left-radius: 7px;border: 1px solid black;}";
-    //    if(ui->progressBar->value()<80)
-    //        ui->progressBar->setStyleSheet(danger);
-    //    else
-    //        ui->progressBar->setStyleSheet(safe);
-
     this->ui->progressBar->setValue(value);
 }
 
 ///
-/// MainWindow::blockSizeStartIndex().
+/// MainWindow::on_dirBrowseBtn_clicked().
+///
+/// browse to the directory to perform benchmarking
 ///
 
 
@@ -212,41 +244,59 @@ void MainWindow::on_dirBrowseBtn_clicked()
 }
 
 ///
-/// MainWindow::blockSizeStartIndex().
+/// MainWindow::on_StartBtn_clicked().
+///
+/// start performing the benchmark
 ///
 
 
 void MainWindow::on_StartBtn_clicked()
 {
-    ui->progressBar->show();
-    //clear
-    ui->BlockSizeEdit->clear();
-    ui->ReadRateEdit->clear();
-    ui->WriteRateEdit->clear();
-
-    this->ui->StartBtn->setEnabled(false);
-    this->ui->dirBrowseBtn->setEnabled(false);
-    this->ui->BlockSizeEndCombo->setEnabled(false);
-    this->ui->BlockSizeStartCombo->setEnabled(false);
-    this->ui->FileSizeCombo->setEnabled(false);
-    this->ui->AboutBtn->setEnabled(false);
-    this->ui->DirectoryEdit->setEnabled(false);
-    this->ui->dirBrowseBtn->setEnabled(false);
-    // this->ui->ValidateDataCheck->setEnabled(false);
-    this->ui->reportCheckBox->setEnabled(false);
-    this->ui->directModeCheckBox->setEnabled(false);
-    this->ui->ReadRateEdit->setTextInteractionFlags(Qt::NoTextInteraction);
-    this->ui->WriteRateEdit->setTextInteractionFlags(Qt::NoTextInteraction);
-    this->ui->BlockSizeEdit->setTextInteractionFlags(Qt::NoTextInteraction);
-
-    bool directMode = this->ui->directModeCheckBox->isChecked();
-    bool report = this->ui->reportCheckBox->isChecked();
-    bool mt_enabled = this->ui->multithreadCheckBox->isChecked();
 
     try{
+        /// smake sure we have a valiade directory
+        if( std::filesystem::exists(ui->DirectoryEdit->text().toStdString().c_str()) == false )
+            throw std::string( "cannot access " + ui->DirectoryEdit->text().toStdString());
+
+        /// show the progress bar
+        ui->progressBar->show();
+        /// clear vectors
+        ui->BlockSizeEdit->clear();
+        ui->ReadRateEdit->clear();
+        ui->WriteRateEdit->clear();
+
+        /// disable GUI elements before starting the benchmarking process
+        this->ui->StartBtn->setEnabled(false);
+        this->ui->dirBrowseBtn->setEnabled(false);
+        this->ui->BlockSizeEndCombo->setEnabled(false);
+        this->ui->BlockSizeStartCombo->setEnabled(false);
+        this->ui->FileSizeCombo->setEnabled(false);
+        this->ui->AboutBtn->setEnabled(false);
+        this->ui->DirectoryEdit->setEnabled(false);
+        this->ui->dirBrowseBtn->setEnabled(false);
+        // this->ui->ValidateDataCheck->setEnabled(false);
+        this->ui->reportCheckBox->setEnabled(false);
+        this->ui->directModeCheckBox->setEnabled(false);
+        this->ui->ReadRateEdit->setTextInteractionFlags(Qt::NoTextInteraction);
+        this->ui->WriteRateEdit->setTextInteractionFlags(Qt::NoTextInteraction);
+        this->ui->BlockSizeEdit->setTextInteractionFlags(Qt::NoTextInteraction);
+
+        /// using direct mode? or use the standard method which supports file caching
+        bool directMode = this->ui->directModeCheckBox->isChecked();
+        /// generate report after finishing the benchmark?
+        bool report = this->ui->reportCheckBox->isChecked();
+        /// multi-threaded process?
+        bool mt_enabled = this->ui->multithreadCheckBox->isChecked();
+
         if(mt_enabled){
+
+            /// create the QThread for the benchmark process
             QThread *thread = QThread::create(&appManager::startBenchmarking, manager, directMode, report);
+
+            /// start the process
             thread->start();
+
+            /// wait and update the GUI if needed
             while(thread->isRunning()){
 
 #ifdef LINUX
@@ -267,19 +317,21 @@ void MainWindow::on_StartBtn_clicked()
     }
     catch(std::string &msg){
         QMessageBox messageBox;
-        messageBox.critical(0,"Error","Unable to perform benchmark. Operation aborted. Reason is \n{" + QString::fromStdString(msg) + "}");
+        messageBox.critical(0,"Error","Unable to perform benchmark.\nOperation aborted.\nReason is \n{" + QString::fromStdString(msg) + "}");
         restrictGUIElements(true);
     }
     catch(...)
     {
         QMessageBox messageBox;
-        messageBox.critical(0,"Error","Unable to perform benchmark. Operation aborted.");
+        messageBox.critical(0,"Error","Unable to perform benchmark.\nOperation aborted.");
         restrictGUIElements(true);
     }
 }
 
 ///
 /// MainWindow::on_AboutBtn_clicked().
+///
+/// go to the website
 ///
 
 void MainWindow::on_AboutBtn_clicked()

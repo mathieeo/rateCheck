@@ -54,5 +54,8 @@ win32:LIBS += -lversion -lIphlpapi -lSetupApi -lNewdev -lws2_32
 
 ICON = icon.png
 
+RESOURCES += \
+    resource.qrc
+
 
 

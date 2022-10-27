@@ -6,6 +6,7 @@ namespace rateCheckApp
 {
 ///
 /// CLASS AveragedRate.
+///
 /// Simple low-pass filtered rate data
 ///
 
@@ -21,6 +22,7 @@ AveragedRate::AveragedRate(int taps)
 
 ///
 /// AveragedRate::Reset().
+///
 /// Reset the prams
 ///
 
@@ -35,6 +37,7 @@ void AveragedRate::Reset()
 
 ///
 /// AveragedRate::Process().
+///
 /// Process the average rate from number of recent cached taps
 ///
 
@@ -54,6 +57,7 @@ double AveragedRate::Process(double sample)
 
 ///
 ///  AveragedRate::Differential().
+///
 /// Set the different sample.
 ///
 
@@ -67,6 +71,7 @@ double AveragedRate::Differential(double sample)
 
 ///
 /// AveragedRate::Differential().
+///
 /// Get the different sample.
 ///
 
