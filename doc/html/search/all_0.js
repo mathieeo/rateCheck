@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['_3ca_20href_3d_22https_3a_2f_2fintegratedsw_2etech_22_20_3e_3cimg_20alt_3d_5c_22_5c_22_20width_3d_5c_2230x_5c_22_20src_3d_5c_22https_3a_2f_2fstatic_2ewixstatic_2ecom_2fmedia_2fb3d4ff_5f6d86c4d4b77245d8894a815b759ed7fd_7emv2_2epng_2fv1_2ffill_2fw_5f132_2ch_5f119_2cal_5fc_2cusm_5f0_2e66_5f1_2e00_5f0_2e01_2cenc_5fauto_2flogo_2epng_5c_22_20_2f_3e_3c_2fa_3e_20ratecheck_20by_20_3ca_20href_3d_22https_3a_2f_2fintegratedsw_2etech_22_20_3eintegrated_20software_20technologies_20inc_2e_3c_2fa_3e_0',['&lt;a href=&quot;https://integratedsw.tech&quot; &gt;&lt;img alt=\&quot;\&quot; width=\&quot;30x\&quot; src=\&quot;https://static.wixstatic.com/media/b3d4ff_6d86c4d4b77245d8894a815b759ed7fd~mv2.png/v1/fill/w_132,h_119,al_c,usm_0.66_1.00_0.01,enc_auto/logo.png\&quot; /&gt;&lt;/a&gt; rateCheck by &lt;a href=&quot;https://integratedsw.tech&quot; &gt;Integrated Software Technologies Inc.&lt;/a&gt;',['../md__r_e_a_d_m_e.html',1,'']]]
+];

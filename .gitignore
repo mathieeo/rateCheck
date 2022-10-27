@@ -48,8 +48,6 @@ moc_mainwindow.cpp
 
 Debug/
 
-html/
-
 latex/
 
 qrc_resource.cpp
