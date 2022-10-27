@@ -276,10 +276,12 @@ void MainWindow::on_StartBtn_clicked()
 {
 
     try{
+        //todo fixme
+#ifndef MAC_OS
         /// smake sure we have a valiade directory
         if( std::filesystem::exists(ui->DirectoryEdit->text().toStdString().c_str()) == false )
             throw std::string( "cannot access " + ui->DirectoryEdit->text().toStdString());
-
+#endif
         /// show the progress bar
         ui->progressBar->show();
         /// clear vectors
