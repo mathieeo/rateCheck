@@ -5,7 +5,7 @@
 ## About The Project
 Rate Check is a free disk benchmarking application for Windows, Ubuntu, MacOS. Applcaiton written in C++ that performs benchmarking on host machine disks and partitions.
 
-[<img src="//upload.wikimedia.org/wikipedia/commons/thumb/a/ae/TheQtCompany_Logo.png/200px-TheQtCompany_Logo.png" />](https://www.qt.io/)
+[<img src="https://en.wikipedia.org/wiki/Qt_(software)#/media/File:Qt_logo_2016.svg" />](https://www.qt.io/)
 
 ## Features
 - Benchmarking with different file sizes.
