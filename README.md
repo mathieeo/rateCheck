@@ -11,6 +11,7 @@ Dillinger is a free applcaiton written in C++ that performs benchmarking on host
 - Support for direct disk access mode and cached access mode.
 - Range of different block size for read and write operations.
 - Verifying data.
+- Multi-threading support.
 - Report generating
 
 ## Installation
@@ -47,8 +48,8 @@ Distributed under the GNU GPLv3 License. See `LICENSE` for more information.
 
 ## Contact
 
-Matthew - [eMail](mailto:matt@integratedsw.tech?subject=SoftCOM)
+Matthew - [eMail](mailto:matt@integratedsw.tech?subject=rateCheck)
 
-Project Link: [SoftCOM](https://github.com/mathieeo/softcom)
+Project Link: [rateCheck](https://github.com/mathieeo/rateCheck)
 
 [<img alt="alt_text" width="300x" src="https://static.wixstatic.com/media/b3d4ff_fd5635e886fa4ff1ab24e822f2fc4bbc~mv2.gif" />](https://integratedsw.tech)
