@@ -3,7 +3,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-Rate Check is a free disk benchmarking application for Windows, Ubuntu, MacOS. Applcaiton written in C++ that performs benchmarking on host machine disks and partitions.
+Rate check is a free open-source application written in C++17 for benchmarking the host disks and partitions.
 
 [<img src="https://en.wikipedia.org/wiki/Qt_(software)#/media/File:Qt_logo_2016.svg" />](https://www.qt.io/)
 
