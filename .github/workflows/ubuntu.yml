@@ -46,6 +46,7 @@ jobs:
         with:
           name: ${{ matrix.os }}_${{matrix.qt_ver}}.zip
           path: Release/RateCheck
+      - uses: actions/checkout@v2
       - name: Build
         run: cargo build --release
       - name: Upload binaries to release
