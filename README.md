@@ -23,16 +23,32 @@ Rate check is a free open-source application written in C++17 for benchmarking t
 * **Ubuntu 20.04 and up**
 * **RedHat 8.5**
 
-## Installation
+## Installation and building
 
 RateCheck requires [QtCreator](https://www.qt.io/) v6+ to build and run.
 
-
+# terminal 
 ```sh
 cd rateCheck
 qmake
 make
 ```
+# QtCreator
+```sh
+./qtcreator
+```
+Run the QtCreator IDE and from file menu -> open project -> borwse to the rateCheck.pro file and select/open that file. 
+configure the compiler.
+* **MinGW** for Windows
+* **Clang** for MacOS
+* **Gcc_64** for Linux
+
+## Download
+To download the deployed iamges and documents, please browse to https://github.com/mathieeo/rateCheck/releases from there click on the desired release version. 
+* **rateCheck_MacOS_v.dmg** - compressed file for the MacOS platform.
+* **rateCheck_Win64_v.zip** - comppressed file for the Windows-64bit platform.
+* **rateCheck_Ubuntu_v.zip** - comppressed file for the Ubuntu platform.
+* **doc-v.zip** - documentation file.
 
 ## Contributing
 
