@@ -46,13 +46,14 @@ jobs:
         with:
           name: ${{ matrix.os }}_${{matrix.qt_ver}}.zip
           path: Release/RateCheck
-#       # tag Release
-#       - name: uploadRelease
-#         if: startsWith(github.event.ref, 'refs/tags/')
-#         uses: svenstaro/upload-release-action@v2
-#         with:
-#           repo_token: ${{ secrets.GITHUB_TOKEN }}
-#           file: Release/RateCheck
-#           asset_name: ${{ matrix.os }}_${{matrix.qt_ver}}.zip
-#           tag: ${{ github.ref }}
-#           overwrite: true
+      - name: Build
+        run: cargo build --release
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: Release/RateCheck
+          asset_name: ${{ matrix.os }}_${{matrix.qt_ver}}.zip
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "This is my release text"
