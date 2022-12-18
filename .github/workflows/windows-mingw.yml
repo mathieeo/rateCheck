@@ -21,7 +21,7 @@ jobs:
       - name: Install Qt Creator
         run: |
           Invoke-WebRequest -Uri "https://download.qt.io/official_releases/qtcreator/8.0/8.0.2/qt-creator-opensource-windows-x86_64-8.0.2.exe" -OutFile qt-creator.exe
-          ./qt-creator.exe --verbose --script qt-creator-windows-x86_64-8.0.2.qs
+          ./qt-creator.exe --verbose
           rm qt-creator.exe
       - name: Build project with Qt Creator
         run: |
