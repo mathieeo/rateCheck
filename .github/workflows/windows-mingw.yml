@@ -1,8 +1,17 @@
-name: Build and Deploy
-
-on:
-  release:
-    types: [published]
+name: Windows-MinGW 
+on: 
+  push:
+    paths:
+      - '**'
+      - '*.pro'
+      - 'support/**'
+      - '.github/workflows/windows-mingw.yml'
+  pull_request:
+    paths:
+      - '**'
+      - '*.pro'
+      - 'support/**'
+      - '.github/workflows/windows-mingw.yml' 
 
 jobs:
   build:
