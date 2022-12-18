@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install Qt Creator
         run: |
-          wget -q -O qt-creator.exe "https://download.qt.io/official_releases/qtcreator/6.4/6.4.0/qt-creator-opensource-windows-x86_64-6.4.0.exe"
+          Invoke-WebRequest -Uri "https://download.qt.io/official_releases/qtcreator/6.4/6.4.0/qt-creator-opensource-windows-x86_64-6.4.0.exe" -OutFile qt-creator.exe
           ./qt-creator.exe --verbose --script qt-creator-windows-x86_64-6.4.0.qs
           rm qt-creator.exe
       - name: Build project with Qt Creator
