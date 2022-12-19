@@ -242,11 +242,24 @@ std::string StdFileManager::FileName() const
 
 bool StdFileManager::Position(int64 offset)
 {
+
+  // fixme todo - add mutex
+ // std::unique_lock<std::mutex> lock(mutex_);
+
     if (!Opened())
     { return false;}
 
+// if you are using this function on a large file and performance is a concern,
+// you could consider using the lseek64 function, which supports larger file offsets, instead of lseek.
+#if defined(_LARGEFILE64_SOURCE) && defined(__USE_LARGEFILE64)
+    // Use lseek64 on systems that support it
+    off64_t position = static_cast<off64_t>(offset);
+    int result = ::lseek64(Handle, position, SEEK_SET);
+#else
+    // Use lseek on systems that do not support lseek64
     off_t position = static_cast<off_t>(offset);
-    int result = fseek(Handle, position, SEEK_SET);
+    int result = ::lseek(Handle, position, SEEK_SET);
+#endif
 
     return (result == 0);
 }
