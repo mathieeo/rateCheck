@@ -56,7 +56,7 @@ jobs:
       - name: Set C++17 flag
         shell: pwsh
         run: |
-        $env:CXXFLAGS = "-std=c++17"
+          $env:CXXFLAGS = "-std=c++17"
       - name: where is qmake & where is mingw32-make
         shell: pwsh
         run: |
