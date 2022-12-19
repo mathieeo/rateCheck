@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>569</width>
+    <width>696</width>
     <height>793</height>
    </rect>
   </property>
@@ -553,6 +553,9 @@
            <layout class="QHBoxLayout" name="horizontalLayout_5">
             <item>
              <widget class="QCheckBox" name="multithreadCheckBox">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
               <property name="text">
                <string>Multi-Threading</string>
               </property>
@@ -841,7 +844,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>569</width>
+     <width>696</width>
      <height>21</height>
     </rect>
    </property>

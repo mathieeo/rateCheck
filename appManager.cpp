@@ -9,6 +9,7 @@
 #include <fstream>
 #include <string>
 #include <sstream>
+#include <map>
 
 using namespace rateCheckApp;
 using namespace std::chrono;
@@ -20,6 +21,7 @@ using namespace std::chrono;
 /// This class handles the file managements and benchmarking routines.
 /// @param reference from the GUI object so we can call the GUI setters and getters
 ///
+
 appManager::appManager(GUI_Interface *_gui_interface) :
     gui_interface(_gui_interface)
 {
@@ -27,61 +29,47 @@ appManager::appManager(GUI_Interface *_gui_interface) :
     BenchmarkProgress = 0.0f;
 
     /// init vectors.
-    /// Block size vection
-    blockSizeVec.push_back(512);
-    blockSizeVec.push_back(1*Kay);
-    blockSizeVec.push_back(2*Kay);
-    blockSizeVec.push_back(4*Kay);
-    blockSizeVec.push_back(8*Kay);
-    blockSizeVec.push_back(16*Kay);
-    blockSizeVec.push_back(32*Kay);
-    blockSizeVec.push_back(64*Kay);
-    blockSizeVec.push_back(128*Kay);
-    blockSizeVec.push_back(256*Kay);
-    blockSizeVec.push_back(512*Kay);
-    blockSizeVec.push_back(1*Meg);
-    blockSizeVec.push_back(2*Meg);
-    blockSizeVec.push_back(4*Meg);
-    blockSizeVec.push_back(8*Meg);
-    blockSizeVec.push_back(16*Meg);
-    blockSizeVec.push_back(32*Meg);
-    blockSizeVec.push_back(64*Meg);
-    blockSizeVec.push_back(128*Meg);
-    blockSizeVec.push_back(256*Meg);
-    /// File Size vector
-    FileSizeVec.push_back(32*Meg);
-    FileSizeVec.push_back(64*Meg);
-    FileSizeVec.push_back(128*Meg);
-    FileSizeVec.push_back(256*Meg);
-    FileSizeVec.push_back(512*Meg);
-    FileSizeVec.push_back(1*Geg);
-    FileSizeVec.push_back(2*Geg);
-    FileSizeVec.push_back(4*Geg);
-    FileSizeVec.push_back(8*Geg);
-    FileSizeVec.push_back(16*Geg);
-    FileSizeVec.push_back(32*Geg);
-    /// IO Tags vector
-    IoSizeTagsVec.push_back("512 B");
-    IoSizeTagsVec.push_back("1 KB");
-    IoSizeTagsVec.push_back("2 KB");
-    IoSizeTagsVec.push_back("4 KB");
-    IoSizeTagsVec.push_back("8 KB");
-    IoSizeTagsVec.push_back("16 KB");
-    IoSizeTagsVec.push_back("32 KB");
-    IoSizeTagsVec.push_back("64 KB");
-    IoSizeTagsVec.push_back("128 KB");
-    IoSizeTagsVec.push_back("256 KB");
-    IoSizeTagsVec.push_back("512 KB");
-    IoSizeTagsVec.push_back("1 MB");
-    IoSizeTagsVec.push_back("2 MB");
-    IoSizeTagsVec.push_back("4 MB");
-    IoSizeTagsVec.push_back("8 MB");
-    IoSizeTagsVec.push_back("16 MB");
-    IoSizeTagsVec.push_back("32 MB");
-    IoSizeTagsVec.push_back("64 MB");
-    IoSizeTagsVec.push_back("128 MB");
-    IoSizeTagsVec.push_back("256 MB");
+    std::map<BlockSize, std::string> block_size_tags = {
+            {BlockSize::bs512B, "512 B"},
+            {BlockSize::bs1KB, "1 KB"},
+            {BlockSize::bs2KB, "2 KB"},
+            {BlockSize::bs4KB, "4 KB"},
+            {BlockSize::bs8KB, "8 KB"},
+            {BlockSize::bs16KB, "16 KB"},
+            {BlockSize::bs32KB, "32 KB"},
+            {BlockSize::bs64KB, "64 KB"},
+            {BlockSize::bs128KB, "128 KB"},
+            {BlockSize::bs256KB, "256 KB"},
+            {BlockSize::bs512KB, "512 KB"},
+            {BlockSize::bs1MB, "1 MB"},
+            {BlockSize::bs2MB, "2 MB"},
+            {BlockSize::bs4MB, "4 MB"},
+            {BlockSize::bs8MB, "8 MB"},
+            {BlockSize::bs16MB, "16 MB"},
+            {BlockSize::bs32MB, "32 MB"},
+            {BlockSize::bs64MB, "64 MB"},
+            {BlockSize::bs128MB, "128 MB"},
+            {BlockSize::bs256MB, "256 MB"},
+        };
 
+        for (const auto &[size, tag] : block_size_tags) {
+            blockSizeVec.push_back(static_cast<int>(size));
+            IoSizeTagsVec.push_back(tag);
+        }
+
+        FileSizeVec = {
+            32 * MB,
+            64 * MB,
+            128 * MB,
+            256 * MB,
+            512 * MB,
+            1 * GB,
+            2 * GB,
+            4 * GB,
+            8 * GB,
+            16 * GB,
+            32 * GB,
+        };
 }
 ///
 ///  Destractor of class appManager

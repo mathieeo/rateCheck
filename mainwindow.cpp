@@ -82,6 +82,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->progressBar->hide();
 
     updateBlockSizeList();
+
 }
 
 ///
@@ -296,7 +297,7 @@ void MainWindow::on_StartBtn_clicked()
 
     try{
         /// smake sure we have a valiade directory
-        if( fs::exists(ui->DirectoryEdit->text().toStdString().c_str()) == false )
+        if( !QFileInfo::exists(ui->DirectoryEdit->text()) )
             throw std::string( "cannot access " + ui->DirectoryEdit->text().toStdString());
 
         /// show the progress bar
@@ -338,13 +339,8 @@ void MainWindow::on_StartBtn_clicked()
             thread->start();
 
             /// wait and update the GUI if needed
-            while(thread->isRunning()){
-
-#ifdef LINUX
-                usleep(1);
-#else
-                Sleep(1);
-#endif
+            while (thread->isRunning()) {
+                QThread::sleep(1);
                 qApp->processEvents();
                 updateProgressBar(manager->benchmarkProgress());
             }
@@ -353,18 +349,15 @@ void MainWindow::on_StartBtn_clicked()
         else{
             manager->startBenchmarking(directMode); // single thread?
         }
-        QMessageBox messageBox;
-        messageBox.information(0,"Successfully performed benchmarking","Benchmarking finished.");
+        QMessageBox::information(0,"Successfully performed benchmarking","Benchmarking finished.");
     }
     catch(std::string &msg){
-        QMessageBox messageBox;
-        messageBox.critical(0,"Error","Unable to perform benchmark.\nOperation aborted.\nReason is \n{" + QString::fromStdString(msg) + "}");
+        QMessageBox::critical(0,"Error","Unable to perform benchmark.\nOperation aborted.\nReason is \n{" + QString::fromStdString(msg) + "}");
         restrictGUIElements(true);
     }
     catch(...)
     {
-        QMessageBox messageBox;
-        messageBox.critical(0,"Error","Unable to perform benchmark.\nOperation aborted.");
+        QMessageBox::critical(0,"Error","Unable to perform benchmark.\nOperation aborted.");
         restrictGUIElements(true);
     }
 }

@@ -10,11 +10,34 @@
 #include <string>
 
 /// const prams
-const long long Kay = 1024;
-const long long Meg = 1024*1024;
-const long long Geg = 1024*1024*1024;
 const long long AlignedBlockSize = 512;
 
+constexpr unsigned long long kB = 1024;
+constexpr unsigned long long MB = 1024 * 1024;
+constexpr unsigned long long GB = 1024 * 1024 * 1024;
+
+enum class BlockSize {
+  bs512B = 512,
+  bs1KB = 1 * kB,
+  bs2KB = 2 * kB,
+  bs4KB = 4 * kB,
+  bs8KB = 8 * kB,
+  bs16KB = 16 * kB,
+  bs32KB = 32 * kB,
+  bs64KB = 64 * kB,
+  bs128KB = 128 * kB,
+  bs256KB = 256 * kB,
+  bs512KB = 512 * kB,
+  bs1MB = 1 * MB,
+  bs2MB = 2 * MB,
+  bs4MB = 4 * MB,
+  bs8MB = 8 * MB,
+  bs16MB = 16 * MB,
+  bs32MB = 32 * MB,
+  bs64MB = 64 * MB,
+  bs128MB = 128 * MB,
+  bs256MB = 256 * MB,
+};
 
 ///
 ///  Class GUI_Interface
